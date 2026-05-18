@@ -62,3 +62,14 @@ describe("Profile page — checklists", () => {
     expect(box).toBeChecked();
   });
 });
+
+describe("Profile page — settings", () => {
+  it("toggles inspection time setting", async () => {
+    const user = userEvent.setup();
+    renderProfile();
+    const cb = screen.getByRole("checkbox", { name: /enable 15s inspection/i });
+    expect(cb).toBeChecked(); // default on
+    await user.click(cb);
+    expect(cb).not.toBeChecked();
+  });
+});

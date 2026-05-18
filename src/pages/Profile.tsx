@@ -123,6 +123,43 @@ function Checklist({
   );
 }
 
+function SettingsSection() {
+  const { profile, setSetting, resetProfile } = useProfile();
+  return (
+    <div className="space-y-3">
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={profile.settings.inspection}
+          onChange={(e) => setSetting("inspection", e.target.checked)}
+          aria-label="Enable 15s inspection"
+        />
+        <span>Enable 15s inspection (WCA-style)</span>
+      </label>
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={profile.settings.useMs}
+          onChange={(e) => setSetting("useMs", e.target.checked)}
+          aria-label="Show milliseconds"
+        />
+        <span>Show milliseconds in timer</span>
+      </label>
+      <button
+        type="button"
+        onClick={() => {
+          if (confirm("Reset all profile data? This cannot be undone.")) {
+            resetProfile();
+          }
+        }}
+        className="rounded border border-red-300 px-3 py-1 text-red-700 hover:bg-red-50"
+      >
+        Reset all data
+      </button>
+    </div>
+  );
+}
+
 export default function Profile() {
   return (
     <main className="mx-auto max-w-3xl p-6">
@@ -152,6 +189,11 @@ export default function Profile() {
             cases={cl.cases}
           />
         ))}
+      </section>
+
+      <section className="mt-10 border-t border-slate-200 pt-6">
+        <h2 className="text-xl font-semibold mb-2">Settings</h2>
+        <SettingsSection />
       </section>
     </main>
   );
