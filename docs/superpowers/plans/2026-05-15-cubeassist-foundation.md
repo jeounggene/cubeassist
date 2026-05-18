@@ -83,6 +83,12 @@ npm install
 npm install react-router-dom@^6
 ```
 
+If `npm create vite@latest` pulled vite@8 (current as of 2026), downgrade both vite and the React plugin now to the vitest@3-compatible line — otherwise typecheck on `vite.config.ts` will fail later and `@vitejs/plugin-react@6` will fail at runtime when paired with vite@7:
+
+```bash
+npm install -D vite@^7 @vitejs/plugin-react@^5
+```
+
 - [ ] **Step 3: Replace `src/App.tsx` with a minimal placeholder**
 
 ```tsx
@@ -223,7 +229,7 @@ afterEach(() => {
 Replace `vite.config.ts` with:
 
 ```ts
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
@@ -250,9 +256,11 @@ Inside the `compilerOptions` object of `tsconfig.json`, add (or extend) the `typ
 In the `scripts` section, add:
 
 ```json
-"test": "vitest run",
+"test": "vitest run --passWithNoTests",
 "test:watch": "vitest"
 ```
+
+(`--passWithNoTests` keeps the test command green between tasks before real test files are written — vitest@3 exits 1 by default when no tests match.)
 
 - [ ] **Step 6: Write and run a smoke test**
 
