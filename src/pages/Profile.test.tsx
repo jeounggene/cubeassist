@@ -1,0 +1,37 @@
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { ProfileProvider } from "../state/ProfileProvider";
+import Profile from "./Profile";
+
+function renderProfile() {
+  return render(
+    <ProfileProvider>
+      <Profile />
+    </ProfileProvider>,
+  );
+}
+
+describe("Profile page — times", () => {
+  it("renders an input for each stage", () => {
+    renderProfile();
+    expect(screen.getByLabelText(/^cross time$/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^f2l time$/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^oll time$/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^pll time$/i)).toBeInTheDocument();
+  });
+
+  it("records a time and displays the new average", async () => {
+    const user = userEvent.setup();
+    renderProfile();
+    const input = screen.getByLabelText(/^pll time$/i) as HTMLInputElement;
+    await user.type(input, "3.0");
+    await user.click(screen.getByRole("button", { name: /add pll time/i }));
+
+    await user.clear(input);
+    await user.type(input, "4.0");
+    await user.click(screen.getByRole("button", { name: /add pll time/i }));
+
+    expect(screen.getByTestId("pll-avg")).toHaveTextContent("3.50");
+  });
+});
