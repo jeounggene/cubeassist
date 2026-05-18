@@ -4,6 +4,7 @@ import {
   Stage,
   ChecklistKey,
   STORAGE_KEY,
+  SAMPLE_WINDOW,
 } from "../types/profile";
 
 const STAGES: Stage[] = ["cross", "f2l", "oll", "pll"];
@@ -35,4 +36,24 @@ export function loadProfile(): UserProfile {
 
 export function saveProfile(p: UserProfile): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+
+export function appendTimeSample(
+  profile: UserProfile,
+  stage: Stage,
+  seconds: number,
+): UserProfile {
+  if (!(seconds > 0) || !Number.isFinite(seconds)) {
+    throw new Error(`Invalid sample: ${seconds}`);
+  }
+  const prev = profile.times[stage].samples;
+  const samples = [...prev, seconds].slice(-SAMPLE_WINDOW);
+  const avg = samples.reduce((a, b) => a + b, 0) / samples.length;
+  return {
+    ...profile,
+    times: {
+      ...profile.times,
+      [stage]: { samples, avg },
+    },
+  };
 }
