@@ -1,0 +1,12 @@
+[
+  { "id": "2oll-eo-dot",  "name": "2-look OLL — EO dot (no edges oriented)" },
+  { "id": "2oll-eo-line", "name": "2-look OLL — EO line (2 edges oriented)" },
+  { "id": "2oll-eo-L",    "name": "2-look OLL — EO L-shape (2 edges oriented)" },
+  { "id": "2oll-oc-sune",      "name": "2-look OLL — Sune (OCLL)" },
+  { "id": "2oll-oc-antisune",  "name": "2-look OLL — Anti-Sune (OCLL)" },
+  { "id": "2oll-oc-h",         "name": "2-look OLL — H (OCLL)" },
+  { "id": "2oll-oc-pi",        "name": "2-look OLL — Pi (OCLL)" },
+  { "id": "2oll-oc-l",         "name": "2-look OLL — L-shape (OCLL)" },
+  { "id": "2oll-oc-t",         "name": "2-look OLL — T-shape (OCLL)" },
+  { "id": "2oll-oc-u",         "name": "2-look OLL — U-shape (OCLL)" }
+]

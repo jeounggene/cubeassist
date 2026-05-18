@@ -1,0 +1,23 @@
+[
+  { "id": "PLL-Aa", "name": "PLL Aa perm" },
+  { "id": "PLL-Ab", "name": "PLL Ab perm" },
+  { "id": "PLL-E",  "name": "PLL E perm" },
+  { "id": "PLL-F",  "name": "PLL F perm" },
+  { "id": "PLL-Ga", "name": "PLL Ga perm" },
+  { "id": "PLL-Gb", "name": "PLL Gb perm" },
+  { "id": "PLL-Gc", "name": "PLL Gc perm" },
+  { "id": "PLL-Gd", "name": "PLL Gd perm" },
+  { "id": "PLL-H",  "name": "PLL H perm" },
+  { "id": "PLL-Ja", "name": "PLL Ja perm" },
+  { "id": "PLL-Jb", "name": "PLL Jb perm" },
+  { "id": "PLL-Na", "name": "PLL Na perm" },
+  { "id": "PLL-Nb", "name": "PLL Nb perm" },
+  { "id": "PLL-Ra", "name": "PLL Ra perm" },
+  { "id": "PLL-Rb", "name": "PLL Rb perm" },
+  { "id": "PLL-T",  "name": "PLL T perm" },
+  { "id": "PLL-Ua", "name": "PLL Ua perm" },
+  { "id": "PLL-Ub", "name": "PLL Ub perm" },
+  { "id": "PLL-V",  "name": "PLL V perm" },
+  { "id": "PLL-Y",  "name": "PLL Y perm" },
+  { "id": "PLL-Z",  "name": "PLL Z perm" }
+]

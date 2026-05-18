@@ -1,0 +1,8 @@
+[
+  { "id": "2pll-edges-Ua", "name": "2-look PLL — Ua perm (edges)" },
+  { "id": "2pll-edges-Ub", "name": "2-look PLL — Ub perm (edges)" },
+  { "id": "2pll-edges-Z",  "name": "2-look PLL — Z perm (edges)" },
+  { "id": "2pll-edges-H",  "name": "2-look PLL — H perm (edges)" },
+  { "id": "2pll-corners-Aa", "name": "2-look PLL — A perm (corners)" },
+  { "id": "2pll-corners-E",  "name": "2-look PLL — E perm (corners)" }
+]
