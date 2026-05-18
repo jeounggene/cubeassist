@@ -1,11 +1,6 @@
 // src/lib/profile.ts
-import {
-  UserProfile,
-  Stage,
-  ChecklistKey,
-  STORAGE_KEY,
-  SAMPLE_WINDOW,
-} from "../types/profile";
+import { STORAGE_KEY, SAMPLE_WINDOW } from "../types/profile";
+import type { UserProfile, Stage, ChecklistKey } from "../types/profile";
 
 const STAGES: Stage[] = ["cross", "f2l", "oll", "pll"];
 const CHECKLISTS: ChecklistKey[] = ["f2l", "oll2look", "pll2look", "oll", "pll"];
@@ -15,8 +10,8 @@ export function emptyProfile(): UserProfile {
     schemaVersion: 1,
     times: Object.fromEntries(
       STAGES.map((s) => [s, { avg: null, samples: [] }]),
-    ) as UserProfile["times"],
-    known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as UserProfile["known"],
+    ) as unknown as UserProfile["times"],
+    known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as UserProfile["known"],
     drillHistory: [],
     settings: { inspection: true, useMs: false },
   };
