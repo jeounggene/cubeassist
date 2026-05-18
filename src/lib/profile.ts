@@ -57,3 +57,18 @@ export function appendTimeSample(
     },
   };
 }
+
+export function setKnown(
+  profile: UserProfile,
+  checklist: ChecklistKey,
+  caseId: string,
+  value: boolean,
+): UserProfile {
+  return {
+    ...profile,
+    known: {
+      ...profile.known,
+      [checklist]: { ...profile.known[checklist], [caseId]: value },
+    },
+  };
+}

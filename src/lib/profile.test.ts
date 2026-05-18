@@ -81,3 +81,25 @@ describe("appendTimeSample", () => {
     expect(out).not.toBe(p);
   });
 });
+
+import { setKnown } from "./profile";
+
+describe("setKnown", () => {
+  it("marks an algorithm as known", () => {
+    const p = setKnown(emptyProfile(), "pll", "PLL-T", true);
+    expect(p.known.pll["PLL-T"]).toBe(true);
+  });
+
+  it("clears a previously-known algorithm when value is false", () => {
+    let p = setKnown(emptyProfile(), "oll", "OLL-27", true);
+    p = setKnown(p, "oll", "OLL-27", false);
+    expect(p.known.oll["OLL-27"]).toBe(false);
+  });
+
+  it("does not mutate the input profile", () => {
+    const p = emptyProfile();
+    const out = setKnown(p, "pll", "PLL-T", true);
+    expect(p.known.pll["PLL-T"]).toBeUndefined();
+    expect(out).not.toBe(p);
+  });
+});
