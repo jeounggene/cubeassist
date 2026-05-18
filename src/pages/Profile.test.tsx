@@ -35,3 +35,30 @@ describe("Profile page — times", () => {
     expect(screen.getByTestId("pll-avg")).toHaveTextContent("3.50");
   });
 });
+
+describe("Profile page — checklists", () => {
+  it("renders sections for each algorithm list", () => {
+    renderProfile();
+    expect(screen.getByRole("heading", { name: /^f2l$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /2-look oll/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /2-look pll/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^oll$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^pll$/i })).toBeInTheDocument();
+  });
+
+  it("renders a checkbox for every PLL case (21 total)", () => {
+    renderProfile();
+    const region = screen.getByRole("region", { name: /^pll$/i });
+    const checkboxes = region.querySelectorAll("input[type='checkbox']");
+    expect(checkboxes).toHaveLength(21);
+  });
+
+  it("toggling a checkbox updates the profile", async () => {
+    const user = userEvent.setup();
+    renderProfile();
+    const box = screen.getByRole("checkbox", { name: /pll t perm/i });
+    expect(box).not.toBeChecked();
+    await user.click(box);
+    expect(box).toBeChecked();
+  });
+});
