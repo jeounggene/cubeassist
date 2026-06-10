@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useProfile } from "../state/ProfileProvider";
 import { generateCrossScramble } from "../lib/scramble";
-import { solveCross } from "../lib/cross";
+import { solveCross, CROSS_COLORS } from "../lib/cross";
+import type { CrossColor } from "../lib/cross";
 import Timer from "../components/Timer";
 import CubeDiagram from "../components/CubeDiagram";
 
@@ -19,16 +20,25 @@ function avgOfLast(xs: number[], n: number): string {
 export default function TrainerCross() {
   const { profile, addDrill } = useProfile();
   const [difficulty, setDifficulty] = useState(4);
+  const [colorNeutral, setColorNeutral] = useState(false);
+  const [crossColor, setCrossColor] = useState<CrossColor>("white");
   const [scramble, setScramble] = useState("");
   const [times, setTimes] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
   const [solution, setSolution] = useState<string | null>(null);
 
-  const newScramble = useCallback((len: number) => {
-    setScramble(generateCrossScramble(len));
-    setSolved(false);
-    setSolution(null);
-  }, []);
+  const newScramble = useCallback(
+    (len: number) => {
+      const color: CrossColor = colorNeutral
+        ? CROSS_COLORS[Math.floor(Math.random() * CROSS_COLORS.length)]
+        : "white";
+      setCrossColor(color);
+      setScramble(generateCrossScramble(len, color));
+      setSolved(false);
+      setSolution(null);
+    },
+    [colorNeutral],
+  );
 
   useEffect(() => {
     newScramble(difficulty);
@@ -60,7 +70,7 @@ export default function TrainerCross() {
         length), then time yourself.
       </p>
 
-      <div className="mb-6 flex items-center gap-2">
+      <div className="mb-4 flex items-center gap-2">
         <span className="font-medium">Difficulty:</span>
         {DIFFICULTIES.map((d) => (
           <button
@@ -78,6 +88,32 @@ export default function TrainerCross() {
         ))}
       </div>
 
+      <div className="mb-6 flex items-center gap-2">
+        <span className="font-medium">Cross color:</span>
+        <button
+          type="button"
+          onClick={() => setColorNeutral(false)}
+          className={`rounded border px-3 py-1.5 ${
+            !colorNeutral
+              ? "bg-slate-900 text-white border-slate-900"
+              : "border-slate-300 text-slate-700 hover:bg-slate-100"
+          }`}
+        >
+          White
+        </button>
+        <button
+          type="button"
+          onClick={() => setColorNeutral(true)}
+          className={`rounded border px-3 py-1.5 ${
+            colorNeutral
+              ? "bg-slate-900 text-white border-slate-900"
+              : "border-slate-300 text-slate-700 hover:bg-slate-100"
+          }`}
+        >
+          Color neutral
+        </button>
+      </div>
+
       <div className="mb-6 flex items-center justify-between gap-6">
         <div>
           <div className="text-sm text-slate-500 mb-1">Scramble</div>
@@ -85,7 +121,7 @@ export default function TrainerCross() {
             {scramble}
           </div>
         </div>
-        <CubeDiagram />
+        <CubeDiagram color={crossColor} />
       </div>
 
       <div className="mb-6">
@@ -108,7 +144,7 @@ export default function TrainerCross() {
           solution === null ? (
             <button
               type="button"
-              onClick={() => setSolution(solveCross(scramble))}
+              onClick={() => setSolution(solveCross(scramble, crossColor))}
               className="rounded border border-slate-300 px-4 py-2"
             >
               Show optimal solution

@@ -10,6 +10,7 @@ vi.mock("../lib/scramble", () => ({
 vi.mock("../lib/cross", () => ({
   solveCross: () => "D' F R'",
   optimalCrossLength: () => 4,
+  CROSS_COLORS: ["white", "yellow", "green", "blue", "red", "orange"],
 }));
 
 let now = 0;
@@ -44,6 +45,18 @@ describe("TrainerCross", () => {
   it("changing difficulty regenerates a scramble", () => {
     renderTrainer();
     fireEvent.click(screen.getByRole("button", { name: "6" }));
+    expect(screen.getByTestId("scramble")).toHaveTextContent("R U2 F' D");
+  });
+
+  it("defaults to the white cross", () => {
+    renderTrainer();
+    expect(screen.getByRole("img", { name: /white cross/i })).toBeInTheDocument();
+  });
+
+  it("has a color-neutral option that can be enabled", () => {
+    renderTrainer();
+    fireEvent.click(screen.getByRole("button", { name: /color neutral/i }));
+    // still produces a scramble once color-neutral is on
     expect(screen.getByTestId("scramble")).toHaveTextContent("R U2 F' D");
   });
 });
