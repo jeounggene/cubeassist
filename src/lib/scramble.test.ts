@@ -38,4 +38,11 @@ describe("generateCrossScramble", () => {
       expect(optimalCrossLength(scr)).toBe(k);
     }
   });
+
+  it("targets the cross length of a non-white color", () => {
+    for (const color of ["yellow", "green"] as const) {
+      const scr = generateCrossScramble(3, color);
+      expect(optimalCrossLength(scr, color)).toBe(3);
+    }
+  });
 });
