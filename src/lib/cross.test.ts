@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { optimalCrossLength, solveCross, crossDistanceTable, CROSS_COLORS } from "./cross";
+import type { CrossColor } from "./cross";
 import { solved, applyScramble } from "./cube";
 
 const CROSS_PIECES = [4, 5, 6, 7];
@@ -74,7 +75,8 @@ const crossSolvedForColor = (scramble: string, color: string): boolean => {
 
 describe("color-neutral cross", () => {
   it("is 0 for any solved color", () => {
-    for (const c of ["white", "yellow", "green"]) {
+    const colors: CrossColor[] = ["white", "yellow", "green"];
+    for (const c of colors) {
       expect(optimalCrossLength("", c)).toBe(0);
     }
   });
@@ -85,7 +87,8 @@ describe("color-neutral cross", () => {
   });
 
   it("solveCross solves the chosen color's cross at optimal length", () => {
-    for (const color of ["yellow", "green"]) {
+    const colors: CrossColor[] = ["yellow", "green"];
+    for (const color of colors) {
       for (const scr of ["R U2 F' D", "B' L F2 D R"]) {
         const sol = solveCross(scr, color);
         const len = sol === "" ? 0 : sol.split(" ").length;
