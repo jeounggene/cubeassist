@@ -7,8 +7,9 @@ import {
   useState,
 } from "react";
 import type { ReactNode } from "react";
-import type { UserProfile } from "../types/profile";
+import type { UserProfile, DrillRecord } from "../types/profile";
 import {
+  appendDrillRecord,
   appendTimeSample,
   emptyProfile,
   loadProfile,
@@ -28,6 +29,7 @@ type ProfileContextValue = {
     key: K,
     value: UserProfile["settings"][K],
   ) => void;
+  addDrill: (record: DrillRecord) => void;
   resetProfile: () => void;
 };
 
@@ -49,6 +51,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         setProfile((p) => setKnown(p, list, caseId, value)),
       setSetting: (key, value) =>
         setProfile((p) => ({ ...p, settings: { ...p.settings, [key]: value } })),
+      addDrill: (record) => setProfile((p) => appendDrillRecord(p, record)),
       resetProfile: () => setProfile(emptyProfile()),
     }),
     [profile],
