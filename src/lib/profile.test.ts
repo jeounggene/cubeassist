@@ -103,3 +103,28 @@ describe("setKnown", () => {
     expect(out).not.toBe(p);
   });
 });
+
+import { appendDrillRecord } from "./profile";
+import type { DrillRecord } from "../types/profile";
+
+describe("appendDrillRecord", () => {
+  const rec: DrillRecord = {
+    date: "2026-06-10",
+    caseId: "cross",
+    attempts: 5,
+    avgTime: 3.2,
+  };
+
+  it("appends a record to drillHistory", () => {
+    const p = appendDrillRecord(emptyProfile(), rec);
+    expect(p.drillHistory).toHaveLength(1);
+    expect(p.drillHistory[0]).toEqual(rec);
+  });
+
+  it("does not mutate the input profile", () => {
+    const p = emptyProfile();
+    const out = appendDrillRecord(p, rec);
+    expect(p.drillHistory).toHaveLength(0);
+    expect(out).not.toBe(p);
+  });
+});
