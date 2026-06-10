@@ -1,4 +1,5 @@
 import { optimalCrossLength } from "./cross";
+import type { CrossColor } from "./cross";
 
 const FACES = ["U", "D", "L", "R", "F", "B"];
 const MODIFIERS = ["", "'", "2"];
@@ -37,11 +38,15 @@ export function generateScramble(n = 20): string {
   return moves.join(" ");
 }
 
-// Retry random scrambles until the optimal white-cross length equals targetLen.
-export function generateCrossScramble(targetLen: number, maxTries = 50000): string {
+// Retry random scrambles until the optimal cross length for `color` equals targetLen.
+export function generateCrossScramble(
+  targetLen: number,
+  color: CrossColor = "white",
+  maxTries = 50000,
+): string {
   for (let i = 0; i < maxTries; i++) {
     const scr = generateScramble(20);
-    if (optimalCrossLength(scr) === targetLen) return scr;
+    if (optimalCrossLength(scr, color) === targetLen) return scr;
   }
-  throw new Error(`Could not generate a cross scramble of length ${targetLen}`);
+  throw new Error(`Could not generate a ${color} cross scramble of length ${targetLen}`);
 }
