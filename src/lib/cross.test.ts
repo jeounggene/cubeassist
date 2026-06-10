@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { optimalCrossLength, solveCross, crossDistanceTable } from "./cross";
+import { optimalCrossLength, solveCross, crossDistanceTable, CROSS_COLORS } from "./cross";
 import { solved, applyScramble } from "./cube";
 
 const CROSS_PIECES = [4, 5, 6, 7];
@@ -55,5 +55,54 @@ describe("solveCross", () => {
       expect(len).toBe(optimalCrossLength(scr));
       expect(crossSolved(`${scr} ${sol}`.trim())).toBe(true);
     }
+  });
+});
+
+// Independent color->pieces map for verifying color-neutral behavior.
+const PIECES: Record<string, number[]> = {
+  white: [4, 5, 6, 7], // D
+  yellow: [0, 1, 2, 3], // U
+  green: [0, 4, 8, 9], // F
+};
+const crossSolvedForColor = (scramble: string, color: string): boolean => {
+  const s = applyScramble(solved(), scramble);
+  return PIECES[color].every((p) => {
+    const slot = s.perm.indexOf(p);
+    return slot === p && s.ori[slot] === 0;
+  });
+};
+
+describe("color-neutral cross", () => {
+  it("is 0 for any solved color", () => {
+    for (const c of ["white", "yellow", "green"]) {
+      expect(optimalCrossLength("", c)).toBe(0);
+    }
+  });
+
+  it("a U move leaves the white cross but scrambles the yellow (U-face) cross", () => {
+    expect(optimalCrossLength("U", "white")).toBe(0);
+    expect(optimalCrossLength("U", "yellow")).toBe(1);
+  });
+
+  it("solveCross solves the chosen color's cross at optimal length", () => {
+    for (const color of ["yellow", "green"]) {
+      for (const scr of ["R U2 F' D", "B' L F2 D R"]) {
+        const sol = solveCross(scr, color);
+        const len = sol === "" ? 0 : sol.split(" ").length;
+        expect(len).toBe(optimalCrossLength(scr, color));
+        expect(crossSolvedForColor(`${scr} ${sol}`.trim(), color)).toBe(true);
+      }
+    }
+  });
+
+  it("exposes the six cross colors", () => {
+    expect(CROSS_COLORS).toEqual([
+      "white",
+      "yellow",
+      "green",
+      "blue",
+      "red",
+      "orange",
+    ]);
   });
 });

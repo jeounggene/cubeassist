@@ -1,10 +1,22 @@
 import { MOVES, solved, applyScramble } from "./cube";
 import type { EdgeState } from "./cube";
 
-// Pieces whose home slots form the white (D-layer) cross.
-const CROSS_PIECES = [4, 5, 6, 7];
+export type CrossColor = "white" | "yellow" | "green" | "blue" | "red" | "orange";
 
-// Pack the 4 cross pieces' (slot, ori) into a single integer: 5 bits each.
+// The 4 edge pieces forming each face's cross (by home slot / piece id).
+// Slot order: 0 UF 1 UR 2 UB 3 UL 4 DF 5 DR 6 DB 7 DL 8 FR 9 FL 10 BR 11 BL
+const CROSS_PIECES_BY_COLOR: Record<CrossColor, number[]> = {
+  white: [4, 5, 6, 7], // D face
+  yellow: [0, 1, 2, 3], // U face
+  green: [0, 4, 8, 9], // F face
+  blue: [2, 6, 10, 11], // B face
+  red: [1, 5, 8, 10], // R face
+  orange: [3, 7, 9, 11], // L face
+};
+
+export const CROSS_COLORS = Object.keys(CROSS_PIECES_BY_COLOR) as CrossColor[];
+
+// Pack 4 pieces' (slot, ori) into a single integer: 5 bits each.
 function packCoord(slots: number[], oris: number[]): number {
   let coord = 0;
   for (let i = 0; i < 4; i++) {
@@ -14,10 +26,10 @@ function packCoord(slots: number[], oris: number[]): number {
   return coord;
 }
 
-function coordOfState(state: EdgeState): number {
+function coordOfState(state: EdgeState, pieces: number[]): number {
   const slots: number[] = [];
   const oris: number[] = [];
-  for (const p of CROSS_PIECES) {
+  for (const p of pieces) {
     const slot = state.perm.indexOf(p);
     slots.push(slot);
     oris.push(state.ori[slot]);
@@ -25,7 +37,9 @@ function coordOfState(state: EdgeState): number {
   return packCoord(slots, oris);
 }
 
-const SOLVED_COORD = packCoord(CROSS_PIECES, [0, 0, 0, 0]);
+function solvedCoord(pieces: number[]): number {
+  return packCoord(pieces, [0, 0, 0, 0]);
+}
 
 function applyMoveToCoord(coord: number, moveIndex: number): number {
   const spec = MOVES[moveIndex];
@@ -41,13 +55,16 @@ function applyMoveToCoord(coord: number, moveIndex: number): number {
   return packCoord(slots, oris);
 }
 
-let TABLE: Map<number, number> | null = null;
+const TABLES = new Map<CrossColor, Map<number, number>>();
 
-export function crossDistanceTable(): Map<number, number> {
-  if (TABLE) return TABLE;
+export function crossDistanceTable(color: CrossColor = "white"): Map<number, number> {
+  const cached = TABLES.get(color);
+  if (cached) return cached;
+  const pieces = CROSS_PIECES_BY_COLOR[color];
   const table = new Map<number, number>();
-  table.set(SOLVED_COORD, 0);
-  let frontier = [SOLVED_COORD];
+  const start = solvedCoord(pieces);
+  table.set(start, 0);
+  let frontier = [start];
   let dist = 0;
   while (frontier.length > 0) {
     const next: number[] = [];
@@ -63,20 +80,22 @@ export function crossDistanceTable(): Map<number, number> {
     frontier = next;
     dist++;
   }
-  TABLE = table;
+  TABLES.set(color, table);
   return table;
 }
 
-export function optimalCrossLength(scramble: string): number {
-  const table = crossDistanceTable();
-  const coord = coordOfState(applyScramble(solved(), scramble));
+export function optimalCrossLength(scramble: string, color: CrossColor = "white"): number {
+  const table = crossDistanceTable(color);
+  const pieces = CROSS_PIECES_BY_COLOR[color];
+  const coord = coordOfState(applyScramble(solved(), scramble), pieces);
   return table.get(coord) ?? 0;
 }
 
-// One optimal cross solution, reconstructed by greedy descent on the table.
-export function solveCross(scramble: string): string {
-  const table = crossDistanceTable();
-  let coord = coordOfState(applyScramble(solved(), scramble));
+// One optimal cross solution for the given color, via greedy descent on the table.
+export function solveCross(scramble: string, color: CrossColor = "white"): string {
+  const table = crossDistanceTable(color);
+  const pieces = CROSS_PIECES_BY_COLOR[color];
+  let coord = coordOfState(applyScramble(solved(), scramble), pieces);
   let dist = table.get(coord) ?? 0;
   const moves: string[] = [];
   while (dist > 0) {
