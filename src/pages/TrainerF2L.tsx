@@ -5,7 +5,7 @@ import {
   SLOTS,
   slotAlgorithm,
   slotSetup,
-  slotFacelets,
+  caseFacelets,
   pairFacelets,
   f2lGroups,
 } from "../lib/f2l";
@@ -42,8 +42,10 @@ export default function TrainerF2L() {
   );
   const algorithm = useMemo(() => slotAlgorithm(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
-  const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
-  const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
+  // The case only shows at the front-right in its canonical orientation, so the
+  // diagram is the canonical case; the Direction control drives the algorithm.
+  const facelets = useMemo(() => caseFacelets(current), [current]);
+  const highlight = useMemo(() => pairFacelets(current, "FR"), [current]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);

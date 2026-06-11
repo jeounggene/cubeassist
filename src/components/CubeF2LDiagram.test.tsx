@@ -4,10 +4,10 @@ import CubeF2LDiagram from "./CubeF2LDiagram";
 import { solved } from "../lib/facecube";
 
 describe("CubeF2LDiagram", () => {
-  it("renders an unfolded cube net of 54 stickers", () => {
+  it("renders a 3-face view (U + F + R = 27 stickers)", () => {
     render(<CubeF2LDiagram facelets={solved()} />);
     expect(screen.getByRole("img", { name: /f2l/i })).toBeInTheDocument();
-    expect(screen.getAllByTestId("sticker")).toHaveLength(54);
+    expect(screen.getAllByTestId("sticker")).toHaveLength(27);
   });
 
   it("only highlights the given facelets in color", () => {
