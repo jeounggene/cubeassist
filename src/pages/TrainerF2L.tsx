@@ -1,0 +1,160 @@
+import { useMemo, useState } from "react";
+import { useProfile } from "../state/ProfileProvider";
+import { F2L_CASES, caseSetup, caseFacelets, f2lGroups } from "../lib/f2l";
+import Timer from "../components/Timer";
+import CubeF2LDiagram from "../components/CubeF2LDiagram";
+
+function mean(xs: number[]): number {
+  return xs.reduce((a, b) => a + b, 0) / xs.length;
+}
+function avgOfLast(xs: number[], n: number): string {
+  if (xs.length < n) return "—";
+  return mean(xs.slice(-n)).toFixed(2);
+}
+
+export default function TrainerF2L() {
+  const { profile, addDrill } = useProfile();
+  const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
+  const [hideAlg, setHideAlg] = useState(false);
+  const [times, setTimes] = useState<number[]>([]);
+  const [solved, setSolved] = useState(false);
+
+  const current = useMemo(
+    () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
+    [selectedId],
+  );
+  const setup = useMemo(() => caseSetup(current), [current]);
+  const facelets = useMemo(() => caseFacelets(current), [current]);
+
+  const selectCase = (id: string) => {
+    setSelectedId(id);
+    setTimes([]);
+    setSolved(false);
+  };
+
+  const showAlg = !hideAlg || solved;
+
+  const endSession = () => {
+    if (times.length === 0) return;
+    addDrill({
+      date: new Date().toISOString().slice(0, 10),
+      caseId: current.id,
+      attempts: times.length,
+      avgTime: Number(mean(times).toFixed(3)),
+    });
+    setTimes([]);
+    setSolved(false);
+  };
+
+  return (
+    <main className="mx-auto max-w-3xl p-6">
+      <h1 className="text-3xl font-bold mb-1">F2L trainer</h1>
+      <p className="text-slate-600 mb-6">
+        Pick a case, apply its setup to a solved cube, then drill the algorithm and
+        time yourself.
+      </p>
+
+      <div className="mb-6">
+        {f2lGroups().map((g) => (
+          <div key={g} className="mb-3">
+            <div className="text-sm font-medium text-slate-500 mb-1">{g}</div>
+            <div className="flex flex-wrap gap-1">
+              {F2L_CASES.filter((c) => c.group === g).map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => selectCase(c.id)}
+                  className={`rounded border px-2 py-1 text-sm ${
+                    c.id === current.id
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "border-slate-300 text-slate-700 hover:bg-slate-100"
+                  }`}
+                >
+                  {c.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <label className="mb-6 flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={hideAlg}
+          onChange={(e) => setHideAlg(e.target.checked)}
+          aria-label="Hide algorithm until solve"
+        />
+        <span>Hide algorithm until solve</span>
+      </label>
+
+      <div className="mb-6 flex items-start justify-between gap-6">
+        <div>
+          <div className="text-xl font-semibold">{current.name}</div>
+          <div className="text-sm text-slate-500 mb-3">{current.group}</div>
+          <div className="text-sm text-slate-500">Setup</div>
+          <div data-testid="setup" className="font-mono text-lg mb-3">
+            {setup}
+          </div>
+          {showAlg ? (
+            <>
+              <div className="text-sm text-slate-500">Algorithm</div>
+              <div data-testid="algorithm" className="font-mono text-lg">
+                {current.algorithm}
+              </div>
+              <p className="mt-2 text-sm text-slate-600">{current.recognition}</p>
+            </>
+          ) : (
+            <p className="text-sm text-slate-400">
+              Algorithm hidden — solve, then it reveals.
+            </p>
+          )}
+        </div>
+        <CubeF2LDiagram facelets={facelets} />
+      </div>
+
+      <div className="mb-6">
+        <Timer
+          inspection={profile.settings.inspection}
+          useMs={profile.settings.useMs}
+          onComplete={(seconds) => {
+            setTimes((t) => [...t, seconds]);
+            setSolved(true);
+          }}
+        />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <button
+          type="button"
+          onClick={() => setSolved(false)}
+          className="rounded bg-slate-900 px-4 py-2 text-white"
+        >
+          Next rep
+        </button>
+        <button
+          type="button"
+          onClick={endSession}
+          className="ml-auto rounded border border-red-300 px-4 py-2 text-red-700 hover:bg-red-50"
+        >
+          End session
+        </button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 text-center border-t border-slate-200 pt-4">
+        <Stat label="Solves" value={String(times.length)} />
+        <Stat label="Ao5" value={avgOfLast(times, 5)} />
+        <Stat label="Ao12" value={avgOfLast(times, 12)} />
+      </div>
+    </main>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-2xl font-semibold tabular-nums">{value}</div>
+      <div className="text-sm text-slate-500">{label}</div>
+    </div>
+  );
+}
