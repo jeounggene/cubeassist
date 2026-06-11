@@ -20,6 +20,8 @@ function faceRotation(n: number[]): string {
   if (n[2] === -1) return "rotateY(180deg)"; // B
   return ""; // F
 }
+// Each sticker fills its whole cubie face (so faces are opaque — no see-through);
+// a dark border draws the grid lines.
 const STICKER_TRANSFORM = GEO.map(
   (g) =>
     `translate3d(${g.pos[0] * S}px, ${-g.pos[1] * S}px, ${g.pos[2] * S}px) ${faceRotation(g.normal)} translateZ(${HC}px)`,
@@ -157,14 +159,17 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
         key={idx}
         data-testid="sticker"
         data-hl={hl.has(idx) ? "1" : undefined}
-        className="absolute rounded-sm border border-slate-500/50"
+        className="absolute"
         style={{
-          width: S - 4,
-          height: S - 4,
+          width: S,
+          height: S,
           left: "50%",
           top: "50%",
-          marginLeft: -(S - 4) / 2,
-          marginTop: -(S - 4) / 2,
+          marginLeft: -S / 2,
+          marginTop: -S / 2,
+          boxSizing: "border-box",
+          border: "1.5px solid #0f172a",
+          borderRadius: 4,
           transform: STICKER_TRANSFORM[idx],
           backgroundColor: on ? COLORS[shown[idx]] : MUTED,
         }}
@@ -205,7 +210,7 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           transition: dragging ? "none" : "transform 0.45s ease",
         }}
       >
-        {/* stickers not in the turning layer */}
+        {/* stickers (+ backings) not in the turning layer */}
         {all.filter((i) => !inTurn(i)).map(sticker)}
         {/* turning layer (rotates as a group) */}
         {turn && (
