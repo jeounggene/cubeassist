@@ -5,6 +5,7 @@ import {
   SLOTS,
   slotAlgorithms,
   slotSetup,
+  slotFacelets,
   caseFacelets,
   pairFacelets,
   f2lGroups,
@@ -12,12 +13,21 @@ import {
 import type { Slot } from "../lib/f2l";
 import Timer from "../components/Timer";
 import CubeF2LDiagram from "../components/CubeF2LDiagram";
+import MiniF2LCube from "../components/MiniF2LCube";
 
 const SLOT_LABELS: Record<Slot, string> = {
   FR: "Front-right",
   FL: "Front-left",
   BL: "Back-left",
   BR: "Back-right",
+};
+
+// Default cube orientation per direction, so each slot faces the viewer.
+const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
+  FR: { x: -30, y: -45 },
+  FL: { x: -30, y: 45 },
+  BL: { x: -30, y: 135 },
+  BR: { x: -30, y: -135 },
 };
 
 function mean(xs: number[]): number {
@@ -40,12 +50,21 @@ export default function TrainerF2L() {
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
     [selectedId],
   );
+
+  // Precompute each case's canonical (front-right) diagram for the picker.
+  const previews = useMemo(() => {
+    const m = new Map<string, { facelets: number[]; highlight: number[] }>();
+    for (const c of F2L_CASES) {
+      m.set(c.id, { facelets: caseFacelets(c), highlight: pairFacelets(c, "FR") });
+    }
+    return m;
+  }, []);
   const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
-  // The case only shows at the front-right in its canonical orientation, so the
-  // diagram is the canonical case; the Direction control drives the algorithm.
-  const facelets = useMemo(() => caseFacelets(current), [current]);
-  const highlight = useMemo(() => pairFacelets(current, "FR"), [current]);
+  // Position-accurate per direction: the pair shows in the chosen slot, and the
+  // cube's home orientation rotates so that slot faces the viewer.
+  const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
+  const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);
@@ -79,21 +98,26 @@ export default function TrainerF2L() {
         {f2lGroups().map((g) => (
           <div key={g} className="mb-3">
             <div className="text-sm font-medium text-slate-500 mb-1">{g}</div>
-            <div className="flex flex-wrap gap-1">
-              {F2L_CASES.filter((c) => c.group === g).map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => selectCase(c.id)}
-                  className={`rounded border px-2 py-1 text-sm ${
-                    c.id === current.id
-                      ? "bg-slate-900 text-white border-slate-900"
-                      : "border-slate-300 text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  {c.name}
-                </button>
-              ))}
+            <div className="flex flex-wrap gap-2">
+              {F2L_CASES.filter((c) => c.group === g).map((c) => {
+                const p = previews.get(c.id)!;
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    aria-label={c.name}
+                    onClick={() => selectCase(c.id)}
+                    className={`flex flex-col items-center rounded border px-1 pt-1 pb-0.5 ${
+                      c.id === current.id
+                        ? "border-slate-900 bg-slate-100 ring-2 ring-slate-900"
+                        : "border-slate-300 hover:bg-slate-50"
+                    }`}
+                  >
+                    <MiniF2LCube facelets={p.facelets} highlight={p.highlight} />
+                    <span className="text-[11px] text-slate-600">{c.name.replace("F2L case ", "#")}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         ))}
@@ -161,7 +185,12 @@ export default function TrainerF2L() {
             </p>
           )}
         </div>
-        <CubeF2LDiagram facelets={facelets} highlight={highlight} />
+        <CubeF2LDiagram
+          facelets={facelets}
+          highlight={highlight}
+          homeX={SLOT_HOME[slot].x}
+          homeY={SLOT_HOME[slot].y}
+        />
       </div>
 
       <div className="mb-6">
