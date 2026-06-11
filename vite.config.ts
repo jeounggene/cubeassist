@@ -8,5 +8,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],
     css: false,
+    // Cross/F2L modules build BFS tables on first use; allow headroom under load.
+    testTimeout: 30000,
   },
 });

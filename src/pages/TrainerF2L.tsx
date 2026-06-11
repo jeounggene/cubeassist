@@ -6,12 +6,14 @@ import {
   slotAlgorithms,
   slotSetup,
   slotFacelets,
+  caseFacelets,
   pairFacelets,
   f2lGroups,
 } from "../lib/f2l";
 import type { Slot } from "../lib/f2l";
 import Timer from "../components/Timer";
 import CubeF2LDiagram from "../components/CubeF2LDiagram";
+import MiniF2LCube from "../components/MiniF2LCube";
 
 const SLOT_LABELS: Record<Slot, string> = {
   FR: "Front-right",
@@ -48,6 +50,15 @@ export default function TrainerF2L() {
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
     [selectedId],
   );
+
+  // Precompute each case's canonical (front-right) diagram for the picker.
+  const previews = useMemo(() => {
+    const m = new Map<string, { facelets: number[]; highlight: number[] }>();
+    for (const c of F2L_CASES) {
+      m.set(c.id, { facelets: caseFacelets(c), highlight: pairFacelets(c, "FR") });
+    }
+    return m;
+  }, []);
   const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
   // Position-accurate per direction: the pair shows in the chosen slot, and the
@@ -87,21 +98,26 @@ export default function TrainerF2L() {
         {f2lGroups().map((g) => (
           <div key={g} className="mb-3">
             <div className="text-sm font-medium text-slate-500 mb-1">{g}</div>
-            <div className="flex flex-wrap gap-1">
-              {F2L_CASES.filter((c) => c.group === g).map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => selectCase(c.id)}
-                  className={`rounded border px-2 py-1 text-sm ${
-                    c.id === current.id
-                      ? "bg-slate-900 text-white border-slate-900"
-                      : "border-slate-300 text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  {c.name}
-                </button>
-              ))}
+            <div className="flex flex-wrap gap-2">
+              {F2L_CASES.filter((c) => c.group === g).map((c) => {
+                const p = previews.get(c.id)!;
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    aria-label={c.name}
+                    onClick={() => selectCase(c.id)}
+                    className={`flex flex-col items-center rounded border px-1 pt-1 pb-0.5 ${
+                      c.id === current.id
+                        ? "border-slate-900 bg-slate-100 ring-2 ring-slate-900"
+                        : "border-slate-300 hover:bg-slate-50"
+                    }`}
+                  >
+                    <MiniF2LCube facelets={p.facelets} highlight={p.highlight} />
+                    <span className="text-[11px] text-slate-600">{c.name.replace("F2L case ", "#")}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         ))}
