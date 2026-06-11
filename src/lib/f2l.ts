@@ -59,6 +59,45 @@ export function slotDisturbable(slot: Slot): number[] {
   ];
 }
 
+// Color sets of each slot's pair: corner = its two side faces + D(3); edge = the
+// two side faces. Faces: U=0 R=1 F=2 D=3 L=4 B=5.
+const SLOT_COLORS: Record<Slot, { corner: number[]; edge: number[] }> = {
+  FR: { corner: [1, 2, 3], edge: [1, 2] },
+  FL: { corner: [2, 3, 4], edge: [2, 4] },
+  BL: { corner: [3, 4, 5], edge: [4, 5] },
+  BR: { corner: [1, 3, 5], edge: [1, 5] },
+};
+
+const CORNER_POSITIONS: [number, number, number][] = [];
+for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) CORNER_POSITIONS.push([x, y, z]);
+const EDGE_POSITIONS: [number, number, number][] = [];
+for (const a of [-1, 0, 1]) for (const b of [-1, 0, 1]) for (const c of [-1, 0, 1]) {
+  if ([a, b, c].filter((v) => v === 0).length === 1) EDGE_POSITIONS.push([a, b, c]);
+}
+
+const sortedEq = (a: number[], b: number[]) => {
+  const x = [...a].sort();
+  const y = [...b].sort();
+  return x.length === y.length && x.every((v, i) => v === y[i]);
+};
+
+// Facelet indices currently showing the slot's pair pieces (to highlight in the
+// diagram). Everything else in the case is irrelevant last-layer noise.
+export function pairFacelets(c: F2LCase, slot: Slot): number[] {
+  const f = slotFacelets(c, slot);
+  const want = SLOT_COLORS[slot];
+  const out: number[] = [];
+  for (const pos of CORNER_POSITIONS) {
+    const fl = cubieFacelets(pos);
+    if (sortedEq(fl.map((i) => f[i]), want.corner)) out.push(...fl);
+  }
+  for (const pos of EDGE_POSITIONS) {
+    const fl = cubieFacelets(pos);
+    if (sortedEq(fl.map((i) => f[i]), want.edge)) out.push(...fl);
+  }
+  return out;
+}
+
 // Stickers a clean FR-slot case may disturb: the entire top (U) layer plus the
 // FR pair (DFR corner + FR edge). Everything else must stay solved.
 export const DISTURBABLE_FACELETS = [
