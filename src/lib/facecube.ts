@@ -159,6 +159,14 @@ export function cubieFacelets(pos: [number, number, number]): number[] {
   return out;
 }
 
+// 3D geometry of each facelet: its cubie center and outward normal (for rendering).
+export function faceletGeometry(): { pos: [number, number, number]; normal: [number, number, number] }[] {
+  return FACELETS.map((f) => ({
+    pos: [f.pos[0], f.pos[1], f.pos[2]],
+    normal: [f.normal[0], f.normal[1], f.normal[2]],
+  }));
+}
+
 // Facelet indices in the top (U) layer — every sticker on a cubie with y = +1.
 // These include the U face plus the top row of each side face.
 export function topLayerFacelets(): number[] {
