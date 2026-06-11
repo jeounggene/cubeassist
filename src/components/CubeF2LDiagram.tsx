@@ -62,6 +62,17 @@ function moveAnim(token: string): { spec: Spec; deg: number; token: string } | n
 
 const TURN_MS = 300;
 
+// Track which facelet positions hold the highlighted pair as moves permute the
+// cube: label each position by its index, apply the move, and the label landing
+// at position i tells us which old position moved there.
+const IDENTITY = Array.from({ length: 54 }, (_, i) => i);
+function moveHighlight(set: Set<number>, token: string): Set<number> {
+  const perm = applyAlg(IDENTITY, token); // perm[i] = source position now at i
+  const out = new Set<number>();
+  for (let i = 0; i < 54; i++) if (set.has(perm[i])) out.add(i);
+  return out;
+}
+
 type Props = {
   facelets: number[];
   highlight?: number[];
@@ -78,11 +89,13 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
 
   // Animation state.
   const [display, setDisplay] = useState<number[] | null>(null); // colors shown while playing
+  const [displayHl, setDisplayHl] = useState<Set<number> | null>(null); // pair positions while playing
   const [turn, setTurn] = useState<{ spec: Spec; angle: number } | null>(null);
 
   useEffect(() => setRot({ x: homeX, y: homeY }), [homeX, homeY]);
   useEffect(() => {
     setDisplay(null);
+    setDisplayHl(null);
     setTurn(null);
   }, [facelets]);
 
@@ -110,9 +123,11 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
     if (!play || play.nonce === 0 || !play.alg) return;
     const tokens = play.alg.split(/\s+/).filter(Boolean);
     let state = facelets;
+    let hlSet = new Set(highlight);
     let cancelled = false;
     const timers: number[] = [];
     setDisplay(state);
+    setDisplayHl(hlSet);
 
     const step = (i: number) => {
       if (cancelled) return;
@@ -122,8 +137,10 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
       }
       const a = moveAnim(tokens[i]);
       if (!a) {
+        hlSet = moveHighlight(hlSet, tokens[i]);
         state = applyAlg(state, tokens[i]);
         setDisplay(state);
+        setDisplayHl(hlSet);
         step(i + 1);
         return;
       }
@@ -135,8 +152,10 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
       timers.push(
         window.setTimeout(() => {
           if (cancelled) return;
+          hlSet = moveHighlight(hlSet, a.token);
           state = applyAlg(state, a.token);
           setDisplay(state);
+          setDisplayHl(hlSet);
           setTurn(null);
           step(i + 1);
         }, TURN_MS + 40),
@@ -152,9 +171,18 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
 
   const shown = display ?? facelets;
   const playing = display !== null;
+  // Only the F2L pair is ever colored; during play it follows the pieces.
+  const litHl = playing && displayHl ? displayHl : hl;
 
   const sticker = (idx: number) => {
-    const on = playing || hl.has(idx);
+    const on = litHl.has(idx);
+    const t = turn;
+    const turning = t !== null && t.spec.sel.includes(GEO[idx].pos[t.spec.axis]);
+    const base = STICKER_TRANSFORM[idx];
+    // The rotation is prefixed onto the sticker's own transform. Each sticker is
+    // positioned with left/top:50%, so its transform-origin sits exactly at the
+    // cube core — prefixing rotate() pivots the layer around the core.
+    const transform = turning && t ? `rotate${t.spec.rot}(${t.angle}deg) ${base}` : base;
     return (
       <div
         key={idx}
@@ -171,14 +199,14 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           boxSizing: "border-box",
           border: "1.5px solid #0f172a",
           borderRadius: 4,
-          transform: STICKER_TRANSFORM[idx],
+          transform,
+          transition: turning ? `transform ${TURN_MS}ms ease-in-out` : undefined,
           backgroundColor: on ? COLORS[shown[idx]] : MUTED,
         }}
       />
     );
   };
 
-  const inTurn = (idx: number) => turn !== null && turn.spec.sel.includes(GEO[idx].pos[turn.spec.axis]);
   const all = GEO.map((_, i) => i);
 
   return (
@@ -211,23 +239,9 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           transition: dragging ? "none" : "transform 0.45s ease",
         }}
       >
-        {/* stickers (+ backings) not in the turning layer */}
-        {all.filter((i) => !inTurn(i)).map(sticker)}
-        {/* turning layer (rotates as a group) */}
-        {turn && (
-          <div
-            style={{
-              position: "absolute",
-              width: S,
-              height: S,
-              transformStyle: "preserve-3d",
-              transform: `rotate${turn.spec.rot}(${turn.angle}deg)`,
-              transition: `transform ${TURN_MS}ms ease-in-out`,
-            }}
-          >
-            {all.filter(inTurn).map(sticker)}
-          </div>
-        )}
+        {/* every sticker rotates around its own origin (= the core) when its
+            layer is turning; the rest stay put */}
+        {all.map(sticker)}
       </div>
     </div>
   );
