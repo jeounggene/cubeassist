@@ -13,8 +13,8 @@ const GEO = faceletGeometry();
 
 // Orient a sticker (default faces +z) to its outward normal (world y is up; CSS y is down).
 function faceRotation(n: number[]): string {
-  if (n[1] === 1) return "rotateX(-90deg)"; // U
-  if (n[1] === -1) return "rotateX(90deg)"; // D
+  if (n[1] === 1) return "rotateX(90deg)"; // U
+  if (n[1] === -1) return "rotateX(-90deg)"; // D
   if (n[0] === 1) return "rotateY(90deg)"; // R
   if (n[0] === -1) return "rotateY(-90deg)"; // L
   if (n[2] === -1) return "rotateY(180deg)"; // B
