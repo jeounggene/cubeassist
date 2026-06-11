@@ -28,26 +28,27 @@ const STICKER_TRANSFORM = GEO.map(
 );
 
 // Per move base: which axis selects the layer, which coords rotate, the CSS rotation.
+// Signs match applyAlg under the world->CSS y-flip (X/Z turns are negated vs world).
 type Spec = { axis: 0 | 1 | 2; sel: number[]; rot: "X" | "Y" | "Z"; deg: number };
 const SPECS: Record<string, Spec> = {
-  R: { axis: 0, sel: [1], rot: "X", deg: -90 },
-  L: { axis: 0, sel: [-1], rot: "X", deg: 90 },
+  R: { axis: 0, sel: [1], rot: "X", deg: 90 },
+  L: { axis: 0, sel: [-1], rot: "X", deg: -90 },
   U: { axis: 1, sel: [1], rot: "Y", deg: -90 },
   D: { axis: 1, sel: [-1], rot: "Y", deg: 90 },
-  F: { axis: 2, sel: [1], rot: "Z", deg: -90 },
-  B: { axis: 2, sel: [-1], rot: "Z", deg: 90 },
-  r: { axis: 0, sel: [0, 1], rot: "X", deg: -90 },
-  l: { axis: 0, sel: [-1, 0], rot: "X", deg: 90 },
+  F: { axis: 2, sel: [1], rot: "Z", deg: 90 },
+  B: { axis: 2, sel: [-1], rot: "Z", deg: -90 },
+  r: { axis: 0, sel: [0, 1], rot: "X", deg: 90 },
+  l: { axis: 0, sel: [-1, 0], rot: "X", deg: -90 },
   u: { axis: 1, sel: [0, 1], rot: "Y", deg: -90 },
   d: { axis: 1, sel: [-1, 0], rot: "Y", deg: 90 },
-  f: { axis: 2, sel: [0, 1], rot: "Z", deg: -90 },
-  b: { axis: 2, sel: [-1, 0], rot: "Z", deg: 90 },
-  M: { axis: 0, sel: [0], rot: "X", deg: 90 },
+  f: { axis: 2, sel: [0, 1], rot: "Z", deg: 90 },
+  b: { axis: 2, sel: [-1, 0], rot: "Z", deg: -90 },
+  M: { axis: 0, sel: [0], rot: "X", deg: -90 },
   E: { axis: 1, sel: [0], rot: "Y", deg: 90 },
-  S: { axis: 2, sel: [0], rot: "Z", deg: -90 },
-  x: { axis: 0, sel: [-1, 0, 1], rot: "X", deg: -90 },
+  S: { axis: 2, sel: [0], rot: "Z", deg: 90 },
+  x: { axis: 0, sel: [-1, 0, 1], rot: "X", deg: 90 },
   y: { axis: 1, sel: [-1, 0, 1], rot: "Y", deg: -90 },
-  z: { axis: 2, sel: [-1, 0, 1], rot: "Z", deg: -90 },
+  z: { axis: 2, sel: [-1, 0, 1], rot: "Z", deg: 90 },
 };
 
 function moveAnim(token: string): { spec: Spec; deg: number; token: string } | null {
