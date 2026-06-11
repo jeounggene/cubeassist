@@ -5,7 +5,7 @@ import {
   SLOTS,
   slotAlgorithms,
   slotSetup,
-  caseFacelets,
+  slotFacelets,
   pairFacelets,
   f2lGroups,
 } from "../lib/f2l";
@@ -18,6 +18,14 @@ const SLOT_LABELS: Record<Slot, string> = {
   FL: "Front-left",
   BL: "Back-left",
   BR: "Back-right",
+};
+
+// Default cube orientation per direction, so each slot faces the viewer.
+const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
+  FR: { x: -30, y: -45 },
+  FL: { x: -30, y: 45 },
+  BL: { x: -30, y: 135 },
+  BR: { x: -30, y: -135 },
 };
 
 function mean(xs: number[]): number {
@@ -42,10 +50,10 @@ export default function TrainerF2L() {
   );
   const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
-  // The case only shows at the front-right in its canonical orientation, so the
-  // diagram is the canonical case; the Direction control drives the algorithm.
-  const facelets = useMemo(() => caseFacelets(current), [current]);
-  const highlight = useMemo(() => pairFacelets(current, "FR"), [current]);
+  // Position-accurate per direction: the pair shows in the chosen slot, and the
+  // cube's home orientation rotates so that slot faces the viewer.
+  const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
+  const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);
@@ -161,7 +169,12 @@ export default function TrainerF2L() {
             </p>
           )}
         </div>
-        <CubeF2LDiagram facelets={facelets} highlight={highlight} />
+        <CubeF2LDiagram
+          facelets={facelets}
+          highlight={highlight}
+          homeX={SLOT_HOME[slot].x}
+          homeY={SLOT_HOME[slot].y}
+        />
       </div>
 
       <div className="mb-6">
