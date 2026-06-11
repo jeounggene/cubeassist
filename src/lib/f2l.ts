@@ -11,12 +11,15 @@ export type F2LCase = {
   name: string;
   group: string;
   recognition: string;
-  // Per slot, a ranked list of usable rotationless algorithms (best first).
+  // Per slot, algorithms ordered with the favored (recommended) alg first.
   algs: Record<Slot, string[]>;
+  // Per slot, a clean face-move algorithm used only to derive the setup + diagram
+  // (so the setup never reorients even when the favored display alg uses wide moves).
+  setup: Record<Slot, string>;
 };
 
 export const F2L_CASES: F2LCase[] = (casesData as Partial<F2LCase>[]).filter(
-  (c): c is F2LCase => !!c.algs && Array.isArray(c.algs.FR) && c.algs.FR.length > 0,
+  (c): c is F2LCase => !!c.algs && !!c.setup && Array.isArray(c.algs.FR) && c.algs.FR.length > 0,
 );
 
 const SLOT_CUBIES: Record<Slot, { corner: [number, number, number]; edge: [number, number, number] }> = {
@@ -30,12 +33,13 @@ const SLOT_CUBIES: Record<Slot, { corner: [number, number, number]; edge: [numbe
 export function slotAlgorithms(c: F2LCase, slot: Slot): string[] {
   return c.algs[slot];
 }
-// The primary (most ergonomic) algorithm for the slot.
+// The favored (first-displayed) algorithm for the slot.
 export function slotAlgorithm(c: F2LCase, slot: Slot): string {
   return c.algs[slot][0];
 }
+// The setup is derived from the clean face-move alg, not the (maybe wide) favored one.
 export function slotSetup(c: F2LCase, slot: Slot): string {
-  return invertAlg(slotAlgorithm(c, slot));
+  return invertAlg(c.setup[slot]);
 }
 export function caseSetup(c: F2LCase): string {
   return slotSetup(c, "FR");

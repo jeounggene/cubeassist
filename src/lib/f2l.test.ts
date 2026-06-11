@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { F2L_CASES, caseSetup, caseFacelets, slotAlgorithm, DISTURBABLE_FACELETS } from "./f2l";
-import { solved, applyAlg } from "./facecube";
+import { solved, applyAlg, isF2LComplete } from "./facecube";
 
 const allowed = new Set(DISTURBABLE_FACELETS);
 
@@ -21,10 +21,10 @@ describe("F2L data correctness", () => {
     }
   });
 
-  it("the FR algorithm solves its own setup (pair returns home)", () => {
+  it("the favored FR algorithm completes F2L from its setup", () => {
     for (const c of F2L_CASES) {
       const after = applyAlg(applyAlg(solved(), caseSetup(c)), slotAlgorithm(c, "FR"));
-      expect(after).toEqual(solved());
+      expect(isF2LComplete(after)).toBe(true);
     }
   });
 

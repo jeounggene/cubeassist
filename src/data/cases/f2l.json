@@ -7,34 +7,40 @@
     "algs": {
       "FR": [
         "R U' R'",
-        "R U' R' U",
-        "U R U2 R'",
         "U' R' F R F'",
         "U' y' r' U' R U M'",
-        "U' y U F' L F L2 U L"
+        "U' y U F' L F L2 U L",
+        "U R U2 R'",
+        "R U' R' U"
       ],
       "FL": [
         "F U' F'",
-        "F U' F' U",
-        "U F U2 F'",
         "U' F' L F L'",
-        "U' y U L' B L B2 U B"
+        "U' y U L' B L B2 U B",
+        "U F U2 F'",
+        "F U' F' U"
       ],
       "BL": [
         "L U' L'",
-        "L U' L' U",
-        "U L U2 L'",
         "U' L' B L B'",
-        "U' y U B' R B R2 U R"
+        "U' y U B' R B R2 U R",
+        "U L U2 L'",
+        "L U' L' U"
       ],
       "BR": [
-        "R' F' U' F R",
         "B U' B'",
-        "R' F' U' F R U",
-        "U R2 F R F' R",
         "U' B' R B R'",
-        "U' y U R' F R F2 U F"
+        "U' y U R' F R F2 U F",
+        "R' F' U' F R",
+        "U R2 F R F' R",
+        "R' F' U' F R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R'",
+      "FL": "F U' F'",
+      "BL": "L U' L'",
+      "BR": "R' F' U' F R"
     }
   },
   {
@@ -45,33 +51,39 @@
     "algs": {
       "FR": [
         "R U R'",
-        "R U R' U",
-        "y2 L U L'",
+        "y' f R f'",
         "y F U F'",
-        "y' f R f'"
+        "y2 L U L'",
+        "R U R' U"
       ],
       "FL": [
         "F U F'",
-        "y L U L'",
-        "F U F' U",
         "y' l F l'",
-        "y2 B U B'"
+        "y L U L'",
+        "y2 B U B'",
+        "F U F' U"
       ],
       "BL": [
         "L U L'",
-        "y2 R U R'",
-        "L U L' U",
+        "y' b L b'",
         "y B U B'",
-        "y' b L b'"
+        "y2 R U R'",
+        "L U L' U"
       ],
       "BR": [
         "B U B'",
-        "y R U R'",
         "y' r B r'",
+        "y R U R'",
         "y2 F U F'",
-        "B U B' U",
-        "U2 R' F' U F U2 R"
+        "U2 R' F' U F U2 R",
+        "B U B' U"
       ]
+    },
+    "setup": {
+      "FR": "R U R'",
+      "FL": "F U F'",
+      "BL": "L U L'",
+      "BR": "B U B'"
     }
   },
   {
@@ -84,27 +96,33 @@
         "F' U' F",
         "y' R' U' R",
         "y L' U' L",
-        "F' U' F U",
-        "S U R U' R' S'"
+        "S U R U' R' S'",
+        "F' U' F U"
       ],
       "FL": [
         "L' U' L",
-        "L' U' L U",
         "y' F' U' F",
-        "y B' U' B"
+        "y B' U' B",
+        "L' U' L U"
       ],
       "BL": [
         "B' U' B",
-        "y R' U' R",
         "y' L' U' L",
+        "y R' U' R",
         "B' U' B U"
       ],
       "BR": [
         "R' U' R",
-        "R' U' R U",
+        "y' B' U' B",
         "y F' U' F",
-        "y' B' U' B"
+        "R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U' F",
+      "FL": "L' U' L",
+      "BL": "B' U' B",
+      "BR": "R' U' R"
     }
   },
   {
@@ -114,37 +132,43 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "F' U F",
-        "F' U F U",
-        "U' F' U2 F",
-        "U y' U' R' U R",
         "U F R' F' R",
-        "U y U' L' U L"
+        "U y' U' R' U R",
+        "F' U F",
+        "U y U' L' U L",
+        "U' F' U2 F",
+        "F' U F U"
       ],
       "FL": [
-        "L' U L",
-        "L' U L U",
-        "U' L' U2 L",
         "U L F' L' F",
         "U y' U' F' U F",
-        "U y U' B' U B"
+        "L' U L",
+        "U y U' B' U B",
+        "U' L' U2 L",
+        "L' U L U"
       ],
       "BL": [
-        "L F U F' L'",
+        "U B L' B' L",
+        "U y' U' L' U L",
         "B' U B",
         "U y U' R' U R",
-        "U y' U' L' U L",
-        "U' B' U2 B",
-        "U B L' B' L"
+        "L F U F' L'",
+        "U' B' U2 B"
       ],
       "BR": [
-        "R' U R",
-        "R' U R U",
-        "U' R' U2 R",
-        "U y U' F' U F",
         "U R B' R' B",
-        "U y' U' B' U B"
+        "U y' U' B' U B",
+        "R' U R",
+        "U y U' F' U F",
+        "U' R' U2 R",
+        "R' U R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U F",
+      "FL": "L' U L",
+      "BL": "L F U F' L'",
+      "BR": "R' U R"
     }
   },
   {
@@ -154,31 +178,37 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R U R' F' U' F",
-        "R U R' F' U' F U",
         "U2 r U' r' U2 r U r'",
-        "U2 F' L' U2 L F"
+        "U2 F' L' U2 L F",
+        "R U R' F' U' F",
+        "R U R' F' U' F U"
       ],
       "FL": [
+        "U2 f U' f' U2 f U f'",
+        "U2 L' B' U2 B L",
         "F U F' L' U' L",
         "L' U' L U' L' U L",
-        "U2 L' U L U2 L' U' L",
-        "U2 L' B' U2 B L",
-        "U2 f U' f' U2 f U f'"
+        "U2 L' U L U2 L' U' L"
       ],
       "BL": [
-        "L U L' B' U' B",
-        "U2 B' R' U2 R B",
         "U2 l U' l' U2 l U l'",
+        "U2 B' R' U2 R B",
+        "L U L' B' U' B",
         "L F U2 F2 L F L2",
         "F' U' F' L F U L' F"
       ],
       "BR": [
-        "R' U' R U' R' U R",
-        "R' F R' F' R2",
+        "U2 b U' b' U2 b U b'",
         "U2 R' F' U2 F R",
-        "U2 b U' b' U2 b U b'"
+        "R' U' R U' R' U R",
+        "R' F R' F' R2"
       ]
+    },
+    "setup": {
+      "FR": "R U R' F' U' F",
+      "FL": "F U F' L' U' L",
+      "BL": "L U L' B' U' B",
+      "BR": "R' U' R U' R' U R"
     }
   },
   {
@@ -198,14 +228,20 @@
       ],
       "BL": [
         "L U' L' B' U' B",
-        "L U' L' B' U' B U",
-        "L F' U' L' U L F U' L'"
+        "L F' U' L' U L F U' L'",
+        "L U' L' B' U' B U"
       ],
       "BR": [
         "R' U' R U R' U' R",
-        "R' U' R U R' U' R U",
-        "U R' U2 R U2 R' U' R"
+        "U R' U2 R U2 R' U' R",
+        "R' U' R U R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' F' U' F",
+      "FL": "F U' F' L' U' L",
+      "BL": "L U' L' B' U' B",
+      "BR": "R' U' R U R' U' R"
     }
   },
   {
@@ -232,6 +268,12 @@
         "R' U R' F R F' R",
         "R' U R' F R F' R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U2 F R U R'",
+      "FL": "L' U2 L F U F'",
+      "BL": "L U' L F' L' F L'",
+      "BR": "R' U R' F R F' R"
     }
   },
   {
@@ -259,6 +301,12 @@
         "R' U R U2 R' U2 R",
         "R' U R U' R' U R U"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' F' U2 F",
+      "FL": "L' U L U' L' U L",
+      "BL": "L U2 L F' L' F L'",
+      "BR": "R' U R U' R' U R"
     }
   },
   {
@@ -268,38 +316,44 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "F' U2 F2 R' F' R",
-        "F' U2 F2 R' F' R U",
-        "F' U2 F U' F' U F",
         "U y' U' R' U2 R U' R' U R",
         "R U' R2 F R F' R U' R'",
-        "U y U' L' U2 L U' L' U L"
+        "U y U' L' U2 L U' L' U L",
+        "F' U2 F U' F' U F",
+        "F' U2 F2 R' F' R",
+        "F' U2 F2 R' F' R U"
       ],
       "FL": [
-        "L' U2 L U' L' U L",
-        "L' U2 L2 F' L' F",
-        "L' U2 L U2 L' U2 L",
         "U y' U' F' U2 F U' F' U F",
         "F U' F2 L F L' F U' F'",
-        "U y U' B' U2 B U' B' U B"
+        "U y U' B' U2 B U' B' U B",
+        "L' U2 L U' L' U L",
+        "L' U2 L U2 L' U2 L",
+        "L' U2 L2 F' L' F"
       ],
       "BL": [
-        "L F U2 F' L' U' L U L'",
-        "U y U' R' U2 R U' R' U R",
         "U y' U' L' U2 L U' L' U L",
-        "U2 L U F U' F2 L F L2",
+        "L U' L2 B L B' L U' L'",
+        "U y U' R' U2 R U' R' U R",
         "B' U2 B U' B' U B",
-        "U2 F' U' L2 U L2 U' L2 U F",
-        "L U' L2 B L B' L U' L'"
+        "L F U2 F' L' U' L U L'",
+        "U2 L U F U' F2 L F L2",
+        "U2 F' U' L2 U L2 U' L2 U F"
       ],
       "BR": [
-        "R' U2 R U' R' U R",
-        "R' U' F R' F' R2",
-        "R' U2 R U2 R' U2 R",
-        "U y U' F' U2 F U' F' U F",
         "U y' U' B' U2 B U' B' U B",
-        "B U' B2 R B R' B U' B'"
+        "B U' B2 R B R' B U' B'",
+        "U y U' F' U2 F U' F' U F",
+        "R' U2 R U' R' U R",
+        "R' U2 R U2 R' U2 R",
+        "R' U' F R' F' R2"
       ]
+    },
+    "setup": {
+      "FR": "F' U2 F2 R' F' R",
+      "FL": "L' U2 L U' L' U L",
+      "BL": "L F U2 F' L' U' L U L'",
+      "BR": "R' U2 R U' R' U R"
     }
   },
   {
@@ -310,36 +364,42 @@
     "algs": {
       "FR": [
         "R U R' U R U' R'",
-        "R U R' U2 R U2 R'",
         "U2 R U' R' U2 R U R'",
         "U2 R B U2 B' R'",
-        "U2 y' f R' f' U2 f R f'"
+        "U2 y' f R' f' U2 f R f'",
+        "R U R' U2 R U2 R'"
       ],
       "FL": [
-        "L' U' L F U F'",
-        "U2 F R U2 R' F'",
-        "L' U' L F U F' U",
         "F U F' U F U' F'",
         "U2 F U' F' U2 F U F'",
-        "U2 y' l F' l' U2 l F l'"
+        "U2 F R U2 R' F'",
+        "U2 y' l F' l' U2 l F l'",
+        "L' U' L F U F'",
+        "L' U' L F U F' U"
       ],
       "BL": [
-        "L F U2 F' L'",
-        "L U' L' U2 L U L'",
-        "U L F U F' U L'",
-        "U2 L F' L F L2",
         "U2 L U L' U L U' L'",
-        "y' b L' b' U2 b L b'"
+        "L U' L' U2 L U L'",
+        "L F U2 F' L'",
+        "y' b L' b' U2 b L b'",
+        "U2 L F' L F L2",
+        "U L F U F' U L'"
       ],
       "BR": [
-        "F R2 U' R2 U R2 U F'",
-        "B L U2 L' B'",
-        "F U R U' R' F' R' U R",
-        "U2 R' F R U R' U' F' U' R",
-        "y' r B' r' U2 r B r'",
+        "U2 B U B' U B U' B'",
         "B U' B' U2 B U B'",
-        "U2 B U B' U B U' B'"
+        "B L U2 L' B'",
+        "y' r B' r' U2 r B r'",
+        "F R2 U' R2 U R2 U F'",
+        "F U R U' R' F' R' U R",
+        "U2 R' F R U R' U' F' U' R"
       ]
+    },
+    "setup": {
+      "FR": "R U R' U R U' R'",
+      "FL": "L' U' L F U F'",
+      "BL": "L F U2 F' L'",
+      "BR": "F R2 U' R2 U R2 U F'"
     }
   },
   {
@@ -367,6 +427,12 @@
         "R' U R B U B'",
         "U R' U2 F' U F2 R' F' R2"
       ]
+    },
+    "setup": {
+      "FR": "R U R' U' R U R'",
+      "FL": "L' U L F U F'",
+      "BL": "L U L' U' L U L'",
+      "BR": "R' F U R U' R' F' U R"
     }
   },
   {
@@ -387,13 +453,19 @@
       ],
       "BL": [
         "L U' L' U L U' L'",
-        "L U' L' U2 L U2 L'",
-        "U' L F U2 F' U L'"
+        "U' L F U2 F' U L'",
+        "L U' L' U2 L U2 L'"
       ],
       "BR": [
         "R' U2 R' F R F' R",
         "R' U2 R' F R F' R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' U R U' R'",
+      "FL": "L' U2 L F U2 F'",
+      "BL": "L U' L' U L U' L'",
+      "BR": "R' U2 R' F R F' R"
     }
   },
   {
@@ -405,34 +477,40 @@
       "FR": [
         "R U R' U R U R'",
         "U' R U' R' U' R U R'",
-        "R U R' U R U R' U",
         "U d R' U R d' R U R'",
-        "U y' U R' U R U' f R f'"
+        "U y' U R' U R U' f R f'",
+        "R U R' U R U R' U"
       ],
       "FL": [
-        "L' U L U' F U F'",
-        "U2 L' U' L U2 F U F'",
-        "U F U' F' U' F U F'",
         "U2 F U F' U F U F'",
+        "U F U' F' U' F U F'",
         "U' d F' U F d' F U F'",
-        "U' y' U F' U F U' l F l'"
+        "U' y' U F' U F U' l F l'",
+        "L' U L U' F U F'",
+        "U2 L' U' L U2 F U F'"
       ],
       "BL": [
         "L U L' U L U L'",
         "U' L U' L' U' L U L'",
-        "L U L' U L U L' U",
         "U d L' U L d' L U L'",
-        "U y' U L' U L U' b L b'"
+        "U y' U L' U L U' b L b'",
+        "L U L' U L U L' U"
       ],
       "BR": [
-        "R2 U' F' U F R2",
-        "R2 U' F' U F R2 U",
-        "U' R' U' F' U F U2 R",
-        "y' U B' U B U' r B r'",
         "U' B U B' U B U B'",
         "U2 B U' B' U' B U B'",
-        "d B' U B d' B U B'"
+        "d B' U B d' B U B'",
+        "y' U B' U B U' r B r'",
+        "R2 U' F' U F R2",
+        "U' R' U' F' U F U2 R",
+        "R2 U' F' U F R2 U"
       ]
+    },
+    "setup": {
+      "FR": "R U R' U R U R'",
+      "FL": "L' U L U' F U F'",
+      "BL": "L U L' U L U L'",
+      "BR": "R2 U' F' U F R2"
     }
   },
   {
@@ -443,34 +521,40 @@
     "algs": {
       "FR": [
         "R U' R' U R U R'",
-        "R U' R' U R U R' U",
-        "U' R2 U R' U R U2 R2",
+        "U R U2 R' U2 R U R' U2 R U' R'",
         "R2 D R' U R D' R2",
-        "U R U2 R' U2 R U R' U2 R U' R'"
+        "U' R2 U R' U R U2 R2",
+        "R U' R' U R U R' U"
       ],
       "FL": [
         "F U' F' U F U F'",
-        "F U' F' U F U F' U",
-        "U' F2 U F' U F U2 F2",
+        "U F U2 F' U2 F U F' U2 F U' F'",
         "F2 D F' U F D' F2",
-        "U F U2 F' U2 F U F' U2 F U' F'"
+        "U' F2 U F' U F U2 F2",
+        "F U' F' U F U F' U"
       ],
       "BL": [
         "L U' L' U L U L'",
-        "L U' L' U L U L' U",
-        "U' L2 U L' U L U2 L2",
+        "U L U2 L' U2 L U L' U2 L U' L'",
         "L2 D L' U L D' L2",
-        "U L U2 L' U2 L U L' U2 L U' L'"
+        "U' L2 U L' U L U2 L2",
+        "L U' L' U L U L' U"
       ],
       "BR": [
+        "U' B U' B' U B U B'",
+        "B U2 B' U2 B U B' U2 B U' B'",
+        "U' B2 D B' U B D' B2",
+        "U2 B2 U B' U B U2 B2",
         "R' U F' U F2 R' F' R2",
         "U' R' U R2 U2 F R' F' U2 R'",
-        "U2 R' U2 R2 U2 F R' F' U2 R'",
-        "U' B U' B' U B U B'",
-        "U2 B2 U B' U B U2 B2",
-        "U' B2 D B' U B D' B2",
-        "B U2 B' U2 B U B' U2 B U' B'"
+        "U2 R' U2 R2 U2 F R' F' U2 R'"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' U R U R'",
+      "FL": "F U' F' U F U F'",
+      "BL": "L U' L' U L U L'",
+      "BR": "R' U F' U F2 R' F' R2"
     }
   },
   {
@@ -481,8 +565,8 @@
     "algs": {
       "FR": [
         "R U2 R' U R U R'",
-        "R U2 R' U R U R' U",
-        "U2 R U R' U2 R U R'"
+        "U2 R U R' U2 R U R'",
+        "R U2 R' U R U R' U"
       ],
       "FL": [
         "L' U L U2 L' U L",
@@ -491,14 +575,20 @@
       ],
       "BL": [
         "L U2 L' U L U L'",
-        "U2 L U2 F U2 F' L'",
-        "U2 L U L' U2 L U L'"
+        "U2 L U L' U2 L U L'",
+        "U2 L U2 F U2 F' L'"
       ],
       "BR": [
         "R' U R U2 R' U R",
         "R' U R U R' U2 R",
         "R' U R U2 R' U R U"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' U R U R'",
+      "FL": "L' U L U2 L' U L",
+      "BL": "L U2 L' U L U L'",
+      "BR": "R' U R U2 R' U R"
     }
   },
   {
@@ -514,8 +604,8 @@
       ],
       "FL": [
         "L' U2 L U' L' U' L",
-        "L' U2 L U' L' U' L U",
-        "U2 L' U' L U2 L' U' L"
+        "U2 L' U' L U2 L' U' L",
+        "L' U2 L U' L' U' L U"
       ],
       "BL": [
         "L U' L' U2 L U' L'",
@@ -524,9 +614,15 @@
       ],
       "BR": [
         "R' U2 R U' R' U' R",
-        "R' U2 R U' R' U' R U",
-        "U2 R' U' R U2 R' U' R"
+        "U2 R' U' R U2 R' U' R",
+        "R' U2 R U' R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' U2 R U' R'",
+      "FL": "L' U2 L U' L' U' L",
+      "BL": "L U' L' U2 L U' L'",
+      "BR": "R' U2 R U' R' U' R"
     }
   },
   {
@@ -537,32 +633,38 @@
     "algs": {
       "FR": [
         "R U R' U2 R U' R'",
+        "U F2 L' U' L U F2",
         "R U R' U' R U2 R'",
-        "R U R' U2 R U' R' U",
         "R U R' U R' F R F'",
-        "U F2 L' U' L U F2"
+        "R U R' U2 R U' R' U"
       ],
       "FL": [
         "F U F' U2 F U' F'",
+        "U L2 B' U' B U L2",
         "F U F' U' F U2 F'",
         "F U F' U F' L F L'",
-        "U L2 B' U' B U L2",
         "U' L F U F' U' L2 U L"
       ],
       "BL": [
-        "L F U F' U2 L'",
         "U L U L' U2 L U' L'",
-        "U L U L' U' L U2 L'",
         "U2 B2 R' U' R U B2",
-        "U L U L' U L' B L B'"
+        "U L U L' U' L U2 L'",
+        "U L U L' U L' B L B'",
+        "L F U F' U2 L'"
       ],
       "BR": [
-        "R2 F' U' F U R2",
-        "R2 F' U' F U R2 U",
         "U' B U B' U2 B U' B'",
+        "R2 F' U' F U R2",
         "U' B U B' U' B U2 B'",
-        "U' B U B' U B' R B R'"
+        "U' B U B' U B' R B R'",
+        "R2 F' U' F U R2 U"
       ]
+    },
+    "setup": {
+      "FR": "R U R' U2 R U' R'",
+      "FL": "F U F' U2 F U' F'",
+      "BL": "L F U F' U2 L'",
+      "BR": "R2 F' U' F U R2"
     }
   },
   {
@@ -573,36 +675,42 @@
     "algs": {
       "FR": [
         "R U2 R' U R U' R'",
-        "R U2 R' U2 R U2 R'",
         "R U2 R2 F R F'",
-        "R U2 R' U R U' R' U",
+        "U' d f R2 f' U f R' f'",
         "U' R U' R' U R U' R' U R U R'",
-        "U' d f R2 f' U f R' f'"
+        "R U2 R' U2 R U2 R'",
+        "R U2 R' U R U' R' U"
       ],
       "FL": [
-        "F U2 F2 L F L'",
         "F U2 F' U F U' F'",
-        "F U2 F' U2 F U2 F'",
+        "F U2 F2 L F L'",
         "U' d l F2 l' U l F' l'",
-        "U' F U' F' U F U' F' U F U F'"
+        "U' F U' F' U F U' F' U F U F'",
+        "F U2 F' U2 F U2 F'"
       ],
       "BL": [
         "L U2 L' U L U' L'",
-        "L U F' L F L2",
-        "L U2 L' U2 L U2 L'",
         "L U2 L2 B L B'",
+        "U' d b L2 b' U b L' b'",
         "U' L U' L' U L U' L' U L U L'",
-        "U' d b L2 b' U b L' b'"
+        "L U F' L F L2",
+        "L U2 L' U2 L U2 L'"
       ],
       "BR": [
-        "R' F' U2 F R U R' U' R",
-        "B U2 B2 R B R'",
-        "U2 R' U' F' U F2 R' F' R2",
-        "U2 F U R2 U' R2 U R2 U' F'",
-        "U' d r B2 r' U r B' r'",
         "B U2 B' U B U' B'",
-        "U' B U' B' U B U' B' U B U B'"
+        "B U2 B2 R B R'",
+        "U' d r B2 r' U r B' r'",
+        "U' B U' B' U B U' B' U B U B'",
+        "R' F' U2 F R U R' U' R",
+        "U2 R' U' F' U F2 R' F' R2",
+        "U2 F U R2 U' R2 U R2 U' F'"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' U R U' R'",
+      "FL": "F U2 F2 L F L'",
+      "BL": "L U2 L' U L U' L'",
+      "BR": "R' F' U2 F R U R' U' R"
     }
   },
   {
@@ -613,34 +721,40 @@
     "algs": {
       "FR": [
         "R U2 R' U' R U R'",
-        "R U2 R' U' R U R' U",
         "y2 L U2 L' U' L U L'",
         "R U R' U' R U2 R' U2 R U R'",
-        "y L F' L' F L' U L U' L' U L"
+        "y L F' L' F L' U L U' L' U L",
+        "R U2 R' U' R U R' U"
       ],
       "FL": [
         "F U2 F' U' F U F'",
-        "F U2 F' U' F U F' U",
         "y2 B U2 B' U' B U B'",
         "F U F' U' F U2 F' U2 F U F'",
-        "y B L' B' L B' U B U' B' U B"
+        "y B L' B' L B' U B U' B' U B",
+        "F U2 F' U' F U F' U"
       ],
       "BL": [
         "L U2 L' U' L U L'",
         "y2 R U2 R' U' R U R'",
-        "L U2 L' U' L U L' U",
         "L U L' U' L U2 L' U2 L U L'",
-        "y R B' R' B R' U R U' R' U R"
+        "y R B' R' B R' U R U' R' U R",
+        "L U2 L' U' L U L' U"
       ],
       "BR": [
-        "R' U2 F R U R' U' F' R",
-        "y2 F U2 F' U' F U F'",
-        "R2 F' U F U2 F' U' F R2",
-        "U' R' F' U2 F2 R' F' R U' R",
         "B U2 B' U' B U B'",
+        "y2 F U2 F' U' F U F'",
+        "B U B' U' B U2 B' U2 B U B'",
         "y F R' F' R F' U F U' F' U F",
-        "B U B' U' B U2 B' U2 B U B'"
+        "R' U2 F R U R' U' F' R",
+        "U' R' F' U2 F2 R' F' R U' R",
+        "R2 F' U F U2 F' U' F R2"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' U' R U R'",
+      "FL": "F U2 F' U' F U F'",
+      "BL": "L U2 L' U' L U L'",
+      "BR": "R' U2 F R U R' U' F' R"
     }
   },
   {
@@ -650,31 +764,37 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R U2 R' U2 R U' R'",
         "R U2 R' U' R U2 R'",
-        "R U2 R' U2 R U' R' U",
+        "U M' U' M U2 r U' r'",
+        "R U2 R' U2 R U' R'",
         "R U2 R' U R' F R F'",
-        "U M' U' M U2 r U' r'"
+        "R U2 R' U2 R U' R' U"
       ],
       "FL": [
-        "F U2 F' U2 F U' F'",
         "F U2 F' U' F U2 F'",
-        "F U2 F' U2 F U' F' U",
-        "F U2 F' U F' L F L'"
+        "F U2 F' U2 F U' F'",
+        "F U2 F' U F' L F L'",
+        "F U2 F' U2 F U' F' U"
       ],
       "BL": [
-        "L U2 L' U2 L U' L'",
         "L U2 L' U' L U2 L'",
-        "U L U F U2 F' U L'",
-        "L U2 L' U L' B L B'"
+        "L U2 L' U2 L U' L'",
+        "L U2 L' U L' B L B'",
+        "U L U F U2 F' U L'"
       ],
       "BR": [
-        "F R U R2 U' R F'",
-        "F R U R2 U' R F' U",
         "U' B U2 B' U' B U2 B'",
         "U' B U2 B' U2 B U' B'",
-        "U' B U2 B' U B' R B R'"
+        "U' B U2 B' U B' R B R'",
+        "F R U R2 U' R F'",
+        "F R U R2 U' R F' U"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' U2 R U' R'",
+      "FL": "F U2 F' U2 F U' F'",
+      "BL": "L U2 L' U2 L U' L'",
+      "BR": "F R U R2 U' R F'"
     }
   },
   {
@@ -684,35 +804,41 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R' U2 R2 U R2 U R",
-        "R' U2 R2 U R2 U R U",
-        "U F' U2 F U' R U R'",
         "R U' R' U R U' R' U2 R U' R'",
-        "U R U' R' U' R U R' U' R U R'"
+        "R' U2 R2 U R2 U R",
+        "U R U' R' U' R U R' U' R U R'",
+        "U F' U2 F U' R U R'",
+        "R' U2 R2 U R2 U R U"
       ],
       "FL": [
-        "L' U2 L U' F U F'",
-        "L' U2 L U' F U F' U",
+        "U' F U' F' U F U' F' U2 F U' F'",
         "U' F' U2 F2 U F2 U F",
         "F U' F' U' F U F' U' F U F'",
-        "U' F U' F' U F U' F' U2 F U' F'"
+        "L' U2 L U' F U F'",
+        "L' U2 L U' F U F' U"
       ],
       "BL": [
-        "L' U2 L2 U L2 U L",
-        "L U' F U2 F' U2 L'",
-        "L' U2 L2 U L2 U L U",
-        "U B' U2 B U' L U L'",
         "L U' L' U L U' L' U2 L U' L'",
-        "U L U' L' U' L U L' U' L U L'"
+        "L' U2 L2 U L2 U L",
+        "U L U' L' U' L U L' U' L U L'",
+        "U B' U2 B U' L U L'",
+        "L U' F U2 F' U2 L'",
+        "L' U2 L2 U L2 U L U"
       ],
       "BR": [
-        "R' U' F R' F' R U' R",
-        "R' U' F R' F' R U' R U",
-        "R' U2 R U' B U B'",
+        "U' B U' B' U B U' B' U2 B U' B'",
         "U' B' U2 B2 U B2 U B",
         "B U' B' U' B U B' U' B U B'",
-        "U' B U' B' U B U' B' U2 B U' B'"
+        "R' U2 R U' B U B'",
+        "R' U' F R' F' R U' R",
+        "R' U' F R' F' R U' R U"
       ]
+    },
+    "setup": {
+      "FR": "R' U2 R2 U R2 U R",
+      "FL": "L' U2 L U' F U F'",
+      "BL": "L' U2 L2 U L2 U L",
+      "BR": "R' U' F R' F' R U' R"
     }
   },
   {
@@ -722,37 +848,43 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R2 U2 R' U' R U' R2",
-        "R2 U2 R' U' R U' R2 U",
-        "R2 U2 R' U' R U' R2 U'",
         "U' R U' R' U' R U' R' U R U' R'",
         "U2 R U R' U2 R U R' U' R U R'",
-        "U2 R U' R2 D' R U2 R' D R"
+        "R2 U2 R' U' R U' R2",
+        "U2 R U' R2 D' R U2 R' D R",
+        "R2 U2 R' U' R U' R2 U",
+        "R2 U2 R' U' R U' R2 U'"
       ],
       "FL": [
-        "F2 U2 F' U' F U' F2",
-        "U' L F' L' F U F U F'",
-        "U2 F' U' L' U L F L' U L",
         "U' F U' F' U' F U' F' U F U' F'",
         "U2 F U F' U2 F U F' U' F U F'",
-        "U2 F U' F2 D' F U2 F' D F"
+        "F2 U2 F' U' F U' F2",
+        "U2 F U' F2 D' F U2 F' D F",
+        "U' L F' L' F U F U F'",
+        "U2 F' U' L' U L F L' U L"
       ],
       "BL": [
-        "L2 U2 L' U' L U' L2",
-        "L2 U2 L' U' L U' L2 U",
         "U' L U' L' U' L U' L' U L U' L'",
         "U2 L U L' U2 L U L' U' L U L'",
-        "U2 L U' L2 D' L U2 L' D L"
+        "L2 U2 L' U' L U' L2",
+        "U2 L U' L2 D' L U2 L' D L",
+        "L2 U2 L' U' L U' L2 U"
       ],
       "BR": [
-        "R' U' R' U' F' U F R2",
-        "R' F' U' F2 R' F' R2",
-        "U R' U2 R' U' F' U F R2",
-        "B2 U2 B' U' B U' B2",
         "U' B U' B' U' B U' B' U B U' B'",
+        "U2 B U B' U2 B U B' U' B U B'",
+        "B2 U2 B' U' B U' B2",
         "U2 B U' B2 D' B U2 B' D B",
-        "U2 B U B' U2 B U B' U' B U B'"
+        "R' U' R' U' F' U F R2",
+        "U R' U2 R' U' F' U F R2",
+        "R' F' U' F2 R' F' R2"
       ]
+    },
+    "setup": {
+      "FR": "R2 U2 R' U' R U' R2",
+      "FL": "F2 U2 F' U' F U' F2",
+      "BL": "L2 U2 L' U' L U' L2",
+      "BR": "R' U' R' U' F' U F R2"
     }
   },
   {
@@ -763,8 +895,8 @@
     "algs": {
       "FR": [
         "R2 U R2 U R2 U2 R2",
-        "R2 U R2 U R2 U2 R2 U",
-        "U2 R2 U2 R2 U' R2 U' R2"
+        "U2 R2 U2 R2 U' R2 U' R2",
+        "R2 U R2 U R2 U2 R2 U"
       ],
       "FL": [
         "L2 U2 L2 U L2 U L2",
@@ -773,14 +905,20 @@
       ],
       "BL": [
         "L U' F U F' U L'",
-        "L U' F U F' U L' U",
-        "U' L U' F U2 F' U L'"
+        "U' L U' F U2 F' U L'",
+        "L U' F U F' U L' U"
       ],
       "BR": [
         "R2 U2 R2 U R2 U R2",
-        "R' U F' U' F U' R",
-        "U2 R2 U' R2 U' R2 U2 R2"
+        "U2 R2 U' R2 U' R2 U2 R2",
+        "R' U F' U' F U' R"
       ]
+    },
+    "setup": {
+      "FR": "R2 U R2 U R2 U2 R2",
+      "FL": "L2 U2 L2 U L2 U L2",
+      "BL": "L U' F U F' U L'",
+      "BR": "R2 U2 R2 U R2 U R2"
     }
   },
   {
@@ -808,6 +946,12 @@
         "R' F R' F' R U' R",
         "R' F R' F' R U' R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U F U R U R'",
+      "FL": "L' U L U F U F'",
+      "BL": "L U' F' L' U' L U F L'",
+      "BR": "R' F R' F' R U' R"
     }
   },
   {
@@ -836,6 +980,12 @@
         "U' R U2 F R' F' U2 R'",
         "U F R2 U R2 U' R2 F'"
       ]
+    },
+    "setup": {
+      "FR": "F' U F U R U' R'",
+      "FL": "L' U L U F U' F'",
+      "BL": "L U2 F U F' U2 L'",
+      "BR": "R' U2 F' U F U2 R"
     }
   },
   {
@@ -845,29 +995,35 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
+        "U F' U2 L' U2 L U2 F",
         "R U' R' F R' F' R",
         "R U R' U' F' U' F",
-        "R U' R' U' F' U F",
-        "U F' U2 L' U2 L U2 F"
+        "R U' R' U' F' U F"
       ],
       "FL": [
+        "U L' U2 B' U2 B U2 L",
         "F U F' U' L' U' L",
         "F U' F' U' L' U L",
-        "U2 F U2 F' U2 L' U' L",
-        "U L' U2 B' U2 B U2 L"
+        "U2 F U2 F' U2 L' U' L"
       ],
       "BL": [
+        "U' B' U2 R' U2 R U2 B",
         "L U2 F U' F' U2 L'",
-        "L U2 F U' F' U2 L' U",
         "U L' U2 F' L F U2 L",
-        "U' B' U2 R' U2 R U2 B"
+        "L U2 F U' F' U2 L' U"
       ],
       "BR": [
+        "U2 R' U2 F' U2 F U2 R",
         "R U R U R U' R' U' R'",
         "U2 R U R U R' U' R' U' R'",
-        "U' R U R U R2 U' R' U' R'",
-        "U2 R' U2 F' U2 F U2 R"
+        "U' R U R U R2 U' R' U' R'"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' F R' F' R",
+      "FL": "F U F' U' L' U' L",
+      "BL": "L U2 F U' F' U2 L'",
+      "BR": "R U R U R U' R' U' R'"
     }
   },
   {
@@ -878,38 +1034,44 @@
     "algs": {
       "FR": [
         "R U' R' U F' U' F",
+        "U F R U R' U' F' R U' R'",
         "R U' R' d R' U' R",
-        "R U' R' U F' U' F U",
         "U d R' U' R U' R' U' R",
         "U2 R U R' U2 F' U' F",
-        "U F R U R' U' F' R U' R'"
+        "R U' R' U F' U' F U"
       ],
       "FL": [
-        "L' U L U L' U' L",
-        "U' L' U' L U' L' U' L",
         "U F U' F' U L' U' L",
+        "U2 L F U F' U' L' F U' F'",
         "U F U' F' d F' U' F",
         "U2 d F' U' F U' F' U' F",
-        "U2 L F U F' U' L' F U' F'"
+        "L' U L U L' U' L",
+        "U' L' U' L U' L' U' L"
       ],
       "BL": [
-        "L2 U F U' F' L2",
-        "L2 U F U' F' L2 U",
+        "U' L U' L' U B' U' B",
+        "B L U L' U' B' L U' L'",
         "U' L U' L' d L' U' L",
         "d L' U' L U' L' U' L",
+        "L2 U F U' F' L2",
         "U L U F U' F' U2 L'",
-        "U' L U' L' U B' U' B",
-        "B L U L' U' B' L U' L'"
+        "L2 U F U' F' L2 U"
       ],
       "BR": [
-        "R' U R U R' U' R",
-        "U' R' U' R U' R' U' R",
-        "R' U R U R' U' R U",
         "U B U' B' U R' U' R",
+        "U2 R B U B' U' R' B U' B'",
         "U B U' B' d B' U' B",
         "U2 d B' U' B U' B' U' B",
-        "U2 R B U B' U' R' B U' B'"
+        "R' U R U R' U' R",
+        "U' R' U' R U' R' U' R",
+        "R' U R U R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' U F' U' F",
+      "FL": "L' U L U L' U' L",
+      "BL": "L2 U F U' F' L2",
+      "BR": "R' U R U R' U' R"
     }
   },
   {
@@ -920,8 +1082,8 @@
     "algs": {
       "FR": [
         "R U R' F R' F' R",
-        "R U R' U' F' U F",
-        "U R U R' U F' U' F"
+        "U R U R' U F' U' F",
+        "R U R' U' F' U F"
       ],
       "FL": [
         "F U F' U L' U' L",
@@ -934,9 +1096,15 @@
       ],
       "BR": [
         "R' U F R U R' U' F' R",
-        "U B U B' U R' U' R",
-        "U2 R' U' R2 U2 F R' F' U2 R'"
+        "U2 R' U' R2 U2 F R' F' U2 R'",
+        "U B U B' U R' U' R"
       ]
+    },
+    "setup": {
+      "FR": "R U R' F R' F' R",
+      "FL": "F U F' U L' U' L",
+      "BL": "L F' L F L' U L'",
+      "BR": "R' U F R U R' U' F' R"
     }
   },
   {
@@ -947,35 +1115,41 @@
     "algs": {
       "FR": [
         "R U2 R' U F' U' F",
-        "R U2 R' d R' U' R",
-        "R U2 R' U F' U' F U",
         "U y' R U2 R2 U' R2 U' R'",
-        "U F' U L' U2 L U2 F"
+        "R U2 R' d R' U' R",
+        "U F' U L' U2 L U2 F",
+        "R U2 R' U F' U' F U"
       ],
       "FL": [
         "F U2 F' U L' U' L",
-        "F U2 F' U L' U' L U",
-        "U L U2 L2 U' L2 U' L'",
+        "U y' F U2 F2 U' F2 U' F'",
         "F U2 F' d F' U' F",
         "U L' U B' U2 B U2 L",
-        "U y' F U2 F2 U' F2 U' F'"
+        "U L U2 L2 U' L2 U' L'",
+        "F U2 F' U L' U' L U"
       ],
       "BL": [
-        "L U F' L F L' U L'",
-        "L U2 L' d L' U' L",
         "L U2 L' U B' U' B",
-        "U B' U R' U2 R U2 B",
         "U y' L U2 L2 U' L2 U' L'",
+        "L U2 L' d L' U' L",
+        "U B' U R' U2 R U2 B",
+        "L U F' L F L' U L'",
         "L U F' L F L' U L' U"
       ],
       "BR": [
-        "R U2 R2 U' R2 U' R'",
-        "R U2 R2 U' R2 U' R' U",
-        "R' U F' U2 F U2 R",
         "U' B U2 B' U R' U' R",
+        "y' B U2 B2 U' B2 U' B'",
         "U' B U2 B' d B' U' B",
-        "y' B U2 B2 U' B2 U' B'"
+        "R' U F' U2 F U2 R",
+        "R U2 R2 U' R2 U' R'",
+        "R U2 R2 U' R2 U' R' U"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R' U F' U' F",
+      "FL": "F U2 F' U L' U' L",
+      "BL": "L U F' L F L' U L'",
+      "BR": "R U2 R2 U' R2 U' R'"
     }
   },
   {
@@ -985,33 +1159,39 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "F' U F U2 R U R'",
+        "R' D' R U' R' D R U R U' R'",
         "M U r U' r' U' M'",
-        "U R' F R F' U R U R'",
-        "U' R' U2 R' U R' U' R U2 R",
         "R U R' U2 R U' R' U R U' R'",
-        "R' D' R U' R' D R U R U' R'"
+        "F' U F U2 R U R'",
+        "U' R' U2 R' U R' U' R U2 R",
+        "U R' F R F' U R U R'"
       ],
       "FL": [
-        "L' U L U2 F U F'",
-        "L' U L U2 F U F' U",
+        "F' D' F U' F' D F U F U' F'",
         "F U F' U2 F U' F' U F U' F'",
-        "F' D' F U' F' D F U F U' F'"
+        "L' U L U2 F U F'",
+        "L' U L U2 F U F' U"
       ],
       "BL": [
-        "L U2 F U F' U L'",
-        "L U2 F U F' U L' U",
-        "B' U B U2 L U L'",
+        "L' D' L U' L' D L U L U' L'",
         "L U L' U2 L U' L' U L U' L'",
-        "L' D' L U' L' D L U L U' L'"
+        "B' U B U2 L U L'",
+        "L U2 F U F' U L'",
+        "L U2 F U F' U L' U"
       ],
       "BR": [
-        "R' U F' U F U2 R",
-        "R' U F' U F U2 R U",
-        "R' U R U2 B U B'",
+        "B' D' B U' B' D B U B U' B'",
         "B U B' U2 B U' B' U B U' B'",
-        "B' D' B U' B' D B U B U' B'"
+        "R' U R U2 B U B'",
+        "R' U F' U F U2 R",
+        "R' U F' U F U2 R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U F U2 R U R'",
+      "FL": "L' U L U2 F U F'",
+      "BL": "L U2 F U F' U L'",
+      "BR": "R' U F' U F U2 R"
     }
   },
   {
@@ -1023,32 +1203,38 @@
       "FR": [
         "R U' R' U2 F' U' F",
         "R U' R' U2 y' R' U' R",
-        "R U' R' U2 F' U' F U",
-        "U R F R U R' U' F' R'",
         "U M' U R U' r' U' R U R'",
-        "U F U R U' R' F' R U R'"
+        "U F U R U' R' F' R U R'",
+        "U R F R U R' U' F' R'",
+        "R U' R' U2 F' U' F U"
       ],
       "FL": [
         "F U' F' U2 L' U' L",
-        "F U' F' U2 L' U' L U",
         "F U' F' U2 y' F' U' F",
-        "U L U F U' F' L' F U F'"
+        "U L U F U' F' L' F U F'",
+        "F U' F' U2 L' U' L U"
       ],
       "BL": [
-        "L U' F U' F' U2 L'",
-        "L U' L' U2 y' L' U' L",
-        "L U' F U' F' U2 L' U",
         "L U' L' U2 B' U' B",
-        "U B U L U' L' B' L U L'"
+        "L U' L' U2 y' L' U' L",
+        "U B U L U' L' B' L U L'",
+        "L U' F U' F' U2 L'",
+        "L U' F U' F' U2 L' U"
       ],
       "BR": [
-        "R' U2 F' U' F U' R",
-        "R' U2 F' U' F U' R U",
         "B U' B' U2 R' U' R",
-        "U R U2 R U' R U R' U2 R'",
         "B U' B' U2 y' B' U' B",
-        "U R U B U' B' R' B U B'"
+        "U R U B U' B' R' B U B'",
+        "R' U2 F' U' F U' R",
+        "U R U2 R U' R U R' U2 R'",
+        "R' U2 F' U' F U' R U"
       ]
+    },
+    "setup": {
+      "FR": "R U' R' U2 F' U' F",
+      "FL": "F U' F' U2 L' U' L",
+      "BL": "L U' F U' F' U2 L'",
+      "BR": "R' U2 F' U' F U' R"
     }
   },
   {
@@ -1058,40 +1244,46 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R2 U2 F R2 F' U2 R2",
-        "r' U2 R2 U R2 U r",
         "d R' U2 R U R' U2 R",
+        "r' U2 R2 U R2 U r",
         "y' U R' U2 R U2 R' U R",
+        "y U L' U2 L U2 L' U L",
+        "R2 U2 F R2 F' U2 R2",
         "U F' U2 F U2 F' U F",
-        "U F' U2 F U F' U2 F",
-        "y U L' U2 L U2 L' U L"
+        "U F' U2 F U F' U2 F"
       ],
       "FL": [
+        "U' d F' U2 F U F' U2 F",
+        "U' f' U2 F2 U F2 U f",
+        "U' y' U F' U2 F U2 F' U F",
+        "U' y U B' U2 B U2 B' U B",
         "L' U2 L U2 L' U L",
         "L' U2 L U L' U2 L",
-        "L' U2 L U2 L' U L U",
-        "U' f' U2 F2 U F2 U f",
-        "U' d F' U2 F U F' U2 F",
-        "U' y' U F' U2 F U2 F' U F",
-        "U' y U B' U2 B U2 B' U B"
+        "L' U2 L U2 L' U L U"
       ],
       "BL": [
-        "F' L' U' L2 U L' F",
-        "y U R' U2 R U2 R' U R",
-        "l' U2 L2 U L2 U l",
         "d L' U2 L U L' U2 L",
-        "F' L' U' L2 U L' F U",
-        "y' U L' U2 L U2 L' U L"
+        "l' U2 L2 U L2 U l",
+        "y' U L' U2 L U2 L' U L",
+        "y U R' U2 R U2 R' U R",
+        "F' L' U' L2 U L' F",
+        "F' L' U' L2 U L' F U"
       ],
       "BR": [
+        "U' d B' U2 B U B' U2 B",
+        "U' b' U2 B2 U B2 U b",
+        "U' y' U B' U2 B U2 B' U B",
+        "U' y U F' U2 F U2 F' U F",
         "R' U2 R U2 R' U R",
         "R' U2 R U R' U2 R",
-        "R' U2 R U2 R' U R U",
-        "U' y U F' U2 F U2 F' U F",
-        "U' b' U2 B2 U B2 U b",
-        "U' d B' U2 B U B' U2 B",
-        "U' y' U B' U2 B U2 B' U B"
+        "R' U2 R U2 R' U R U"
       ]
+    },
+    "setup": {
+      "FR": "R2 U2 F R2 F' U2 R2",
+      "FL": "L' U2 L U2 L' U L",
+      "BL": "F' L' U' L2 U L' F",
+      "BR": "R' U2 R U2 R' U R"
     }
   },
   {
@@ -1101,32 +1293,38 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "F' U F U' F' U' F",
-        "U' d R' U R U' R' U' R",
         "U' y' U R' U R U' R' U' R",
+        "U' d R' U R U' R' U' R",
+        "F' U F U' F' U' F",
         "F U R U' R' F2 U' F",
         "U' R U R2 F R F2 U' F"
       ],
       "FL": [
-        "L' U L U' L' U' L",
-        "L' U L U' L' U' L U",
+        "U' y' U F' U F U' F' U' F",
         "U' d F' U F U' F' U' F",
-        "U' y' U F' U F U' F' U' F"
+        "L' U L U' L' U' L",
+        "L' U L U' L' U' L U"
       ],
       "BL": [
-        "L U' F U' F2 L F L2",
-        "d L' U L U' L' U' L",
         "y' U L' U L U' L' U' L",
+        "d L' U L U' L' U' L",
+        "L U' F U' F2 L F L2",
         "U L U' L2 U2 F' L F U2 L",
         "U2 L U2 L2 U2 F' L F U2 L"
       ],
       "BR": [
-        "R' U R U' R' U' R",
-        "R' U R U' R' U' R U",
-        "U R2 U' R U' R' U2 R2",
+        "U' y' U B' U B U' B' U' B",
         "U' d B' U B U' B' U' B",
-        "U' y' U B' U B U' B' U' B"
+        "R' U R U' R' U' R",
+        "U R2 U' R U' R' U2 R2",
+        "R' U R U' R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U F U' F' U' F",
+      "FL": "L' U L U' L' U' L",
+      "BL": "L U' F U' F2 L F L2",
+      "BR": "R' U R U' R' U' R"
     }
   },
   {
@@ -1139,33 +1337,39 @@
         "F' U2 F U F' U' F",
         "y' R' U2 R U R' U' R",
         "y L' U2 L U L' U' L",
+        "R' F R F' R U' R' U R U' R'",
         "U R' U' R2 F R F' R2 U R",
-        "U2 F2 U2 R' F' R U2 F2",
-        "R' F R F' R U' R' U R U' R'"
+        "U2 F2 U2 R' F' R U2 F2"
       ],
       "FL": [
         "L' U2 L U L' U' L",
-        "L' U2 L U L' U' L U",
         "y' F' U2 F U F' U' F",
         "y B' U2 B U B' U' B",
-        "F' L F L' F U' F' U F U' F'"
+        "F' L F L' F U' F' U F U' F'",
+        "L' U2 L U L' U' L U"
       ],
       "BL": [
-        "L U2 F' L' U' L U F L'",
-        "y R' U2 R U R' U' R",
-        "y' L' U2 L U L' U' L",
         "B' U2 B U B' U' B",
-        "L2 F U' F' U2 F U F' L2",
+        "y' L' U2 L U L' U' L",
+        "y R' U2 R U R' U' R",
+        "L' B L B' L U' L' U L U' L'",
+        "L U2 F' L' U' L U F L'",
         "U L F U2 F2 L F L' U L'",
-        "L' B L B' L U' L' U L U' L'"
+        "L2 F U' F' U2 F U F' L2"
       ],
       "BR": [
         "R' U2 R U R' U' R",
-        "R' U2 R U R' U' R U",
-        "y F' U2 F U F' U' F",
         "y' B' U2 B U B' U' B",
-        "B' R B R' B U' B' U B U' B'"
+        "y F' U2 F U F' U' F",
+        "B' R B R' B U' B' U B U' B'",
+        "R' U2 R U R' U' R U"
       ]
+    },
+    "setup": {
+      "FR": "F' U2 F U F' U' F",
+      "FL": "L' U2 L U L' U' L",
+      "BL": "L U2 F' L' U' L U F L'",
+      "BR": "R' U2 R U R' U' R"
     }
   },
   {
@@ -1175,38 +1379,44 @@
     "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
     "algs": {
       "FR": [
-        "R' U' R F R' F' U R",
         "U' r U' R' U R U r'",
-        "d R' U' R U2 R' U R",
         "y' U R' U' R U2 R' U R",
+        "d R' U' R U2 R' U R",
+        "U F' U' F U2 F' U F",
+        "R' U' R F R' F' U R",
         "U2 F R' F' R U2 R U R'",
-        "U2 R' F' U' F U R2 U' R'",
-        "U F' U' F U2 F' U F"
+        "U2 R' F' U' F U R2 U' R'"
       ],
       "FL": [
+        "U2 f U' F' U F U f'",
+        "U' y' U F' U' F U2 F' U F",
+        "U' d F' U' F U2 F' U F",
         "L' U' L U2 L' U L",
         "L' U' L U L' U2 L",
-        "L' U' L U2 L' U L U",
-        "U2 f U' F' U F U f'",
-        "U' d F' U' F U2 F' U F",
-        "U' y' U F' U' F U2 F' U F"
+        "L' U' L U2 L' U L U"
       ],
       "BL": [
-        "L2 F U F' U' L2",
         "U' l U' L' U L U l'",
-        "L2 F U F' U' L2 U",
-        "d L' U' L U2 L' U L",
         "y' U L' U' L U2 L' U L",
-        "U B' U' B U2 B' U B"
+        "d L' U' L U2 L' U L",
+        "U B' U' B U2 B' U B",
+        "L2 F U F' U' L2",
+        "L2 F U F' U' L2 U"
       ],
       "BR": [
+        "U2 b U' B' U B U b'",
+        "U' y' U B' U' B U2 B' U B",
+        "U' d B' U' B U2 B' U B",
         "R' U' R U2 R' U R",
         "R' U' R U R' U2 R",
-        "U R' F' U' F U2 R",
-        "U2 b U' B' U B U b'",
-        "U' d B' U' B U2 B' U B",
-        "U' y' U B' U' B U2 B' U B"
+        "U R' F' U' F U2 R"
       ]
+    },
+    "setup": {
+      "FR": "R' U' R F R' F' U R",
+      "FL": "L' U' L U2 L' U L",
+      "BL": "L2 F U F' U' L2",
+      "BR": "R' U' R U2 R' U R"
     }
   },
   {
@@ -1235,6 +1445,12 @@
         "R2 U2 B' R B U2 R U2 R",
         "B U2 B U2 R B R' U2 B2"
       ]
+    },
+    "setup": {
+      "FR": "R2 U2 R' U' R U' R' U2 R'",
+      "FL": "L' U2 L' U' L U' L' U2 L2",
+      "BL": "L2 U2 L' U' L U' L' U2 L'",
+      "BR": "R' U2 R' U' R U' R' U2 R2"
     }
   },
   {
@@ -1263,6 +1479,12 @@
         "R' U2 R' U2 B' R' B U2 R2",
         "B2 U2 R B' R' U2 B' U2 B'"
       ]
+    },
+    "setup": {
+      "FR": "R U2 R U R' U R U2 R2",
+      "FL": "L2 U2 L U L' U L U2 L",
+      "BL": "L U2 L U L' U L U2 L2",
+      "BR": "R2 U2 R U R' U R U2 R"
     }
   },
   {
@@ -1282,14 +1504,20 @@
       ],
       "BL": [
         "L U L U F U' F' L2",
-        "L F U F2 L F L2",
-        "U' L U2 L U F U' F' L2"
+        "U' L U2 L U F U' F' L2",
+        "L F U F2 L F L2"
       ],
       "BR": [
         "R2 U2 R U R' U R2",
         "R2 U2 R U R' U R2 U",
         "R2 U2 R U R' U R2 U'"
       ]
+    },
+    "setup": {
+      "FR": "F U R U' R' F' R U' R'",
+      "FL": "L2 U2 L U L' U L2",
+      "BL": "L U L U F U' F' L2",
+      "BR": "R2 U2 R U R' U R2"
     }
   },
   {
@@ -1316,6 +1544,12 @@
         "R2 F' U' F U R U' R U",
         "U R2 F' U' F U R U' R"
       ]
+    },
+    "setup": {
+      "FR": "R F U R U' R' F' U' R'",
+      "FL": "L' U' F' L' U' L U F L",
+      "BL": "L U' L U F U' F' L2",
+      "BR": "R2 F' U' F U R U' R"
     }
   },
   {
@@ -1342,6 +1576,12 @@
         "R' U R' U' F' U F R2 U",
         "U R' U R' U' F' U F R2"
       ]
+    },
+    "setup": {
+      "FR": "R U F R U R' U' F' R'",
+      "FL": "L' F' U' L' U L F U L",
+      "BL": "L2 F U F' U' L' U L'",
+      "BR": "R' U R' U' F' U F R2"
     }
   },
   {
@@ -1370,6 +1610,12 @@
         "R' U R' U2 B' R2 B U2 R2",
         "B2 U2 R B2 R' U2 B' U B'"
       ]
+    },
+    "setup": {
+      "FR": "R U' R U2 F R2 F' U2 R2",
+      "FL": "L2 U2 F' L2 F U2 L U' L",
+      "BL": "L U' L U2 B L2 B' U2 L2",
+      "BR": "R2 U2 B' R2 B U2 R U' R"
     }
   }
 ]

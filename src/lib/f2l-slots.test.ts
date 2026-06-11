@@ -1,12 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  F2L_CASES,
-  SLOTS,
-  slotAlgorithm,
-  slotAlgorithms,
-  slotSetup,
-  slotDisturbable,
-} from "./f2l";
+import { F2L_CASES, SLOTS, slotAlgorithms, slotSetup, slotDisturbable } from "./f2l";
 import { solved, applyAlg, invertAlg, isF2LComplete } from "./facecube";
 
 describe("F2L rotationless slots", () => {
@@ -16,17 +9,17 @@ describe("F2L rotationless slots", () => {
     }
   });
 
-  it("each slot's primary is a clean face-move algorithm (drives the setup/diagram)", () => {
+  it("each slot's setup alg is a clean face-move alg (drives the setup/diagram)", () => {
     const s = solved();
     for (const c of F2L_CASES) {
       for (const slot of SLOTS) {
-        const primary = slotAlgorithm(c, slot);
-        for (const tok of primary.split(" ")) expect(tok).toMatch(/^[UDLRFB]('|2)?$/);
+        const setupAlg = c.setup[slot];
+        for (const tok of setupAlg.split(" ")) expect(tok).toMatch(/^[UDLRFB]('|2)?$/);
         const allowed = new Set(slotDisturbable(slot));
-        const f = applyAlg(s, invertAlg(primary));
+        const f = applyAlg(s, invertAlg(setupAlg));
         for (let i = 0; i < 54; i++) {
           if (!allowed.has(i) && f[i] !== s[i]) {
-            throw new Error(`${c.id} ${slot} primary disturbs facelet ${i}`);
+            throw new Error(`${c.id} ${slot} setup disturbs facelet ${i}`);
           }
         }
       }
