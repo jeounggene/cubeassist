@@ -45,6 +45,8 @@ export default function TrainerF2L() {
   const [hideAlg, setHideAlg] = useState(false);
   const [times, setTimes] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
+  const [play, setPlay] = useState({ alg: "", nonce: 0 });
+  const playAlg = (a: string) => setPlay((p) => ({ alg: a, nonce: p.nonce + 1 }));
 
   const current = useMemo(
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
@@ -162,17 +164,37 @@ export default function TrainerF2L() {
           {showAlg ? (
             <>
               <div className="text-sm text-slate-500">
-                Algorithm ({SLOT_LABELS[slot]})
+                Algorithm ({SLOT_LABELS[slot]}) — ▶ plays it on the cube
               </div>
-              <div data-testid="algorithm" className="font-mono text-lg">
-                {algs[0]}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label={`Play ${algs[0]}`}
+                  onClick={() => playAlg(algs[0])}
+                  className="rounded bg-emerald-600 px-1.5 text-xs text-white hover:bg-emerald-700"
+                >
+                  ▶
+                </button>
+                <span data-testid="algorithm" className="font-mono text-lg">
+                  {algs[0]}
+                </span>
               </div>
               {algs.length > 1 ? (
                 <div className="mt-1">
                   <div className="text-xs text-slate-400">Alternatives</div>
-                  <ul className="font-mono text-sm text-slate-600">
+                  <ul className="font-mono text-sm text-slate-600 space-y-0.5 mt-0.5">
                     {algs.slice(1).map((a) => (
-                      <li key={a}>{a}</li>
+                      <li key={a} className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          aria-label={`Play ${a}`}
+                          onClick={() => playAlg(a)}
+                          className="rounded border border-emerald-600 px-1 text-[10px] text-emerald-700 hover:bg-emerald-50"
+                        >
+                          ▶
+                        </button>
+                        <span>{a}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -190,6 +212,7 @@ export default function TrainerF2L() {
           highlight={highlight}
           homeX={SLOT_HOME[slot].x}
           homeY={SLOT_HOME[slot].y}
+          play={play}
         />
       </div>
 
