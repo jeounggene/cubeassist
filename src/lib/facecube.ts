@@ -135,6 +135,25 @@ export function applyAlg(state: Facelets, alg: string): Facelets {
   return cur;
 }
 
+// Relabel an algorithm's faces by `quarterTurns` y rotations (rotate the whole
+// maneuver, no rotation moves emitted). Used to express an FR-slot alg for the
+// other slots rotationlessly. One y: F->L, L->B, B->R, R->F; U/D fixed.
+const Y_MAP: Record<string, string> = { U: "U", D: "D", F: "L", L: "B", B: "R", R: "F" };
+
+export function rotateAlg(alg: string, quarterTurns: number): string {
+  const q = ((quarterTurns % 4) + 4) % 4;
+  const relabelOnce = (a: string) =>
+    a
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((tok) => (Y_MAP[tok[0]] ?? tok[0]) + tok.slice(1))
+      .join(" ");
+  let out = alg.trim();
+  for (let i = 0; i < q; i++) out = relabelOnce(out);
+  return out;
+}
+
 export function invertAlg(alg: string): string {
   const tokens = alg.trim().split(/\s+/).filter(Boolean);
   const invertToken = (t: string): string => {

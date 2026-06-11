@@ -4,9 +4,9 @@ import CubeF2LDiagram from "./CubeF2LDiagram";
 import { solved } from "../lib/facecube";
 
 describe("CubeF2LDiagram", () => {
-  it("renders the oblique F2L view with 15 stickers", () => {
+  it("renders the full top-layer view with 21 stickers", () => {
     render(<CubeF2LDiagram facelets={solved()} />);
     expect(screen.getByRole("img", { name: /f2l/i })).toBeInTheDocument();
-    expect(screen.getAllByTestId("sticker")).toHaveLength(15);
+    expect(screen.getAllByTestId("sticker")).toHaveLength(21);
   });
 });

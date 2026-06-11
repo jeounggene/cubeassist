@@ -1,8 +1,23 @@
 import { useMemo, useState } from "react";
 import { useProfile } from "../state/ProfileProvider";
-import { F2L_CASES, caseSetup, caseFacelets, f2lGroups } from "../lib/f2l";
+import {
+  F2L_CASES,
+  SLOTS,
+  slotAlgorithm,
+  slotSetup,
+  slotFacelets,
+  f2lGroups,
+} from "../lib/f2l";
+import type { Slot } from "../lib/f2l";
 import Timer from "../components/Timer";
 import CubeF2LDiagram from "../components/CubeF2LDiagram";
+
+const SLOT_LABELS: Record<Slot, string> = {
+  FR: "Front-right",
+  FL: "Front-left",
+  BL: "Back-left",
+  BR: "Back-right",
+};
 
 function mean(xs: number[]): number {
   return xs.reduce((a, b) => a + b, 0) / xs.length;
@@ -15,6 +30,7 @@ function avgOfLast(xs: number[], n: number): string {
 export default function TrainerF2L() {
   const { profile, addDrill } = useProfile();
   const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
+  const [slot, setSlot] = useState<Slot>("FR");
   const [hideAlg, setHideAlg] = useState(false);
   const [times, setTimes] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
@@ -23,8 +39,9 @@ export default function TrainerF2L() {
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
     [selectedId],
   );
-  const setup = useMemo(() => caseSetup(current), [current]);
-  const facelets = useMemo(() => caseFacelets(current), [current]);
+  const algorithm = useMemo(() => slotAlgorithm(current, slot), [current, slot]);
+  const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
+  const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);
@@ -78,6 +95,24 @@ export default function TrainerF2L() {
         ))}
       </div>
 
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="font-medium">Direction:</span>
+        {SLOTS.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => setSlot(s)}
+            className={`rounded border px-3 py-1.5 text-sm ${
+              s === slot
+                ? "bg-slate-900 text-white border-slate-900"
+                : "border-slate-300 text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            {SLOT_LABELS[s]}
+          </button>
+        ))}
+      </div>
+
       <label className="mb-6 flex items-center gap-2">
         <input
           type="checkbox"
@@ -98,9 +133,11 @@ export default function TrainerF2L() {
           </div>
           {showAlg ? (
             <>
-              <div className="text-sm text-slate-500">Algorithm</div>
+              <div className="text-sm text-slate-500">
+                Algorithm ({SLOT_LABELS[slot]})
+              </div>
               <div data-testid="algorithm" className="font-mono text-lg">
-                {current.algorithm}
+                {algorithm}
               </div>
               <p className="mt-2 text-sm text-slate-600">{current.recognition}</p>
             </>

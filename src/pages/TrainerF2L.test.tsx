@@ -38,4 +38,13 @@ describe("TrainerF2L", () => {
     fireEvent.click(caseButtons[caseButtons.length - 1]);
     expect(screen.getByTestId("setup").textContent).not.toBe(before);
   });
+
+  it("changing direction changes the algorithm to a rotationless slot variant", () => {
+    renderF2L();
+    const before = screen.getByTestId("algorithm").textContent;
+    fireEvent.click(screen.getByRole("button", { name: /back-left/i }));
+    const after = screen.getByTestId("algorithm").textContent ?? "";
+    expect(after).not.toBe(before);
+    expect(after).not.toMatch(/[xyz]/); // rotationless
+  });
 });
