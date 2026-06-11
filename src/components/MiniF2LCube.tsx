@@ -30,13 +30,13 @@ export default function MiniF2LCube({ facelets, highlight = [] }: Props) {
     </div>
   );
   return (
-    <div style={{ width: 56, height: 52, perspective: "240px" }}>
+    <div style={{ width: 60, height: 60, perspective: "240px" }}>
       <div
         style={{
           position: "relative",
           width: FACE,
           height: FACE,
-          margin: "14px auto",
+          margin: "12px auto",
           transformStyle: "preserve-3d",
           transform: "rotateX(-30deg) rotateY(-45deg)",
         }}

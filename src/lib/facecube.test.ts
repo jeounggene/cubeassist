@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { solved, applyAlg, invertAlg } from "./facecube";
+import { solved, applyAlg, invertAlg, isSolvedUpToRotation, normalizeOrientation } from "./facecube";
 
 const eq = (a: number[], b: number[]) =>
   a.length === b.length && a.every((x, i) => x === b[i]);
@@ -45,5 +45,27 @@ describe("facecube model", () => {
 
   it("a single R move actually changes the state", () => {
     expect(eq(applyAlg(solved(), "R"), solved())).toBe(false);
+  });
+
+  it("wide moves and rotations: r^4, u^4, x^4 are identity", () => {
+    for (const m of ["r", "u", "l", "d", "x", "y", "z", "M"]) {
+      expect(eq(applyAlg(solved(), `${m} ${m} ${m} ${m}`), solved())).toBe(true);
+    }
+  });
+
+  it("a whole-cube rotation is solved up to rotation but not literally solved", () => {
+    const rotated = applyAlg(solved(), "x y'");
+    expect(eq(rotated, solved())).toBe(false);
+    expect(isSolvedUpToRotation(rotated)).toBe(true);
+    expect(eq(normalizeOrientation(rotated), solved())).toBe(true);
+  });
+
+  it("a wide move equals its face move plus the matching slice (r = R M')", () => {
+    expect(eq(applyAlg(solved(), "r"), applyAlg(solved(), "R M'"))).toBe(true);
+    expect(eq(applyAlg(solved(), "u"), applyAlg(solved(), "U E'"))).toBe(true);
+  });
+
+  it("Rw notation equals lowercase r", () => {
+    expect(eq(applyAlg(solved(), "Rw U Rw'"), applyAlg(solved(), "r U r'"))).toBe(true);
   });
 });
