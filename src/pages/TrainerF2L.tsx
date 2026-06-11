@@ -6,6 +6,7 @@ import {
   slotAlgorithm,
   slotSetup,
   slotFacelets,
+  pairFacelets,
   f2lGroups,
 } from "../lib/f2l";
 import type { Slot } from "../lib/f2l";
@@ -42,6 +43,7 @@ export default function TrainerF2L() {
   const algorithm = useMemo(() => slotAlgorithm(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
   const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
+  const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);
@@ -147,7 +149,7 @@ export default function TrainerF2L() {
             </p>
           )}
         </div>
-        <CubeF2LDiagram facelets={facelets} />
+        <CubeF2LDiagram facelets={facelets} highlight={highlight} />
       </div>
 
       <div className="mb-6">
