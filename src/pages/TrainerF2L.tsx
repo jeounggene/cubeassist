@@ -3,7 +3,7 @@ import { useProfile } from "../state/ProfileProvider";
 import {
   F2L_CASES,
   SLOTS,
-  slotAlgorithm,
+  slotAlgorithms,
   slotSetup,
   caseFacelets,
   pairFacelets,
@@ -40,7 +40,7 @@ export default function TrainerF2L() {
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
     [selectedId],
   );
-  const algorithm = useMemo(() => slotAlgorithm(current, slot), [current, slot]);
+  const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
   // The case only shows at the front-right in its canonical orientation, so the
   // diagram is the canonical case; the Direction control drives the algorithm.
@@ -141,8 +141,18 @@ export default function TrainerF2L() {
                 Algorithm ({SLOT_LABELS[slot]})
               </div>
               <div data-testid="algorithm" className="font-mono text-lg">
-                {algorithm}
+                {algs[0]}
               </div>
+              {algs.length > 1 ? (
+                <div className="mt-1">
+                  <div className="text-xs text-slate-400">Alternatives</div>
+                  <ul className="font-mono text-sm text-slate-600">
+                    {algs.slice(1).map((a) => (
+                      <li key={a}>{a}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
               <p className="mt-2 text-sm text-slate-600">{current.recognition}</p>
             </>
           ) : (
