@@ -1,166 +1,254 @@
 [
   {
     "id": "f2l-01",
-    "name": "F2L 01"
+    "name": "F2L case 1",
+    "group": "Connected pair (easy insert)",
+    "algorithm": "F' U F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-02",
-    "name": "F2L 02"
+    "name": "F2L case 2",
+    "group": "Connected pair (easy insert)",
+    "algorithm": "F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-03",
-    "name": "F2L 03"
+    "name": "F2L case 3",
+    "group": "Connected pair (easy insert)",
+    "algorithm": "R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-04",
-    "name": "F2L 04"
+    "name": "F2L case 4",
+    "group": "Connected pair (easy insert)",
+    "algorithm": "R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-05",
-    "name": "F2L 05"
+    "name": "F2L case 5",
+    "group": "Intermediate",
+    "algorithm": "F' U F R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-06",
-    "name": "F2L 06"
+    "name": "F2L case 6",
+    "group": "Intermediate",
+    "algorithm": "F' U F2 R' F' R",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-07",
-    "name": "F2L 07"
+    "name": "F2L case 7",
+    "group": "Intermediate",
+    "algorithm": "F' U' F R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-08",
-    "name": "F2L 08"
+    "name": "F2L case 8",
+    "group": "Intermediate",
+    "algorithm": "F' U' F2 R' F' R",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-09",
-    "name": "F2L 09"
+    "name": "F2L case 9",
+    "group": "Intermediate",
+    "algorithm": "F' U2 F R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-10",
-    "name": "F2L 10"
+    "name": "F2L case 10",
+    "group": "Intermediate",
+    "algorithm": "F' U2 F R U2 R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-11",
-    "name": "F2L 11"
+    "name": "F2L case 11",
+    "group": "Intermediate",
+    "algorithm": "F' U2 F2 R' F' R",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-12",
-    "name": "F2L 12"
+    "name": "F2L case 12",
+    "group": "Intermediate",
+    "algorithm": "R U' R' F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-13",
-    "name": "F2L 13"
+    "name": "F2L case 13",
+    "group": "Intermediate",
+    "algorithm": "R U2 R2 F R F'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-14",
-    "name": "F2L 14"
+    "name": "F2L case 14",
+    "group": "Advanced",
+    "algorithm": "F U2 F2 U' F2 U' F'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-15",
-    "name": "F2L 15"
+    "name": "F2L case 15",
+    "group": "Advanced",
+    "algorithm": "F' U F U R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-16",
-    "name": "F2L 16"
+    "name": "F2L case 16",
+    "group": "Advanced",
+    "algorithm": "F' U F U' F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-17",
-    "name": "F2L 17"
+    "name": "F2L case 17",
+    "group": "Advanced",
+    "algorithm": "F' U F U2 R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-18",
-    "name": "F2L 18"
+    "name": "F2L case 18",
+    "group": "Advanced",
+    "algorithm": "F' U' F U R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-19",
-    "name": "F2L 19"
+    "name": "F2L case 19",
+    "group": "Advanced",
+    "algorithm": "F' U' F U' F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-20",
-    "name": "F2L 20"
+    "name": "F2L case 20",
+    "group": "Advanced",
+    "algorithm": "F' U' F U2 F' U F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-21",
-    "name": "F2L 21"
+    "name": "F2L case 21",
+    "group": "Advanced",
+    "algorithm": "F' U2 F U F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-22",
-    "name": "F2L 22"
+    "name": "F2L case 22",
+    "group": "Advanced",
+    "algorithm": "F' U2 F U' R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-23",
-    "name": "F2L 23"
+    "name": "F2L case 23",
+    "group": "Advanced",
+    "algorithm": "F2 U2 F U F' U F2",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-24",
-    "name": "F2L 24"
+    "name": "F2L case 24",
+    "group": "Advanced",
+    "algorithm": "R U R' F R' F' R",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-25",
-    "name": "F2L 25"
+    "name": "F2L case 25",
+    "group": "Advanced",
+    "algorithm": "R U R' U2 R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-26",
-    "name": "F2L 26"
+    "name": "F2L case 26",
+    "group": "Advanced",
+    "algorithm": "R U' R' F R' F' R",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-27",
-    "name": "F2L 27"
+    "name": "F2L case 27",
+    "group": "Advanced",
+    "algorithm": "R U' R' U R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-28",
-    "name": "F2L 28"
+    "name": "F2L case 28",
+    "group": "Advanced",
+    "algorithm": "R U' R' U' R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-29",
-    "name": "F2L 29"
+    "name": "F2L case 29",
+    "group": "Advanced",
+    "algorithm": "R U' R' U2 F' U' F",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-30",
-    "name": "F2L 30"
+    "name": "F2L case 30",
+    "group": "Advanced",
+    "algorithm": "R U' R' U2 R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-31",
-    "name": "F2L 31"
+    "name": "F2L case 31",
+    "group": "Advanced",
+    "algorithm": "R U2 R' U R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-32",
-    "name": "F2L 32"
+    "name": "F2L case 32",
+    "group": "Advanced",
+    "algorithm": "R U2 R' U' R U R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-33",
-    "name": "F2L 33"
+    "name": "F2L case 33",
+    "group": "Advanced",
+    "algorithm": "R U2 R' U2 R U' R'",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-34",
-    "name": "F2L 34"
+    "name": "F2L case 34",
+    "group": "Advanced",
+    "algorithm": "R2 U2 F R2 F' U2 R2",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-35",
-    "name": "F2L 35"
+    "name": "F2L case 35",
+    "group": "Advanced",
+    "algorithm": "R2 U2 R' U' R U' R2",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   },
   {
     "id": "f2l-36",
-    "name": "F2L 36"
-  },
-  {
-    "id": "f2l-37",
-    "name": "F2L 37"
-  },
-  {
-    "id": "f2l-38",
-    "name": "F2L 38"
-  },
-  {
-    "id": "f2l-39",
-    "name": "F2L 39"
-  },
-  {
-    "id": "f2l-40",
-    "name": "F2L 40"
-  },
-  {
-    "id": "f2l-41",
-    "name": "F2L 41"
+    "name": "F2L case 36",
+    "group": "Advanced",
+    "algorithm": "R2 U2 R2 U' R2 U' R2",
+    "recognition": "Apply the setup, then match your cube to the diagram; solve the front-right pair."
   }
 ]
