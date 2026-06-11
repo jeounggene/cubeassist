@@ -129,6 +129,8 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
     setDisplay(state);
     setDisplayHl(hlSet);
 
+    const GAP = 80; // flat beat between consecutive turns so they never overlap
+
     const step = (i: number) => {
       if (cancelled) return;
       if (i >= tokens.length) {
@@ -144,11 +146,15 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
         step(i + 1);
         return;
       }
+      // 1. place the layer at its start angle (no visible motion yet)
       setTurn({ spec: a.spec, angle: 0 });
-      // next frame: animate to the target angle
+      // 2. once that frame is painted, animate to the target angle
       requestAnimationFrame(() => {
         requestAnimationFrame(() => !cancelled && setTurn({ spec: a.spec, angle: a.deg }));
       });
+      // 3. only after the transition has fully finished (it starts ~2 frames
+      //    after step 1, so wait past TURN_MS): commit the move + flatten,
+      //    pause for a beat, then start the next turn.
       timers.push(
         window.setTimeout(() => {
           if (cancelled) return;
@@ -157,8 +163,8 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           setDisplay(state);
           setDisplayHl(hlSet);
           setTurn(null);
-          step(i + 1);
-        }, TURN_MS + 40),
+          timers.push(window.setTimeout(() => !cancelled && step(i + 1), GAP));
+        }, TURN_MS + 70),
       );
     };
     step(0);
