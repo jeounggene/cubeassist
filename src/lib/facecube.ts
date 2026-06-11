@@ -95,6 +95,31 @@ export function solved(): Facelets {
   return Array.from({ length: 54 }, (_, i) => Math.floor(i / 9));
 }
 
+// Whole-cube y rotation as a facelet permutation (same y as rotateAlg).
+function buildYStatePerm(): number[] {
+  const k: Vec = [0, 1, 0];
+  const perm = new Array<number>(54);
+  for (let i = 0; i < FACELETS.length; i++) {
+    const j = INDEX_BY_KEY.get(key(rot90(FACELETS[i].pos, k), rot90(FACELETS[i].normal, k)));
+    if (j === undefined) throw new Error("y rotation match failed");
+    perm[i] = j;
+  }
+  return perm;
+}
+const Y_STATE_PERM = buildYStatePerm();
+
+// Rotate the whole cube `q` quarter y-turns (colors move with the cube).
+export function rotateState(facelets: Facelets, q: number): Facelets {
+  const n = ((q % 4) + 4) % 4;
+  let cur = facelets;
+  for (let t = 0; t < n; t++) {
+    const next = new Array<number>(54);
+    for (let i = 0; i < 54; i++) next[Y_STATE_PERM[i]] = cur[i];
+    cur = next;
+  }
+  return cur;
+}
+
 // Facelet indices belonging to the cubie centered at `pos` (e.g. [1,-1,1] = DFR
 // corner, [1,0,1] = FR edge). Used to identify which stickers a case may disturb.
 export function cubieFacelets(pos: [number, number, number]): number[] {

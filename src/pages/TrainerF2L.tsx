@@ -3,9 +3,9 @@ import { useProfile } from "../state/ProfileProvider";
 import {
   F2L_CASES,
   SLOTS,
-  slotAlgorithm,
+  slotAlgorithms,
   slotSetup,
-  slotFacelets,
+  caseFacelets,
   pairFacelets,
   f2lGroups,
 } from "../lib/f2l";
@@ -40,10 +40,12 @@ export default function TrainerF2L() {
     () => F2L_CASES.find((c) => c.id === selectedId) ?? F2L_CASES[0],
     [selectedId],
   );
-  const algorithm = useMemo(() => slotAlgorithm(current, slot), [current, slot]);
+  const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
-  const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
-  const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
+  // The case only shows at the front-right in its canonical orientation, so the
+  // diagram is the canonical case; the Direction control drives the algorithm.
+  const facelets = useMemo(() => caseFacelets(current), [current]);
+  const highlight = useMemo(() => pairFacelets(current, "FR"), [current]);
 
   const selectCase = (id: string) => {
     setSelectedId(id);
@@ -139,8 +141,18 @@ export default function TrainerF2L() {
                 Algorithm ({SLOT_LABELS[slot]})
               </div>
               <div data-testid="algorithm" className="font-mono text-lg">
-                {algorithm}
+                {algs[0]}
               </div>
+              {algs.length > 1 ? (
+                <div className="mt-1">
+                  <div className="text-xs text-slate-400">Alternatives</div>
+                  <ul className="font-mono text-sm text-slate-600">
+                    {algs.slice(1).map((a) => (
+                      <li key={a}>{a}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
               <p className="mt-2 text-sm text-slate-600">{current.recognition}</p>
             </>
           ) : (

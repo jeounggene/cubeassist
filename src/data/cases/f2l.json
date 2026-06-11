@@ -3,287 +3,1144 @@
     "id": "f2l-01",
     "name": "F2L case 1",
     "group": "Connected pair (easy insert)",
-    "algorithm": "F' U F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R'",
+        "R U2 R'",
+        "R U' R' U"
+      ],
+      "FL": [
+        "F U' F'",
+        "F U2 F'",
+        "F U' F' U"
+      ],
+      "BL": [
+        "L U' L'",
+        "L U2 L'",
+        "L U' L' U"
+      ],
+      "BR": [
+        "R' F' U' F R",
+        "R2 F R F' R",
+        "R' F' U' F R U"
+      ]
+    }
   },
   {
     "id": "f2l-02",
     "name": "F2L case 2",
     "group": "Connected pair (easy insert)",
-    "algorithm": "F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R'",
+        "R U R' U",
+        "U R U R'"
+      ],
+      "FL": [
+        "F U F'",
+        "F U F' U",
+        "U F U F'"
+      ],
+      "BL": [
+        "L U L'",
+        "L U L' U",
+        "U L U L'"
+      ],
+      "BR": [
+        "B U B'",
+        "R' F' U F U2 R",
+        "B U B' U"
+      ]
+    }
   },
   {
     "id": "f2l-03",
     "name": "F2L case 3",
     "group": "Connected pair (easy insert)",
-    "algorithm": "R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U' F",
+        "F' U' F U",
+        "U F' U' F"
+      ],
+      "FL": [
+        "L' U' L",
+        "L' U' L U",
+        "U L' U' L"
+      ],
+      "BL": [
+        "B' U' B",
+        "B' U' B U",
+        "U B' U' B"
+      ],
+      "BR": [
+        "R' U' R",
+        "R' U' R U",
+        "U R' U' R"
+      ]
+    }
   },
   {
     "id": "f2l-04",
     "name": "F2L case 4",
     "group": "Connected pair (easy insert)",
-    "algorithm": "R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U F",
+        "F' U2 F",
+        "F' U F U"
+      ],
+      "FL": [
+        "L' U L",
+        "L' U2 L",
+        "L' U L U"
+      ],
+      "BL": [
+        "L F U F' L'",
+        "B' U B",
+        "B' U2 B"
+      ],
+      "BR": [
+        "R' U R",
+        "R' U2 R",
+        "R' U R U"
+      ]
+    }
   },
   {
     "id": "f2l-05",
     "name": "F2L case 5",
     "group": "Intermediate",
-    "algorithm": "F' U F R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' F' U' F",
+        "R U R' F' U' F U",
+        "U R U R' F' U' F"
+      ],
+      "FL": [
+        "F U F' L' U' L",
+        "L' U' L U' L' U L",
+        "L' U L U2 L' U' L"
+      ],
+      "BL": [
+        "L U L' B' U' B",
+        "L F U2 F2 L F L2",
+        "F' U' F' L F U L' F"
+      ],
+      "BR": [
+        "R' U' R U' R' U R",
+        "R' F' U2 F R",
+        "R' F R' F' R2"
+      ]
+    }
   },
   {
     "id": "f2l-06",
     "name": "F2L case 6",
     "group": "Intermediate",
-    "algorithm": "F' U F2 R' F' R",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' F' U' F",
+        "R U' R' F' U' F U",
+        "U R U' R' F' U' F"
+      ],
+      "FL": [
+        "F U' F' L' U' L",
+        "L' U' L U L' U' L",
+        "L' U2 L U2 L' U' L"
+      ],
+      "BL": [
+        "L U' L' B' U' B",
+        "L F' U' L' U L F U' L'",
+        "L U' L' B' U' B U"
+      ],
+      "BR": [
+        "R' U' R U R' U' R",
+        "R' U2 R U2 R' U' R",
+        "R' U' R U R' U' R U"
+      ]
+    }
   },
   {
     "id": "f2l-07",
     "name": "F2L case 7",
     "group": "Intermediate",
-    "algorithm": "F' U' F R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U2 F R U R'",
+        "F' U F R U2 R'",
+        "R U2 R' F' U' F"
+      ],
+      "FL": [
+        "L' U2 L F U F'",
+        "L' U L F U2 F'",
+        "F U2 F' L' U' L"
+      ],
+      "BL": [
+        "L U' L F' L' F L'",
+        "L U' L F' L' F L' U",
+        "U L U' L F' L' F L'"
+      ],
+      "BR": [
+        "R' U R' F R F' R",
+        "R' U R' F R F' R U",
+        "U R' U R' F R F' R"
+      ]
+    }
   },
   {
     "id": "f2l-08",
     "name": "F2L case 8",
     "group": "Intermediate",
-    "algorithm": "F' U' F2 R' F' R",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' F' U2 F",
+        "R U2 R' U F' U F",
+        "R U R' U2 F' U F"
+      ],
+      "FL": [
+        "L' U L U' L' U L",
+        "F U2 F' L' U2 L",
+        "L' U L U2 L' U2 L"
+      ],
+      "BL": [
+        "L U2 L F' L' F L'",
+        "L U2 L F' L' F L' U",
+        "U L U2 L F' L' F L'"
+      ],
+      "BR": [
+        "R' U R U' R' U R",
+        "R' U R U2 R' U2 R",
+        "R' U R U' R' U R U"
+      ]
+    }
   },
   {
     "id": "f2l-09",
     "name": "F2L case 9",
     "group": "Intermediate",
-    "algorithm": "F' U2 F R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U2 F2 R' F' R",
+        "F' U2 F2 R' F' R U",
+        "U F' U2 F2 R' F' R"
+      ],
+      "FL": [
+        "L' U2 L U' L' U L",
+        "L' U2 L U2 L' U2 L",
+        "L' U2 L2 F' L' F"
+      ],
+      "BL": [
+        "L F U2 F' L' U' L U L'",
+        "L U F U' F2 L F L2",
+        "F' U' L2 U L2 U' L2 U F"
+      ],
+      "BR": [
+        "R' U2 R U' R' U R",
+        "R' U2 R U2 R' U2 R",
+        "R' U' F R' F' R2"
+      ]
+    }
   },
   {
     "id": "f2l-10",
     "name": "F2L case 10",
-    "group": "Intermediate",
-    "algorithm": "F' U2 F R U2 R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "group": "Advanced",
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' U R U' R'",
+        "R U' R' U2 R U R'",
+        "R U R' U2 R U2 R'"
+      ],
+      "FL": [
+        "L' U' L F U F'",
+        "L' U' L F U F' U",
+        "U L' U' L F U F'"
+      ],
+      "BL": [
+        "L F U2 F' L'",
+        "L F' L F L2",
+        "L F U F' U L'"
+      ],
+      "BR": [
+        "F R2 U' R2 U R2 U F'",
+        "F U R U' R' F' R' U R",
+        "R' F R U R' U' F' U' R"
+      ]
+    }
   },
   {
     "id": "f2l-11",
     "name": "F2L case 11",
-    "group": "Intermediate",
-    "algorithm": "F' U2 F2 R' F' R",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "group": "Advanced",
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' U' R U R'",
+        "R U2 R' U2 R U R'",
+        "F' U F R U R'"
+      ],
+      "FL": [
+        "L' U L F U F'",
+        "L' U L F U F' U",
+        "U L' U L F U F'"
+      ],
+      "BL": [
+        "L U L' U' L U L'",
+        "L U' F U2 F' L'",
+        "L U2 L' U2 L U L'"
+      ],
+      "BR": [
+        "R' F U R U' R' F' U R",
+        "R' U R B U B'",
+        "R' U2 F' U F2 R' F' R2"
+      ]
+    }
   },
   {
     "id": "f2l-12",
     "name": "F2L case 12",
-    "group": "Intermediate",
-    "algorithm": "R U' R' F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "group": "Advanced",
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' U R U' R'",
+        "R U' R' U2 R U2 R'",
+        "R U' R' U R U' R' U"
+      ],
+      "FL": [
+        "L' U2 L F U2 F'",
+        "L' U2 L U' F U' F'",
+        "L' U' L U2 F U' F'"
+      ],
+      "BL": [
+        "L U' L' U L U' L'",
+        "L F U2 F' U L'",
+        "L U' L' U2 L U2 L'"
+      ],
+      "BR": [
+        "R' U2 R' F R F' R",
+        "R' U2 R' F R F' R U",
+        "U R' U2 R' F R F' R"
+      ]
+    }
   },
   {
     "id": "f2l-13",
     "name": "F2L case 13",
-    "group": "Intermediate",
-    "algorithm": "R U2 R2 F R F'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "group": "Advanced",
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' U R U R'",
+        "R U' R' U' R U R'",
+        "R U R' U R U R' U"
+      ],
+      "FL": [
+        "L' U L U' F U F'",
+        "L' U' L U2 F U F'",
+        "F U F' U F U F'"
+      ],
+      "BL": [
+        "L U L' U L U L'",
+        "L U' L' U' L U L'",
+        "L U L' U L U L' U"
+      ],
+      "BR": [
+        "R2 U' F' U F R2",
+        "R' U' F' U F U2 R",
+        "R2 U' F' U F R2 U"
+      ]
+    }
   },
   {
     "id": "f2l-14",
     "name": "F2L case 14",
     "group": "Advanced",
-    "algorithm": "F U2 F2 U' F2 U' F'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' U R U R'",
+        "R2 U R' U R U2 R2",
+        "R U' R' U R U R' U"
+      ],
+      "FL": [
+        "F U' F' U F U F'",
+        "F U' F' U F U F' U",
+        "U F U' F' U F U F'"
+      ],
+      "BL": [
+        "L U' L' U L U L'",
+        "L U' L' U L U L' U",
+        "U L U' L' U L U L'"
+      ],
+      "BR": [
+        "R' U F' U F2 R' F' R2",
+        "R' U R2 U2 F R' F' U2 R'",
+        "R' U2 R2 U2 F R' F' U2 R'"
+      ]
+    }
   },
   {
     "id": "f2l-15",
     "name": "F2L case 15",
     "group": "Advanced",
-    "algorithm": "F' U F U R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' U R U R'",
+        "R U R' U2 R U R'",
+        "R U2 R' U R U R' U"
+      ],
+      "FL": [
+        "L' U L U2 L' U L",
+        "L' U L U L' U2 L",
+        "L' U L U2 L' U L U"
+      ],
+      "BL": [
+        "L U2 L' U L U L'",
+        "L U L' U2 L U L'",
+        "L U2 F U2 F' L'"
+      ],
+      "BR": [
+        "R' U R U2 R' U R",
+        "R' U R U R' U2 R",
+        "R' U R U2 R' U R U"
+      ]
+    }
   },
   {
     "id": "f2l-16",
     "name": "F2L case 16",
     "group": "Advanced",
-    "algorithm": "F' U F U' F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' U2 R U' R'",
+        "R U' R' U' R U2 R'",
+        "R U' R' U2 R U' R' U"
+      ],
+      "FL": [
+        "L' U2 L U' L' U' L",
+        "L' U' L U2 L' U' L",
+        "L' U2 L U' L' U' L U"
+      ],
+      "BL": [
+        "L U' L' U2 L U' L'",
+        "L U' L' U' L U2 L'",
+        "L F U2 F' U2 L'"
+      ],
+      "BR": [
+        "R' U2 R U' R' U' R",
+        "R' U' R U2 R' U' R",
+        "R' U2 R U' R' U' R U"
+      ]
+    }
   },
   {
     "id": "f2l-17",
     "name": "F2L case 17",
     "group": "Advanced",
-    "algorithm": "F' U F U2 R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' U2 R U' R'",
+        "R U R' U' R U2 R'",
+        "R U R' U2 R U' R' U"
+      ],
+      "FL": [
+        "F U F' U2 F U' F'",
+        "F U F' U' F U2 F'",
+        "L F U F' U' L2 U L"
+      ],
+      "BL": [
+        "L F U F' U2 L'",
+        "L U L' U2 L U' L'",
+        "L U L' U' L U2 L'"
+      ],
+      "BR": [
+        "R2 F' U' F U R2",
+        "R2 F' U' F U R2 U",
+        "U R2 F' U' F U R2"
+      ]
+    }
   },
   {
     "id": "f2l-18",
     "name": "F2L case 18",
     "group": "Advanced",
-    "algorithm": "F' U' F U R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' U R U' R'",
+        "R U2 R' U2 R U2 R'",
+        "R U2 R' U R U' R' U"
+      ],
+      "FL": [
+        "F U2 F2 L F L'",
+        "F U2 F' U F U' F'",
+        "F U2 F' U2 F U2 F'"
+      ],
+      "BL": [
+        "L U2 L' U L U' L'",
+        "L U F' L F L2",
+        "L U2 L' U2 L U2 L'"
+      ],
+      "BR": [
+        "R' F' U2 F R U R' U' R",
+        "R' U' F' U F2 R' F' R2",
+        "F U R2 U' R2 U R2 U' F'"
+      ]
+    }
   },
   {
     "id": "f2l-19",
     "name": "F2L case 19",
     "group": "Advanced",
-    "algorithm": "F' U' F U' F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' U' R U R'",
+        "R U2 R' U' R U R' U",
+        "U R U2 R' U' R U R'"
+      ],
+      "FL": [
+        "F U2 F' U' F U F'",
+        "F U2 F' U' F U F' U",
+        "U F U2 F' U' F U F'"
+      ],
+      "BL": [
+        "L U2 L' U' L U L'",
+        "L U2 L' U' L U L' U",
+        "U L U2 L' U' L U L'"
+      ],
+      "BR": [
+        "R' U2 F R U R' U' F' R",
+        "R' F' U2 F2 R' F' R U' R",
+        "R2 F' U F U2 F' U' F R2"
+      ]
+    }
   },
   {
     "id": "f2l-20",
     "name": "F2L case 20",
     "group": "Advanced",
-    "algorithm": "F' U' F U2 F' U F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' U2 R U' R'",
+        "R U2 R' U' R U2 R'",
+        "R U2 R' U2 R U' R' U"
+      ],
+      "FL": [
+        "F U2 F' U2 F U' F'",
+        "F U2 F' U' F U2 F'",
+        "F U2 F' U2 F U' F' U"
+      ],
+      "BL": [
+        "L U2 L' U2 L U' L'",
+        "L U2 L' U' L U2 L'",
+        "L U F U2 F' U L'"
+      ],
+      "BR": [
+        "F R U R2 U' R F'",
+        "F R U R2 U' R F' U",
+        "U F R U R2 U' R F'"
+      ]
+    }
   },
   {
     "id": "f2l-21",
     "name": "F2L case 21",
     "group": "Advanced",
-    "algorithm": "F' U2 F U F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R' U2 R2 U R2 U R",
+        "R' U2 R2 U R2 U R U",
+        "U R' U2 R2 U R2 U R"
+      ],
+      "FL": [
+        "L' U2 L U' F U F'",
+        "L' U2 L U' F U F' U",
+        "U L' U2 L U' F U F'"
+      ],
+      "BL": [
+        "L' U2 L2 U L2 U L",
+        "L U' F U2 F' U2 L'",
+        "L' U2 L2 U L2 U L U"
+      ],
+      "BR": [
+        "R' U' F R' F' R U' R",
+        "R' U' F R' F' R U' R U",
+        "U R' U' F R' F' R U' R"
+      ]
+    }
   },
   {
     "id": "f2l-22",
     "name": "F2L case 22",
     "group": "Advanced",
-    "algorithm": "F' U2 F U' R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R2 U2 R' U' R U' R2",
+        "R2 U2 R' U' R U' R2 U",
+        "R2 U2 R' U' R U' R2 U'"
+      ],
+      "FL": [
+        "F2 U2 F' U' F U' F2",
+        "L F' L' F U F U F'",
+        "F' U' L' U L F L' U L"
+      ],
+      "BL": [
+        "L2 U2 L' U' L U' L2",
+        "L2 U2 L' U' L U' L2 U",
+        "U L2 U2 L' U' L U' L2"
+      ],
+      "BR": [
+        "R' U' R' U' F' U F R2",
+        "R' U2 R' U' F' U F R2",
+        "R' F' U' F2 R' F' R2"
+      ]
+    }
   },
   {
     "id": "f2l-23",
     "name": "F2L case 23",
     "group": "Advanced",
-    "algorithm": "F2 U2 F U F' U F2",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R2 U R2 U R2 U2 R2",
+        "R2 U2 R2 U' R2 U' R2",
+        "R2 U R2 U R2 U2 R2 U"
+      ],
+      "FL": [
+        "L2 U2 L2 U L2 U L2",
+        "L2 U' L2 U' L2 U2 L2",
+        "F' L F L' U L' U' L"
+      ],
+      "BL": [
+        "L U' F U F' U L'",
+        "L U' F U2 F' U L'",
+        "L U' F U F' U L' U"
+      ],
+      "BR": [
+        "R2 U2 R2 U R2 U R2",
+        "R2 U' R2 U' R2 U2 R2",
+        "R' U F' U' F U' R"
+      ]
+    }
   },
   {
     "id": "f2l-24",
     "name": "F2L case 24",
     "group": "Advanced",
-    "algorithm": "R U R' F R' F' R",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U F U R U R'",
+        "F' U' F U R U' R'",
+        "F' U' F U' R U R'"
+      ],
+      "FL": [
+        "L' U L U F U F'",
+        "L' U' L U F U' F'",
+        "L' U' L U' F U F'"
+      ],
+      "BL": [
+        "L U' F' L' U' L U F L'",
+        "B' U B U L U L'",
+        "B' U' B U L U' L'"
+      ],
+      "BR": [
+        "R' F R' F' R U' R",
+        "R' F R' F' R U' R U",
+        "U R' F R' F' R U' R"
+      ]
+    }
   },
   {
     "id": "f2l-25",
     "name": "F2L case 25",
     "group": "Advanced",
-    "algorithm": "R U R' U2 R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U F U R U' R'",
+        "F' U' F U R U R'",
+        "R' F R F' R U R'"
+      ],
+      "FL": [
+        "L' U L U F U' F'",
+        "L' U' L U F U F'",
+        "L' U2 L U2 F U F'"
+      ],
+      "BL": [
+        "L U2 F U F' U2 L'",
+        "L U2 F U2 F' U2 L'",
+        "L' U2 F' L' F U2 L"
+      ],
+      "BR": [
+        "R' U2 F' U F U2 R",
+        "R U2 F R' F' U2 R'",
+        "F R2 U R2 U' R2 F'"
+      ]
+    }
   },
   {
     "id": "f2l-26",
     "name": "F2L case 26",
     "group": "Advanced",
-    "algorithm": "R U' R' F R' F' R",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' F R' F' R",
+        "R U R' U' F' U' F",
+        "R U' R' U' F' U F"
+      ],
+      "FL": [
+        "F U F' U' L' U' L",
+        "F U' F' U' L' U L",
+        "F U2 F' U2 L' U' L"
+      ],
+      "BL": [
+        "L U2 F U' F' U2 L'",
+        "L' U2 F' L F U2 L",
+        "L U2 F U' F' U2 L' U"
+      ],
+      "BR": [
+        "R U R U R U' R' U' R'",
+        "R U R U R' U' R' U' R'",
+        "R U R U R2 U' R' U' R'"
+      ]
+    }
   },
   {
     "id": "f2l-27",
     "name": "F2L case 27",
     "group": "Advanced",
-    "algorithm": "R U' R' U R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' U F' U' F",
+        "R U R' U2 F' U' F",
+        "R U' R' U F' U' F U"
+      ],
+      "FL": [
+        "L' U L U L' U' L",
+        "L' U' L U' L' U' L",
+        "F U' F' U L' U' L"
+      ],
+      "BL": [
+        "L2 U F U' F' L2",
+        "L U F U' F' U2 L'",
+        "L2 U F U' F' L2 U"
+      ],
+      "BR": [
+        "R' U R U R' U' R",
+        "R' U' R U' R' U' R",
+        "R' U R U R' U' R U"
+      ]
+    }
   },
   {
     "id": "f2l-28",
     "name": "F2L case 28",
     "group": "Advanced",
-    "algorithm": "R U' R' U' R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U R' F R' F' R",
+        "R U R' U F' U' F",
+        "R U R' U' F' U F"
+      ],
+      "FL": [
+        "F U F' U L' U' L",
+        "F U F' U' L' U L",
+        "F U' F' U' L' U' L"
+      ],
+      "BL": [
+        "L F' L F L' U L'",
+        "L F' L F L' U L' U",
+        "U L F' L F L' U L'"
+      ],
+      "BR": [
+        "R' U F R U R' U' F' R",
+        "R' U' R2 U2 F R' F' U2 R'",
+        "B U B' U R' U' R"
+      ]
+    }
   },
   {
     "id": "f2l-29",
     "name": "F2L case 29",
     "group": "Advanced",
-    "algorithm": "R U' R' U2 F' U' F",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R' U F' U' F",
+        "R U2 R' U F' U' F U",
+        "U R U2 R' U F' U' F"
+      ],
+      "FL": [
+        "F U2 F' U L' U' L",
+        "L U2 L2 U' L2 U' L'",
+        "F U2 F' U L' U' L U"
+      ],
+      "BL": [
+        "L U F' L F L' U L'",
+        "L U F' L F L' U L' U",
+        "U L U F' L F L' U L'"
+      ],
+      "BR": [
+        "R U2 R2 U' R2 U' R'",
+        "R U2 R2 U' R2 U' R' U",
+        "U R U2 R2 U' R2 U' R'"
+      ]
+    }
   },
   {
     "id": "f2l-30",
     "name": "F2L case 30",
     "group": "Advanced",
-    "algorithm": "R U' R' U2 R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U F U2 R U R'",
+        "R' U2 R' U R' U' R U2 R",
+        "R' F R F' U R U R'"
+      ],
+      "FL": [
+        "L' U L U2 F U F'",
+        "L' U L U2 F U F' U",
+        "U L' U L U2 F U F'"
+      ],
+      "BL": [
+        "L U2 F U F' U L'",
+        "L U2 F U F' U L' U",
+        "U L U2 F U F' U L'"
+      ],
+      "BR": [
+        "R' U F' U F U2 R",
+        "R' U F' U F U2 R U",
+        "U R' U F' U F U2 R"
+      ]
+    }
   },
   {
     "id": "f2l-31",
     "name": "F2L case 31",
     "group": "Advanced",
-    "algorithm": "R U2 R' U R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R' U2 F' U' F",
+        "R F R U R' U' F' R'",
+        "R U' R' U2 F' U' F U"
+      ],
+      "FL": [
+        "F U' F' U2 L' U' L",
+        "F U' F' U2 L' U' L U",
+        "U F U' F' U2 L' U' L"
+      ],
+      "BL": [
+        "L U' F U' F' U2 L'",
+        "L U' F U' F' U2 L' U",
+        "U L U' F U' F' U2 L'"
+      ],
+      "BR": [
+        "R' U2 F' U' F U' R",
+        "R U2 R U' R U R' U2 R'",
+        "R' U2 F' U' F U' R U"
+      ]
+    }
   },
   {
     "id": "f2l-32",
     "name": "F2L case 32",
     "group": "Advanced",
-    "algorithm": "R U2 R' U' R U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R2 U2 F R2 F' U2 R2",
+        "F' U2 F U2 F' U F",
+        "F' U2 F U F' U2 F"
+      ],
+      "FL": [
+        "L' U2 L U2 L' U L",
+        "L' U2 L U L' U2 L",
+        "L' U2 L U2 L' U L U"
+      ],
+      "BL": [
+        "F' L' U' L2 U L' F",
+        "F' L' U' L2 U L' F U",
+        "U F' L' U' L2 U L' F"
+      ],
+      "BR": [
+        "R' U2 R U2 R' U R",
+        "R' U2 R U R' U2 R",
+        "R' U2 R U2 R' U R U"
+      ]
+    }
   },
   {
     "id": "f2l-33",
     "name": "F2L case 33",
     "group": "Advanced",
-    "algorithm": "R U2 R' U2 R U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U F U' F' U' F",
+        "F U R U' R' F2 U' F",
+        "R U R2 F R F2 U' F"
+      ],
+      "FL": [
+        "L' U L U' L' U' L",
+        "L' U L U' L' U' L U",
+        "U L' U L U' L' U' L"
+      ],
+      "BL": [
+        "L U' F U' F2 L F L2",
+        "L U' L2 U2 F' L F U2 L",
+        "L U2 L2 U2 F' L F U2 L"
+      ],
+      "BR": [
+        "R' U R U' R' U' R",
+        "R2 U' R U' R' U2 R2",
+        "R' U R U' R' U' R U"
+      ]
+    }
   },
   {
     "id": "f2l-34",
     "name": "F2L case 34",
     "group": "Advanced",
-    "algorithm": "R2 U2 F R2 F' U2 R2",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F' U2 F U F' U' F",
+        "R' U' R2 F R F' R2 U R",
+        "F2 U2 R' F' R U2 F2"
+      ],
+      "FL": [
+        "L' U2 L U L' U' L",
+        "L' U2 L U L' U' L U",
+        "U L' U2 L U L' U' L"
+      ],
+      "BL": [
+        "L U2 F' L' U' L U F L'",
+        "L F U2 F2 L F L' U L'",
+        "L2 F U' F' U2 F U F' L2"
+      ],
+      "BR": [
+        "R' U2 R U R' U' R",
+        "R' U2 R U R' U' R U",
+        "U R' U2 R U R' U' R"
+      ]
+    }
   },
   {
     "id": "f2l-35",
     "name": "F2L case 35",
     "group": "Advanced",
-    "algorithm": "R2 U2 R' U' R U' R2",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R' U' R F R' F' U R",
+        "F R' F' R U2 R U R'",
+        "R' F' U' F U R2 U' R'"
+      ],
+      "FL": [
+        "L' U' L U2 L' U L",
+        "L' U' L U L' U2 L",
+        "L' U' L U2 L' U L U"
+      ],
+      "BL": [
+        "L2 F U F' U' L2",
+        "L2 F U F' U' L2 U",
+        "U L2 F U F' U' L2"
+      ],
+      "BR": [
+        "R' U' R U2 R' U R",
+        "R' U' R U R' U2 R",
+        "R' F' U' F U2 R"
+      ]
+    }
   },
   {
     "id": "f2l-36",
     "name": "F2L case 36",
     "group": "Advanced",
-    "algorithm": "R2 U2 R2 U' R2 U' R2",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R2 U2 R' U' R U' R' U2 R'",
+        "R U2 R U2 F R F' U2 R2",
+        "F2 U2 R' F R U2 F U2 F"
+      ],
+      "FL": [
+        "L' U2 L' U' L U' L' U2 L2",
+        "L2 U2 F' L F U2 L U2 L",
+        "F2 U2 F' U' F U' F' U2 F'"
+      ],
+      "BL": [
+        "L2 U2 L' U' L U' L' U2 L'",
+        "L U2 L U2 B L B' U2 L2",
+        "B2 U2 L' B L U2 B U2 B"
+      ],
+      "BR": [
+        "R' U2 R' U' R U' R' U2 R2",
+        "R2 U2 B' R B U2 R U2 R",
+        "B U2 B U2 R B R' U2 B2"
+      ]
+    }
   },
   {
     "id": "f2l-37",
     "name": "F2L case 37",
     "group": "Advanced",
-    "algorithm": "R F U R U' R' F' U' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U2 R U R' U R U2 R2",
+        "R2 U2 F R' F' U2 R' U2 R'",
+        "F' U2 F' U2 R' F' R U2 F2"
+      ],
+      "FL": [
+        "L2 U2 L U L' U L U2 L",
+        "L' U2 L' U2 F' L' F U2 L2",
+        "F U2 F U F' U F U2 F2"
+      ],
+      "BL": [
+        "L U2 L U L' U L U2 L2",
+        "L2 U2 B L' B' U2 L' U2 L'",
+        "B' U2 B' U2 L' B' L U2 B2"
+      ],
+      "BR": [
+        "R2 U2 R U R' U R U2 R",
+        "R' U2 R' U2 B' R' B U2 R2",
+        "B2 U2 R B' R' U2 B' U2 B'"
+      ]
+    }
   },
   {
     "id": "f2l-38",
     "name": "F2L case 38",
     "group": "Advanced",
-    "algorithm": "R U F R U R' U' F' R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "F U R U' R' F' R U' R'",
+        "R U R2 F R F' R U' R'",
+        "R U R' F' U2 F R U R'"
+      ],
+      "FL": [
+        "L2 U2 L U L' U L2",
+        "L2 U2 L U L' U L2 U",
+        "U L2 U2 L U L' U L2"
+      ],
+      "BL": [
+        "L U L U F U' F' L2",
+        "L U2 L U F U' F' L2",
+        "L F U F2 L F L2"
+      ],
+      "BR": [
+        "R2 U2 R U R' U R2",
+        "R2 U2 R U R' U R2 U",
+        "R2 U2 R U R' U R2 U'"
+      ]
+    }
   },
   {
     "id": "f2l-39",
     "name": "F2L case 39",
     "group": "Advanced",
-    "algorithm": "R2 U2 F R' F' U2 R' U2 R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R F U R U' R' F' U' R'",
+        "F' U' R' F' U' F U R F"
+      ],
+      "FL": [
+        "L' U' F' L' U' L U F L",
+        "F L U F U' F' L' U' F'"
+      ],
+      "BL": [
+        "L U' L U F U' F' L2",
+        "L U' L U F U' F' L2 U",
+        "U L U' L U F U' F' L2"
+      ],
+      "BR": [
+        "R2 F' U' F U R U' R",
+        "R2 F' U' F U R U' R U",
+        "U R2 F' U' F U R U' R"
+      ]
+    }
   },
   {
     "id": "f2l-40",
     "name": "F2L case 40",
     "group": "Advanced",
-    "algorithm": "R2 U2 F R2 F' U2 R' U R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U F R U R' U' F' R'",
+        "F' R' U' F' U F R U F"
+      ],
+      "FL": [
+        "L' F' U' L' U L F U L",
+        "F U L F U F' U' L' F'"
+      ],
+      "BL": [
+        "L2 F U F' U' L' U L'",
+        "L2 F U F' U' L' U L' U",
+        "U L2 F U F' U' L' U L'"
+      ],
+      "BR": [
+        "R' U R' U' F' U F R2",
+        "R' U R' U' F' U F R2 U",
+        "U R' U R' U' F' U F R2"
+      ]
+    }
   },
   {
     "id": "f2l-41",
     "name": "F2L case 41",
     "group": "Advanced",
-    "algorithm": "R2 U2 R' U' R U' R' U2 R'",
-    "recognition": "Apply the setup, then match your cube to the diagram; solve the pair into the chosen slot."
+    "recognition": "Match your cube to the diagram (front-right reference), then solve the pair into the chosen slot.",
+    "algs": {
+      "FR": [
+        "R U' R U2 F R2 F' U2 R2",
+        "R2 U2 F R2 F' U2 R' U R'",
+        "F2 U2 R' F2 R U2 F U' F"
+      ],
+      "FL": [
+        "L2 U2 F' L2 F U2 L U' L",
+        "L' U L' U2 F' L2 F U2 L2",
+        "F U' F U2 L F2 L' U2 F2"
+      ],
+      "BL": [
+        "L U' L U2 B L2 B' U2 L2",
+        "L2 U2 B L2 B' U2 L' U L'",
+        "B2 U2 L' B2 L U2 B U' B"
+      ],
+      "BR": [
+        "R2 U2 B' R2 B U2 R U' R",
+        "R' U R' U2 B' R2 B U2 R2",
+        "B2 U2 R B2 R' U2 B' U B'"
+      ]
+    }
   }
 ]
