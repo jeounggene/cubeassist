@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { applyAlg } from "../lib/facecube";
 
 // Color id -> CSS, in face order U R F D L B.
 const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
@@ -19,18 +20,62 @@ const FACES: { cells: number[]; transform: string }[] = [
   { cells: [36, 37, 38, 39, 40, 41, 42, 43, 44], transform: `rotateY(-90deg) translateZ(${HALF}px)` }, // L
 ];
 
-type Props = { facelets: number[]; highlight?: number[]; homeX?: number; homeY?: number };
+type Props = {
+  facelets: number[];
+  highlight?: number[];
+  homeX?: number;
+  homeY?: number;
+  // Bump `play.nonce` to animate the cube turning through `play.alg`'s moves.
+  play?: { alg: string; nonce: number };
+};
 
-export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, homeY = -45 }: Props) {
+export default function CubeF2LDiagram({
+  facelets,
+  highlight = [],
+  homeX = -30,
+  homeY = -45,
+  play,
+}: Props) {
   const hl = new Set(highlight);
   const [rot, setRot] = useState({ x: homeX, y: homeY });
   const [dragging, setDragging] = useState(false);
   const start = useRef({ px: 0, py: 0, x: 0, y: 0 });
+  // While playing, `display` holds the in-progress state (full colors shown).
+  const [display, setDisplay] = useState<number[] | null>(null);
 
   // Reset to the direction's home orientation when it changes.
   useEffect(() => {
     setRot({ x: homeX, y: homeY });
   }, [homeX, homeY]);
+
+  // Stop any animation when the case/slot changes.
+  useEffect(() => {
+    setDisplay(null);
+  }, [facelets]);
+
+  // Animate the moves of `play.alg`, one per tick.
+  useEffect(() => {
+    if (!play || play.nonce === 0 || !play.alg) return;
+    const moves = play.alg.split(/\s+/).filter(Boolean);
+    let state = facelets;
+    setDisplay(state);
+    let i = 0;
+    const id = window.setInterval(() => {
+      if (i >= moves.length) {
+        window.clearInterval(id);
+        window.setTimeout(() => setDisplay(null), 700);
+        return;
+      }
+      state = applyAlg(state, moves[i]);
+      setDisplay(state);
+      i++;
+    }, 430);
+    return () => window.clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [play?.nonce]);
+
+  const shown = display ?? facelets;
+  const playing = display !== null;
 
   useEffect(() => {
     if (!dragging) return;
@@ -89,15 +134,18 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
             className="absolute grid grid-cols-3 grid-rows-3 gap-px"
             style={{ width: FACE, height: FACE, transform: f.transform }}
           >
-            {f.cells.map((idx) => (
-              <div
-                key={idx}
-                data-testid="sticker"
-                data-hl={hl.has(idx) ? "1" : undefined}
-                className="border border-slate-400/60"
-                style={{ backgroundColor: hl.has(idx) ? COLORS[facelets[idx]] : MUTED }}
-              />
-            ))}
+            {f.cells.map((idx) => {
+              const on = playing || hl.has(idx);
+              return (
+                <div
+                  key={idx}
+                  data-testid="sticker"
+                  data-hl={hl.has(idx) ? "1" : undefined}
+                  className="border border-slate-400/60"
+                  style={{ backgroundColor: on ? COLORS[shown[idx]] : MUTED }}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
