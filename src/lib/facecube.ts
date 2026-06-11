@@ -95,6 +95,27 @@ export function solved(): Facelets {
   return Array.from({ length: 54 }, (_, i) => Math.floor(i / 9));
 }
 
+// Facelet indices belonging to the cubie centered at `pos` (e.g. [1,-1,1] = DFR
+// corner, [1,0,1] = FR edge). Used to identify which stickers a case may disturb.
+export function cubieFacelets(pos: [number, number, number]): number[] {
+  const out: number[] = [];
+  for (let i = 0; i < FACELETS.length; i++) {
+    const p = FACELETS[i].pos;
+    if (p[0] === pos[0] && p[1] === pos[1] && p[2] === pos[2]) out.push(i);
+  }
+  return out;
+}
+
+// Facelet indices in the top (U) layer — every sticker on a cubie with y = +1.
+// These include the U face plus the top row of each side face.
+export function topLayerFacelets(): number[] {
+  const out: number[] = [];
+  for (let i = 0; i < FACELETS.length; i++) {
+    if (FACELETS[i].pos[1] === 1) out.push(i);
+  }
+  return out;
+}
+
 function applyPerm(state: Facelets, perm: number[]): Facelets {
   const next = new Array<number>(54);
   for (let i = 0; i < 54; i++) next[perm[i]] = state[i];
