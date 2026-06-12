@@ -227,7 +227,9 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
       style={{
         width: 170,
         height: 180,
-        perspective: "760px",
+        // Far perspective -> nearly orthographic, so layers keep a constant
+        // size through a turn instead of foreshortening (the "shrink").
+        perspective: "2200px",
         cursor: dragging ? "grabbing" : "grab",
         touchAction: "none",
         userSelect: "none",
