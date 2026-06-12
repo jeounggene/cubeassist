@@ -42,6 +42,12 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     saveProfile(profile);
   }, [profile]);
 
+  // Reflect the chosen theme on <html> so Tailwind's `dark:` variants apply.
+  useEffect(() => {
+    const dark = profile.settings.theme === "dark";
+    document.documentElement.classList.toggle("dark", dark);
+  }, [profile.settings.theme]);
+
   const value = useMemo<ProfileContextValue>(
     () => ({
       profile,

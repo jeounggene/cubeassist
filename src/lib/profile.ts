@@ -13,7 +13,7 @@ export function emptyProfile(): UserProfile {
     ) as unknown as UserProfile["times"],
     known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as UserProfile["known"],
     drillHistory: [],
-    settings: { inspection: true, useMs: false },
+    settings: { inspection: true, useMs: false, theme: "light" },
   };
 }
 

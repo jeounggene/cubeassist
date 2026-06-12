@@ -18,19 +18,19 @@ export default function CubeDiagram({ color = "white" }: Props) {
   return (
     <div className="inline-flex flex-col items-center gap-1">
       <div
-        className="grid grid-cols-3 gap-0.5 rounded bg-slate-800 p-1"
+        className="grid grid-cols-3 gap-0.5 rounded bg-slate-800 dark:bg-slate-700 p-1"
         role="img"
         aria-label={`Target: ${color} cross`}
       >
         {Array.from({ length: 9 }, (_, i) => (
           <div
             key={i}
-            className="h-6 w-6 rounded-sm border border-slate-700"
+            className="h-6 w-6 rounded-sm border border-slate-700 dark:border-slate-600"
             style={{ backgroundColor: CROSS_CELLS.has(i) ? css : "#334155" }}
           />
         ))}
       </div>
-      <span className="text-xs text-slate-500">{color} cross</span>
+      <span className="text-xs text-slate-500 dark:text-slate-400">{color} cross</span>
     </div>
   );
 }

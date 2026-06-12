@@ -15,9 +15,12 @@ export type DrillRecord = {
   avgTime: number;
 };
 
+export type Theme = "light" | "dark";
+
 export type Settings = {
   inspection: boolean;
   useMs: boolean;
+  theme: Theme;
 };
 
 export type UserProfile = {

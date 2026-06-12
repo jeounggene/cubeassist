@@ -120,22 +120,22 @@ export default function Timer({
 
   const color =
     phase === "ready"
-      ? "text-green-600"
+      ? "text-green-600 dark:text-green-400"
       : phase === "running"
-        ? "text-slate-900"
-        : "text-slate-500";
+        ? "text-slate-900 dark:text-slate-100"
+        : "text-slate-500 dark:text-slate-400";
 
   return (
     <div className="text-center select-none">
       {phase === "inspect" ? (
-        <div data-testid="inspection" className="text-2xl text-amber-600">
+        <div data-testid="inspection" className="text-2xl text-amber-600 dark:text-amber-400">
           Inspection: {inspectLeft}s
         </div>
       ) : null}
       <div data-testid="timer-display" className={`text-6xl font-mono tabular-nums ${color}`}>
         {format(display, useMs)}
       </div>
-      <p className="mt-2 text-sm text-slate-500">
+      <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
         Hold <kbd className="rounded border px-1">Space</kbd>, release to start, any key to stop.
       </p>
     </div>

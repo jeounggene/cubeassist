@@ -5,6 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cubeassist</title>
+    <script>
+      // Apply the saved theme before paint to avoid a light flash.
+      try {
+        var p = JSON.parse(localStorage.getItem("cubeassist:profile:v1") || "{}");
+        if (p && p.settings && p.settings.theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

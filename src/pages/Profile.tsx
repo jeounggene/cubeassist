@@ -52,17 +52,17 @@ function StageTimeInput({ stage, label }: { stage: Stage; label: string }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && submit()}
-        className="w-24 rounded border border-slate-300 px-2 py-1"
+        className="w-24 rounded border border-slate-300 dark:border-slate-700 px-2 py-1"
       />
       <button
         type="button"
         onClick={submit}
         aria-label={`Add ${label} time`}
-        className="rounded bg-slate-900 px-3 py-1 text-white"
+        className="rounded bg-slate-900 dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-white"
       >
         Add
       </button>
-      <span className="text-sm text-slate-600">
+      <span className="text-sm text-slate-600 dark:text-slate-300">
         avg:{" "}
         <span data-testid={`${stage}-avg`}>
           {avg === null ? "—" : avg.toFixed(2)}
@@ -97,7 +97,7 @@ function Checklist({
         <h2 id={`heading-${list}`} className="text-xl font-semibold">
           {label}
         </h2>
-        <span className="text-sm text-slate-600">
+        <span className="text-sm text-slate-600 dark:text-slate-300">
           {knownCount} / {total} known
         </span>
       </div>
@@ -145,6 +145,15 @@ function SettingsSection() {
         />
         <span>Show milliseconds in timer</span>
       </label>
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={profile.settings.theme === "dark"}
+          onChange={(e) => setSetting("theme", e.target.checked ? "dark" : "light")}
+          aria-label="Dark mode"
+        />
+        <span>Dark mode</span>
+      </label>
       <button
         type="button"
         onClick={() => {
@@ -152,7 +161,7 @@ function SettingsSection() {
             resetProfile();
           }
         }}
-        className="rounded border border-red-300 px-3 py-1 text-red-700 hover:bg-red-50"
+        className="rounded border border-red-300 dark:border-red-800 px-3 py-1 text-red-700 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-950"
       >
         Reset all data
       </button>
@@ -167,7 +176,7 @@ export default function Profile() {
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-2">Stage times</h2>
-        <p className="text-sm text-slate-600 mb-3">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-3">
           Enter your most recent times for each CFOP stage. We keep a rolling
           average of your last 12 entries.
         </p>
@@ -178,7 +187,7 @@ export default function Profile() {
 
       <section>
         <h2 className="text-xl font-semibold mb-2">Algorithms known</h2>
-        <p className="text-sm text-slate-600 mb-3">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-3">
           Check the ones you've memorized. Used by the recommendation engine.
         </p>
         {CHECKLISTS.map((cl) => (
@@ -191,7 +200,7 @@ export default function Profile() {
         ))}
       </section>
 
-      <section className="mt-10 border-t border-slate-200 pt-6">
+      <section className="mt-10 border-t border-slate-200 dark:border-slate-700 pt-6">
         <h2 className="text-xl font-semibold mb-2">Settings</h2>
         <SettingsSection />
       </section>

@@ -65,7 +65,7 @@ export default function TrainerCross() {
   return (
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-1">Cross trainer</h1>
-      <p className="text-slate-600 mb-6">
+      <p className="text-slate-600 dark:text-slate-300 mb-6">
         Solve only the white cross on a real cube. Pick a difficulty (optimal cross
         length), then time yourself.
       </p>
@@ -79,8 +79,8 @@ export default function TrainerCross() {
             onClick={() => setDifficulty(d)}
             className={`h-9 w-9 rounded border ${
               d === difficulty
-                ? "bg-slate-900 text-white border-slate-900"
-                : "border-slate-300 text-slate-700 hover:bg-slate-100"
+                ? "bg-slate-900 dark:bg-slate-100 dark:text-slate-900 text-white border-slate-900 dark:border-slate-100"
+                : "border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
             }`}
           >
             {d}
@@ -95,8 +95,8 @@ export default function TrainerCross() {
           onClick={() => setColorNeutral(false)}
           className={`rounded border px-3 py-1.5 ${
             !colorNeutral
-              ? "bg-slate-900 text-white border-slate-900"
-              : "border-slate-300 text-slate-700 hover:bg-slate-100"
+              ? "bg-slate-900 dark:bg-slate-100 dark:text-slate-900 text-white border-slate-900 dark:border-slate-100"
+              : "border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           }`}
         >
           White
@@ -106,8 +106,8 @@ export default function TrainerCross() {
           onClick={() => setColorNeutral(true)}
           className={`rounded border px-3 py-1.5 ${
             colorNeutral
-              ? "bg-slate-900 text-white border-slate-900"
-              : "border-slate-300 text-slate-700 hover:bg-slate-100"
+              ? "bg-slate-900 dark:bg-slate-100 dark:text-slate-900 text-white border-slate-900 dark:border-slate-100"
+              : "border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           }`}
         >
           Color neutral
@@ -116,7 +116,7 @@ export default function TrainerCross() {
 
       <div className="mb-6 flex items-center justify-between gap-6">
         <div>
-          <div className="text-sm text-slate-500 mb-1">Scramble</div>
+          <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">Scramble</div>
           <div data-testid="scramble" className="font-mono text-xl">
             {scramble}
           </div>
@@ -136,7 +136,7 @@ export default function TrainerCross() {
         <button
           type="button"
           onClick={() => newScramble(difficulty)}
-          className="rounded bg-slate-900 px-4 py-2 text-white"
+          className="rounded bg-slate-900 dark:bg-slate-100 dark:text-slate-900 px-4 py-2 text-white"
         >
           Next scramble
         </button>
@@ -145,12 +145,12 @@ export default function TrainerCross() {
             <button
               type="button"
               onClick={() => setSolution(solveCross(scramble, crossColor))}
-              className="rounded border border-slate-300 px-4 py-2"
+              className="rounded border border-slate-300 dark:border-slate-700 px-4 py-2"
             >
               Show optimal solution
             </button>
           ) : (
-            <span data-testid="solution" className="font-mono text-slate-700">
+            <span data-testid="solution" className="font-mono text-slate-700 dark:text-slate-200">
               {solution}
             </span>
           )
@@ -158,13 +158,13 @@ export default function TrainerCross() {
         <button
           type="button"
           onClick={endSession}
-          className="ml-auto rounded border border-red-300 px-4 py-2 text-red-700 hover:bg-red-50"
+          className="ml-auto rounded border border-red-300 dark:border-red-800 px-4 py-2 text-red-700 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-950"
         >
           End session
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 text-center border-t border-slate-200 pt-4">
+      <div className="grid grid-cols-3 gap-4 text-center border-t border-slate-200 dark:border-slate-700 pt-4">
         <Stat label="Solves" value={String(times.length)} />
         <Stat label="Ao5" value={avgOfLast(times, 5)} />
         <Stat label="Ao12" value={avgOfLast(times, 12)} />
@@ -177,7 +177,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <div className="text-2xl font-semibold tabular-nums">{value}</div>
-      <div className="text-sm text-slate-500">{label}</div>
+      <div className="text-sm text-slate-500 dark:text-slate-400">{label}</div>
     </div>
   );
 }
