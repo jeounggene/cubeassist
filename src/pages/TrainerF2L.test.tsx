@@ -25,9 +25,9 @@ describe("TrainerF2L", () => {
     expect(screen.getByTestId("algorithm")).toBeInTheDocument();
   });
 
-  it("hides the algorithm when 'Hide algorithm until solve' is checked", () => {
+  it("hides the algorithm when 'Hide algorithm' is checked", () => {
     renderF2L();
-    fireEvent.click(screen.getByLabelText(/hide algorithm until solve/i));
+    fireEvent.click(screen.getByLabelText(/hide algorithm/i));
     expect(screen.queryByTestId("algorithm")).not.toBeInTheDocument();
   });
 

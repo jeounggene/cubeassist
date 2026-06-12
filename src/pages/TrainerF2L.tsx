@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useProfile } from "../state/ProfileProvider";
 import {
   F2L_CASES,
   SLOTS,
@@ -12,7 +11,6 @@ import {
   f2lGroups,
 } from "../lib/f2l";
 import type { Slot } from "../lib/f2l";
-import Timer from "../components/Timer";
 import CubeF2LDiagram from "../components/CubeF2LDiagram";
 import MiniF2LCube from "../components/MiniF2LCube";
 
@@ -23,13 +21,8 @@ const SLOT_LABELS: Record<Slot, string> = {
   BR: "Back-right",
 };
 
-// Cube rotation that brings each slot round to the front-right, so the standard
-// Front-right algorithm can be used instead of the in-place (F/B) version.
-const ROTATION_HINT: Record<Slot, string> = { FR: "", FL: "y'", BR: "y", BL: "y2" };
-
 // One fixed orientation for every direction, so each slot stays in its REAL
-// position (FR near-right, FL front-left, BR back-right, BL back-left) instead
-// of rotating each slot to face front (which made them all look identical). The
+// position (FR near-right, FL front-left, BR back-right, BL back-left). The
 // back slots (BL/BR) sit behind the cube; the "see-through" toggle reveals them.
 const FRONT_VIEW = { x: -28, y: -38 };
 const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
@@ -39,22 +32,11 @@ const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
   BL: FRONT_VIEW,
 };
 
-function mean(xs: number[]): number {
-  return xs.reduce((a, b) => a + b, 0) / xs.length;
-}
-function avgOfLast(xs: number[], n: number): string {
-  if (xs.length < n) return "—";
-  return mean(xs.slice(-n)).toFixed(2);
-}
-
 export default function TrainerF2L() {
-  const { profile, addDrill } = useProfile();
   const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
   const [slot, setSlot] = useState<Slot>("FR");
   const [hideAlg, setHideAlg] = useState(false);
   const [seeThrough, setSeeThrough] = useState(false);
-  const [times, setTimes] = useState<number[]>([]);
-  const [solved, setSolved] = useState(false);
   const [play, setPlay] = useState({ alg: "", nonce: 0 });
   const playAlg = (a: string) => setPlay((p) => ({ alg: a, nonce: p.nonce + 1 }));
 
@@ -73,37 +55,17 @@ export default function TrainerF2L() {
   }, []);
   const algs = useMemo(() => slotAlgorithms(current, slot), [current, slot]);
   const setup = useMemo(() => slotSetup(current, slot), [current, slot]);
-  // Position-accurate per direction: the pair shows in the chosen slot, and the
-  // cube's home orientation rotates so that slot faces the viewer.
+  // Position-accurate per direction: the pair shows in the chosen slot.
   const facelets = useMemo(() => slotFacelets(current, slot), [current, slot]);
   const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
 
-  const selectCase = (id: string) => {
-    setSelectedId(id);
-    setTimes([]);
-    setSolved(false);
-  };
-
-  const showAlg = !hideAlg || solved;
-
-  const endSession = () => {
-    if (times.length === 0) return;
-    addDrill({
-      date: new Date().toISOString().slice(0, 10),
-      caseId: current.id,
-      attempts: times.length,
-      avgTime: Number(mean(times).toFixed(3)),
-    });
-    setTimes([]);
-    setSolved(false);
-  };
+  const showAlg = !hideAlg;
 
   return (
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-1">F2L trainer</h1>
       <p className="text-slate-600 dark:text-slate-300 mb-6">
-        Pick a case, apply its setup to a solved cube, then drill the algorithm and
-        time yourself.
+        Pick a case and drill the algorithm for each slot.
       </p>
 
       <div className="mb-6">
@@ -118,7 +80,7 @@ export default function TrainerF2L() {
                     key={c.id}
                     type="button"
                     aria-label={c.name}
-                    onClick={() => selectCase(c.id)}
+                    onClick={() => setSelectedId(c.id)}
                     className={`flex flex-col items-center rounded border px-1 pt-1 pb-0.5 ${
                       c.id === current.id
                         ? "border-slate-900 dark:border-slate-100 bg-slate-100 dark:bg-slate-800 ring-2 ring-slate-900 dark:ring-slate-100"
@@ -158,9 +120,9 @@ export default function TrainerF2L() {
           type="checkbox"
           checked={hideAlg}
           onChange={(e) => setHideAlg(e.target.checked)}
-          aria-label="Hide algorithm until solve"
+          aria-label="Hide algorithm"
         />
-        <span>Hide algorithm until solve</span>
+        <span>Hide algorithm</span>
       </label>
 
       <label className="mb-6 flex items-center gap-2">
@@ -173,7 +135,7 @@ export default function TrainerF2L() {
         <span>See-through cube (reveal back slots)</span>
       </label>
 
-      <div className="mb-6 flex items-start justify-between gap-6">
+      <div className="flex items-start justify-between gap-6">
         <div>
           <div className="text-xl font-semibold">{current.name}</div>
           <div className="text-sm text-slate-500 dark:text-slate-400 mb-3">{current.group}</div>
@@ -219,19 +181,11 @@ export default function TrainerF2L() {
                   </ul>
                 </div>
               ) : null}
-              {slot !== "FR" ? (
-                <p className="mt-2 text-sm text-amber-700 dark:text-amber-400">
-                  Tip: many cubers rotate{" "}
-                  <span className="font-mono font-semibold">{ROTATION_HINT[slot]}</span> to bring this
-                  slot to the front-right, then use the Front-right alg{" "}
-                  <span className="font-mono">{current.algs.FR[0]}</span>.
-                </p>
-              ) : null}
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{current.recognition}</p>
             </>
           ) : (
             <p className="text-sm text-slate-400 dark:text-slate-500">
-              Algorithm hidden — solve, then it reveals.
+              Algorithm hidden — uncheck to reveal.
             </p>
           )}
         </div>
@@ -245,49 +199,6 @@ export default function TrainerF2L() {
           seeThrough={seeThrough}
         />
       </div>
-
-      <div className="mb-6">
-        <Timer
-          inspection={profile.settings.inspection}
-          useMs={profile.settings.useMs}
-          onComplete={(seconds) => {
-            setTimes((t) => [...t, seconds]);
-            setSolved(true);
-          }}
-        />
-      </div>
-
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <button
-          type="button"
-          onClick={() => setSolved(false)}
-          className="rounded bg-slate-900 dark:bg-slate-100 dark:text-slate-900 px-4 py-2 text-white"
-        >
-          Next rep
-        </button>
-        <button
-          type="button"
-          onClick={endSession}
-          className="ml-auto rounded border border-red-300 dark:border-red-800 px-4 py-2 text-red-700 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-950"
-        >
-          End session
-        </button>
-      </div>
-
-      <div className="grid grid-cols-3 gap-4 text-center border-t border-slate-200 dark:border-slate-700 pt-4">
-        <Stat label="Solves" value={String(times.length)} />
-        <Stat label="Ao5" value={avgOfLast(times, 5)} />
-        <Stat label="Ao12" value={avgOfLast(times, 12)} />
-      </div>
     </main>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="text-2xl font-semibold tabular-nums">{value}</div>
-      <div className="text-sm text-slate-500 dark:text-slate-400">{label}</div>
-    </div>
   );
 }
