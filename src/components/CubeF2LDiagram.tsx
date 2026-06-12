@@ -182,13 +182,6 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
 
   const sticker = (idx: number) => {
     const on = litHl.has(idx);
-    const t = turn;
-    const turning = t !== null && t.spec.sel.includes(GEO[idx].pos[t.spec.axis]);
-    const base = STICKER_TRANSFORM[idx];
-    // The rotation is prefixed onto the sticker's own transform. Each sticker is
-    // positioned with left/top:50%, so its transform-origin sits exactly at the
-    // cube core — prefixing rotate() pivots the layer around the core.
-    const transform = turning && t ? `rotate${t.spec.rot}(${t.angle}deg) ${base}` : base;
     return (
       <div
         key={idx}
@@ -205,14 +198,15 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           boxSizing: "border-box",
           border: "1.5px solid #0f172a",
           borderRadius: 4,
-          transform,
-          transition: turning ? `transform ${TURN_MS}ms ease-in-out` : undefined,
+          transform: STICKER_TRANSFORM[idx],
           backgroundColor: on ? COLORS[shown[idx]] : MUTED,
         }}
       />
     );
   };
 
+  // A sticker turns iff its layer coordinate is selected by the current move.
+  const inTurn = (idx: number) => turn !== null && turn.spec.sel.includes(GEO[idx].pos[turn.spec.axis]);
   const all = GEO.map((_, i) => i);
 
   return (
@@ -247,9 +241,28 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           transition: dragging ? "none" : "transform 0.45s ease",
         }}
       >
-        {/* every sticker rotates around its own origin (= the core) when its
-            layer is turning; the rest stay put */}
-        {all.map(sticker)}
+        {/* stickers not in the turning layer */}
+        {all.filter((i) => !inTurn(i)).map(sticker)}
+        {/* the turning layer: one element, one rotate primitive -> a true
+            rotation arc (constant size). Origin pinned to the cube core
+            (centre of the S x S cube box) so it pivots correctly. */}
+        {turn && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: S,
+              height: S,
+              transformStyle: "preserve-3d",
+              transformOrigin: "50% 50% 0",
+              transform: `rotate${turn.spec.rot}(${turn.angle}deg)`,
+              transition: `transform ${TURN_MS}ms ease-in-out`,
+            }}
+          >
+            {all.filter(inTurn).map(sticker)}
+          </div>
+        )}
       </div>
     </div>
   );
