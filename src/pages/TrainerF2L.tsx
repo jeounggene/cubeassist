@@ -8,6 +8,7 @@ import {
   slotFacelets,
   caseFacelets,
   pairFacelets,
+  slotCells,
   f2lGroups,
 } from "../lib/f2l";
 import type { Slot } from "../lib/f2l";
@@ -210,6 +211,7 @@ export default function TrainerF2L() {
         <CubeF2LDiagram
           facelets={facelets}
           highlight={highlight}
+          slotCells={slotCells(slot)}
           homeX={SLOT_HOME[slot].x}
           homeY={SLOT_HOME[slot].y}
           play={play}

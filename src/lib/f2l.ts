@@ -58,6 +58,12 @@ export function slotDisturbable(slot: Slot): number[] {
   ];
 }
 
+// The destination slot itself (bottom corner + middle edge positions) — where
+// the pair will be inserted. Used to highlight the target slot in the diagram.
+export function slotCells(slot: Slot): number[] {
+  return [...cubieFacelets(SLOT_CUBIES[slot].corner), ...cubieFacelets(SLOT_CUBIES[slot].edge)];
+}
+
 // Color sets of each slot's pair: corner = its two side faces + D(3); edge = the
 // two side faces. Faces: U=0 R=1 F=2 D=3 L=4 B=5.
 const SLOT_COLORS: Record<Slot, { corner: number[]; edge: number[] }> = {

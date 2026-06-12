@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { F2L_CASES, SLOTS, slotAlgorithms, slotSetup, slotDisturbable } from "./f2l";
+import { F2L_CASES, SLOTS, slotAlgorithms, slotSetup, slotDisturbable, slotCells } from "./f2l";
 import { solved, applyAlg, invertAlg, isF2LComplete } from "./facecube";
 
 describe("F2L rotationless slots", () => {
@@ -23,6 +23,15 @@ describe("F2L rotationless slots", () => {
           }
         }
       }
+    }
+  });
+
+  it("each slot's destination cells are 5 facelets (corner + edge) within the disturbable region", () => {
+    for (const slot of SLOTS) {
+      const cells = slotCells(slot);
+      expect(cells).toHaveLength(5); // 3 corner facelets + 2 edge facelets
+      const allowed = new Set(slotDisturbable(slot));
+      for (const i of cells) expect(allowed.has(i)).toBe(true);
     }
   });
 

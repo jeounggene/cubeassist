@@ -76,13 +76,25 @@ function moveHighlight(set: Set<number>, token: string): Set<number> {
 type Props = {
   facelets: number[];
   highlight?: number[];
+  slotCells?: number[];
   homeX?: number;
   homeY?: number;
   play?: { alg: string; nonce: number };
 };
 
-export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, homeY = -45, play }: Props) {
+const SLOT_RING = "#f59e0b"; // amber outline marking the destination slot
+const SLOT_TINT = "rgba(245, 158, 11, 0.28)";
+
+export default function CubeF2LDiagram({
+  facelets,
+  highlight = [],
+  slotCells = [],
+  homeX = -30,
+  homeY = -45,
+  play,
+}: Props) {
   const hl = new Set(highlight);
+  const slot = new Set(slotCells);
   const [rot, setRot] = useState({ x: homeX, y: homeY });
   const [dragging, setDragging] = useState(false);
   const start = useRef({ px: 0, py: 0, x: 0, y: 0 });
@@ -182,11 +194,15 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
 
   const sticker = (idx: number) => {
     const on = litHl.has(idx);
+    // Mark the destination slot (static reference; hidden during playback so the
+    // turning layers stay clean).
+    const isSlot = !playing && slot.has(idx);
     return (
       <div
         key={idx}
         data-testid="sticker"
         data-hl={hl.has(idx) ? "1" : undefined}
+        data-slot={isSlot ? "1" : undefined}
         className="absolute"
         style={{
           width: S,
@@ -196,10 +212,11 @@ export default function CubeF2LDiagram({ facelets, highlight = [], homeX = -30, 
           marginLeft: -S / 2,
           marginTop: -S / 2,
           boxSizing: "border-box",
-          border: "1.5px solid #0f172a",
+          border: isSlot ? `2px solid ${SLOT_RING}` : "1.5px solid #0f172a",
           borderRadius: 4,
+          boxShadow: isSlot ? `0 0 6px ${SLOT_RING}` : undefined,
           transform: STICKER_TRANSFORM[idx],
-          backgroundColor: on ? COLORS[shown[idx]] : MUTED,
+          backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : MUTED,
         }}
       />
     );
