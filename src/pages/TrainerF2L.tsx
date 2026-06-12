@@ -23,6 +23,10 @@ const SLOT_LABELS: Record<Slot, string> = {
   BR: "Back-right",
 };
 
+// Cube rotation that brings each slot round to the front-right, so the standard
+// Front-right algorithm can be used instead of the in-place (F/B) version.
+const ROTATION_HINT: Record<Slot, string> = { FR: "", FL: "y'", BR: "y", BL: "y2" };
+
 // One fixed orientation for every direction, so each slot stays in its REAL
 // position (FR near-right, FL front-left, BR back-right, BL back-left) instead
 // of rotating each slot to face front (which made them all look identical). The
@@ -214,6 +218,14 @@ export default function TrainerF2L() {
                     ))}
                   </ul>
                 </div>
+              ) : null}
+              {slot !== "FR" ? (
+                <p className="mt-2 text-sm text-amber-700 dark:text-amber-400">
+                  Tip: many cubers rotate{" "}
+                  <span className="font-mono font-semibold">{ROTATION_HINT[slot]}</span> to bring this
+                  slot to the front-right, then use the Front-right alg{" "}
+                  <span className="font-mono">{current.algs.FR[0]}</span>.
+                </p>
               ) : null}
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{current.recognition}</p>
             </>
