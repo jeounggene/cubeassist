@@ -19,9 +19,26 @@ function Star({ active, onClick, alg }: { active: boolean; onClick: () => void; 
   );
 }
 
+function Check({ active, onClick, alg }: { active: boolean; onClick: () => void; alg: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${active ? "Mark not learned" : "Mark learned"} ${alg}`}
+      title={active ? "Learned" : "Mark as learned"}
+      className={`px-1 text-base leading-none ${
+        active ? "text-emerald-500" : "text-slate-300 dark:text-slate-600 hover:text-emerald-500"
+      }`}
+    >
+      ✓
+    </button>
+  );
+}
+
 export default function AlgList({ kind, cases }: { kind: "oll" | "pll"; cases: AlgCase[] }) {
-  const { profile, toggleBookmark } = useProfile();
+  const { profile, toggleBookmark, toggleLearned } = useProfile();
   const bookmarks = profile.bookmarks ?? {};
+  const learned = profile.learned ?? {};
 
   return (
     <div className="grid gap-3 sm:grid-cols-2">
@@ -42,6 +59,11 @@ export default function AlgList({ kind, cases }: { kind: "oll" | "pll"; cases: A
                   const key = `${c.id}::${a}`;
                   return (
                     <li key={a} className="flex items-start gap-1">
+                      <Check
+                        active={!!learned[key]}
+                        alg={a}
+                        onClick={() => toggleLearned(key)}
+                      />
                       <Star
                         active={!!bookmarks[key]}
                         alg={a}

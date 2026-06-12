@@ -1,11 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileProvider } from "./state/ProfileProvider";
 import Nav from "./components/Nav";
-import Dashboard from "./pages/Dashboard";
 import Algorithms from "./pages/Algorithms";
-import TrainerCross from "./pages/TrainerCross";
-import Library from "./pages/Library";
-import Notation from "./pages/Notation";
+import Trainer from "./pages/Trainer";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -14,11 +11,9 @@ export default function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Navigate to="/algorithms" replace />} />
           <Route path="/algorithms/*" element={<Algorithms />} />
-          <Route path="/trainer" element={<TrainerCross />} />
-          <Route path="/library/*" element={<Library />} />
-          <Route path="/notation" element={<Notation />} />
+          <Route path="/trainer/*" element={<Trainer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

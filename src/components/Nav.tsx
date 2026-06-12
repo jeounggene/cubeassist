@@ -2,11 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useProfile } from "../state/ProfileProvider";
 
 const LINKS = [
-  { to: "/", label: "Dashboard" },
   { to: "/algorithms", label: "Algorithms" },
-  { to: "/trainer", label: "Cross" },
-  { to: "/library", label: "Library" },
-  { to: "/notation", label: "Notation" },
+  { to: "/trainer", label: "Trainer" },
 ];
 
 export default function Nav() {
