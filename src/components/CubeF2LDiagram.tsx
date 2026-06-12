@@ -197,6 +197,9 @@ export default function CubeF2LDiagram({
     // Mark the destination slot (static reference; hidden during playback so the
     // turning layers stay clean).
     const isSlot = !playing && slot.has(idx);
+    // Plain (non-pair, non-slot) stickers are drawn faint so that whichever slot
+    // is at the back of the cube still reads through it.
+    const dim = !on && !isSlot;
     return (
       <div
         key={idx}
@@ -215,6 +218,7 @@ export default function CubeF2LDiagram({
           border: isSlot ? `2px solid ${SLOT_RING}` : "1.5px solid #0f172a",
           borderRadius: 4,
           boxShadow: isSlot ? `0 0 6px ${SLOT_RING}` : undefined,
+          opacity: dim ? 0.3 : 1,
           transform: STICKER_TRANSFORM[idx],
           backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : MUTED,
         }}
