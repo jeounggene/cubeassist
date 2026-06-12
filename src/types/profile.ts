@@ -29,6 +29,8 @@ export type UserProfile = {
   known: Record<ChecklistKey, Record<string, boolean>>;
   drillHistory: DrillRecord[];
   settings: Settings;
+  // Bookmarked algorithms, keyed by "caseId:slot:alg".
+  bookmarks: Record<string, boolean>;
 };
 
 export const SAMPLE_WINDOW = 12;

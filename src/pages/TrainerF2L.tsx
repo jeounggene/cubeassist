@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useProfile } from "../state/ProfileProvider";
 import {
   F2L_CASES,
   SLOTS,
@@ -33,6 +34,7 @@ const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
 };
 
 export default function TrainerF2L() {
+  const { profile, toggleBookmark } = useProfile();
   const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
   const [slot, setSlot] = useState<Slot>("FR");
   const [hideAlg, setHideAlg] = useState(false);
@@ -60,6 +62,8 @@ export default function TrainerF2L() {
   const highlight = useMemo(() => pairFacelets(current, slot), [current, slot]);
 
   const showAlg = !hideAlg;
+  const bookmarks = profile.bookmarks ?? {};
+  const bmKey = (a: string) => `${current.id}:${slot}:${a}`;
 
   return (
     <main className="mx-auto max-w-3xl p-6">
@@ -160,6 +164,11 @@ export default function TrainerF2L() {
                 <span data-testid="algorithm" className="font-mono text-lg">
                   {algs[0]}
                 </span>
+                <StarButton
+                  active={!!bookmarks[bmKey(algs[0])]}
+                  alg={algs[0]}
+                  onClick={() => toggleBookmark(bmKey(algs[0]))}
+                />
               </div>
               {algs.length > 1 ? (
                 <div className="mt-1">
@@ -176,6 +185,11 @@ export default function TrainerF2L() {
                           ▶
                         </button>
                         <span>{a}</span>
+                        <StarButton
+                          active={!!bookmarks[bmKey(a)]}
+                          alg={a}
+                          onClick={() => toggleBookmark(bmKey(a))}
+                        />
                       </li>
                     ))}
                   </ul>
@@ -200,5 +214,21 @@ export default function TrainerF2L() {
         />
       </div>
     </main>
+  );
+}
+
+function StarButton({ active, alg, onClick }: { active: boolean; alg: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${active ? "Remove bookmark" : "Bookmark"} ${alg}`}
+      title={active ? "Bookmarked" : "Bookmark this alg"}
+      className={`px-1 text-base leading-none ${
+        active ? "text-amber-500" : "text-slate-300 dark:text-slate-600 hover:text-amber-500"
+      }`}
+    >
+      {active ? "★" : "☆"}
+    </button>
   );
 }

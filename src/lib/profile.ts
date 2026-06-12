@@ -14,7 +14,15 @@ export function emptyProfile(): UserProfile {
     known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as UserProfile["known"],
     drillHistory: [],
     settings: { inspection: true, useMs: false, theme: "light" },
+    bookmarks: {},
   };
+}
+
+export function toggleBookmark(profile: UserProfile, key: string): UserProfile {
+  const bookmarks = { ...(profile.bookmarks ?? {}) };
+  if (bookmarks[key]) delete bookmarks[key];
+  else bookmarks[key] = true;
+  return { ...profile, bookmarks };
 }
 
 export function loadProfile(): UserProfile {
