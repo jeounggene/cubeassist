@@ -3,9 +3,9 @@ import { useProfile } from "../state/ProfileProvider";
 
 const LINKS = [
   { to: "/", label: "Dashboard" },
-  { to: "/profile", label: "Profile" },
+  { to: "/algorithms", label: "Algorithms" },
+  { to: "/trainer", label: "Cross" },
   { to: "/library", label: "Library" },
-  { to: "/trainer", label: "Trainer" },
   { to: "/notation", label: "Notation" },
 ];
 
