@@ -23,12 +23,16 @@ const SLOT_LABELS: Record<Slot, string> = {
   BR: "Back-right",
 };
 
-// Default cube orientation per direction, so each slot faces the viewer.
+// One shared front-top-right view for the three front-visible slots, so the
+// highlighted slot stays in its REAL position (FR near, FL front-left, BR
+// back-right) instead of every direction rotating its slot to face front. BL
+// sits behind the cube from that angle, so it gets a back view of its own.
+const FRONT_VIEW = { x: -30, y: -45 };
 const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
-  FR: { x: -30, y: -45 },
-  FL: { x: -30, y: 45 },
+  FR: FRONT_VIEW,
+  FL: FRONT_VIEW,
+  BR: FRONT_VIEW,
   BL: { x: -30, y: 135 },
-  BR: { x: -30, y: -135 },
 };
 
 function mean(xs: number[]): number {
