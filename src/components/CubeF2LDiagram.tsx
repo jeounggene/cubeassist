@@ -80,6 +80,8 @@ type Props = {
   homeX?: number;
   homeY?: number;
   play?: { alg: string; nonce: number };
+  // When true, non-pair stickers are drawn faint so back slots read through.
+  seeThrough?: boolean;
 };
 
 const SLOT_RING = "#f59e0b"; // amber outline marking the destination slot
@@ -92,6 +94,7 @@ export default function CubeF2LDiagram({
   homeX = -30,
   homeY = -45,
   play,
+  seeThrough = false,
 }: Props) {
   const hl = new Set(highlight);
   const slot = new Set(slotCells);
@@ -197,9 +200,9 @@ export default function CubeF2LDiagram({
     // Mark the destination slot (static reference; hidden during playback so the
     // turning layers stay clean).
     const isSlot = !playing && slot.has(idx);
-    // Plain (non-pair, non-slot) stickers are drawn faint so that whichever slot
-    // is at the back of the cube still reads through it.
-    const dim = !on && !isSlot;
+    // In see-through mode, plain (non-pair, non-slot) stickers are drawn faint
+    // so that whichever slot is at the back of the cube reads through it.
+    const dim = seeThrough && !on && !isSlot;
     return (
       <div
         key={idx}

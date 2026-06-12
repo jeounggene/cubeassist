@@ -26,7 +26,7 @@ const SLOT_LABELS: Record<Slot, string> = {
 // One fixed orientation for every direction, so each slot stays in its REAL
 // position (FR near-right, FL front-left, BR back-right, BL back-left) instead
 // of rotating each slot to face front (which made them all look identical). The
-// cube is drawn semi-transparent so the back slots (BL/BR) read through it.
+// back slots (BL/BR) sit behind the cube; the "see-through" toggle reveals them.
 const FRONT_VIEW = { x: -28, y: -38 };
 const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
   FR: FRONT_VIEW,
@@ -48,6 +48,7 @@ export default function TrainerF2L() {
   const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
   const [slot, setSlot] = useState<Slot>("FR");
   const [hideAlg, setHideAlg] = useState(false);
+  const [seeThrough, setSeeThrough] = useState(false);
   const [times, setTimes] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
   const [play, setPlay] = useState({ alg: "", nonce: 0 });
@@ -148,7 +149,7 @@ export default function TrainerF2L() {
         ))}
       </div>
 
-      <label className="mb-6 flex items-center gap-2">
+      <label className="mb-2 flex items-center gap-2">
         <input
           type="checkbox"
           checked={hideAlg}
@@ -156,6 +157,16 @@ export default function TrainerF2L() {
           aria-label="Hide algorithm until solve"
         />
         <span>Hide algorithm until solve</span>
+      </label>
+
+      <label className="mb-6 flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={seeThrough}
+          onChange={(e) => setSeeThrough(e.target.checked)}
+          aria-label="See-through cube"
+        />
+        <span>See-through cube (reveal back slots)</span>
       </label>
 
       <div className="mb-6 flex items-start justify-between gap-6">
@@ -219,6 +230,7 @@ export default function TrainerF2L() {
           homeX={SLOT_HOME[slot].x}
           homeY={SLOT_HOME[slot].y}
           play={play}
+          seeThrough={seeThrough}
         />
       </div>
 
