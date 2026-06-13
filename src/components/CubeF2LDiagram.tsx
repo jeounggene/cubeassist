@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { applyAlg, faceletGeometry } from "../lib/facecube";
 
-// Color id -> CSS, in face order U R F D L B.
-const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
+// Color id -> CSS, in face order U R F D L B. Valid real-cube scheme: yellow
+// top, white bottom, green front, blue back, orange right, red left.
+const COLORS = ["#fde047", "#f97316", "#22c55e", "#f8fafc", "#ef4444", "#3b82f6"];
 const MUTED = "#cbd5e1"; // non-pair stickers: a light grey, distinct from white
 
 const S = 30; // cubie size px
@@ -199,7 +200,14 @@ export default function CubeF2LDiagram({
     const on = litHl.has(idx);
     // Mark the destination slot (static reference; hidden during playback so the
     // turning layers stay clean).
-    const isSlot = !playing && slot.has(idx);
+    const isSlot = !playing && !on && slot.has(idx);
+    // The solved F2L — face centres ("core"), the white cross, and the already
+    // solved pairs (everything in the bottom two layers except the target slot)
+    // — is drawn in real colours. The last (top) layer is grey noise.
+    const p = GEO[idx].pos;
+    const nonzero = (p[0] !== 0 ? 1 : 0) + (p[1] !== 0 ? 1 : 0) + (p[2] !== 0 ? 1 : 0);
+    const isCenter = nonzero === 1;
+    const solved = isCenter || (p[1] !== 1 && !slot.has(idx));
     // In see-through mode, plain (non-pair, non-slot) stickers are drawn faint
     // so that whichever slot is at the back of the cube reads through it.
     const dim = seeThrough && !on && !isSlot;
@@ -220,10 +228,14 @@ export default function CubeF2LDiagram({
           boxSizing: "border-box",
           border: isSlot ? `2px solid ${SLOT_RING}` : "1.5px solid #0f172a",
           borderRadius: 4,
-          boxShadow: isSlot ? `0 0 6px ${SLOT_RING}` : undefined,
+          boxShadow: on
+            ? "0 0 0 2px #0f172a, 0 0 7px 2px #38bdf8"
+            : isSlot
+              ? `0 0 6px ${SLOT_RING}`
+              : undefined,
           opacity: dim ? 0.3 : 1,
           transform: STICKER_TRANSFORM[idx],
-          backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : MUTED,
+          backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : solved ? COLORS[shown[idx]] : MUTED,
         }}
       />
     );

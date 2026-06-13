@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { solved, applyAlg, invertAlg, faceletGeometry } from "../lib/facecube";
 
-// Face colors in order U R F D L B.
-const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
+// Face colors in order U R F D L B (valid real-cube scheme: orange R, red L).
+const COLORS = ["#fde047", "#f97316", "#22c55e", "#f8fafc", "#ef4444", "#3b82f6"];
 const GRAY = "#334155";
 const GEO = faceletGeometry();
 

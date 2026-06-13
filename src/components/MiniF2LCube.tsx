@@ -1,5 +1,6 @@
 // A small, static isometric F2L cube (U + F + R faces) for the case picker.
-const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
+// Valid real-cube scheme (U R F D L B): yellow, orange, green, white, red, blue.
+const COLORS = ["#fde047", "#f97316", "#22c55e", "#f8fafc", "#ef4444", "#3b82f6"];
 const MUTED = "#cbd5e1";
 
 const U_CELLS = [0, 1, 2, 3, 4, 5, 6, 7, 8];
