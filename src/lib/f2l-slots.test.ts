@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { F2L_CASES, SLOTS, slotAlgorithms, slotSetup, slotDisturbable, slotCells } from "./f2l";
+import { F2L_CASES, SLOTS, slotAlgorithms, slotSetup, slotDisturbable, slotCells, feliksAlgorithms } from "./f2l";
 import { solved, applyAlg, invertAlg, isF2LComplete } from "./facecube";
 
 describe("F2L rotationless slots", () => {
@@ -42,6 +42,19 @@ describe("F2L rotationless slots", () => {
         for (const alg of slotAlgorithms(c, slot)) {
           if (!isF2LComplete(applyAlg(setupState, alg))) {
             throw new Error(`${c.id} ${slot} "${alg}" does not complete F2L`);
+          }
+        }
+      }
+    }
+  });
+
+  it("every Feliks algorithm completes F2L from the slot's setup", () => {
+    for (const c of F2L_CASES) {
+      for (const slot of SLOTS) {
+        const setupState = applyAlg(solved(), slotSetup(c, slot));
+        for (const alg of feliksAlgorithms(c, slot)) {
+          if (!isF2LComplete(applyAlg(setupState, alg))) {
+            throw new Error(`${c.id} ${slot} feliks "${alg}" does not complete F2L`);
           }
         }
       }

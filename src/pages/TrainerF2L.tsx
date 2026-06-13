@@ -150,7 +150,7 @@ export default function TrainerF2L() {
           {showAlg ? (
             <>
               <div className="text-sm text-slate-500 dark:text-slate-400">
-                Algorithm ({SLOT_LABELS[slot]}) — ▶ plays it on the cube
+                SpeedCubeDB algorithm ({SLOT_LABELS[slot]}) — ▶ plays it on the cube
               </div>
               <div className="flex items-center gap-2">
                 <button

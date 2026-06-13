@@ -12,7 +12,10 @@ export type F2LCase = {
   group: string;
   recognition: string;
   // Per slot, algorithms ordered with the favored (recommended) alg first.
+  // These are SpeedCubeDB's per-slot algorithms.
   algs: Record<Slot, string[]>;
+  // Per slot, Feliks Zemdegs / Andy Klise "all four slot angles" algorithms.
+  feliks: Record<Slot, string[]>;
   // Per slot, a clean face-move algorithm used only to derive the setup + diagram
   // (so the setup never reorients even when the favored display alg uses wide moves).
   setup: Record<Slot, string>;
@@ -36,6 +39,10 @@ export function slotAlgorithms(c: F2LCase, slot: Slot): string[] {
 // The favored (first-displayed) algorithm for the slot.
 export function slotAlgorithm(c: F2LCase, slot: Slot): string {
   return c.algs[slot][0];
+}
+// Feliks/Klise algorithms for the slot (may be empty for a few hard cases).
+export function feliksAlgorithms(c: F2LCase, slot: Slot): string[] {
+  return c.feliks?.[slot] ?? [];
 }
 // The setup is derived from the clean face-move alg, not the (maybe wide) favored one.
 export function slotSetup(c: F2LCase, slot: Slot): string {

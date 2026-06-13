@@ -35,6 +35,22 @@
       "FL": "U F U' F'",
       "BL": "U L U' L'",
       "BR": "U B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U R U' R'"
+      ],
+      "FL": [
+        "y' U R U' R'",
+        "y U L U' L'"
+      ],
+      "BL": [
+        "U L U' L'"
+      ],
+      "BR": [
+        "y U R U' R'",
+        "y' U L U' L'"
+      ]
     }
   },
   {
@@ -73,6 +89,22 @@
       "FL": "U' L' U L",
       "BL": "U' B' U B",
       "BR": "U' R' U R"
+    },
+    "feliks": {
+      "FR": [
+        "y' U' R' U R",
+        "y U' L' U L"
+      ],
+      "FL": [
+        "U' L' U L"
+      ],
+      "BL": [
+        "y U' R' U R",
+        "y' U' L' U L"
+      ],
+      "BR": [
+        "U' R' U R"
+      ]
     }
   },
   {
@@ -111,6 +143,21 @@
       "FL": "L' U' L",
       "BL": "B' U' B",
       "BR": "R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "y' R' U' R",
+        "y L' U' L"
+      ],
+      "FL": [
+        "L' U' L"
+      ],
+      "BL": [
+        "y R' U' R"
+      ],
+      "BR": [
+        "R' U' R"
+      ]
     }
   },
   {
@@ -149,6 +196,22 @@
       "FL": "F U F'",
       "BL": "L U L'",
       "BR": "B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U R'"
+      ],
+      "FL": [
+        "y' R U R'",
+        "y L U L'"
+      ],
+      "BL": [
+        "L U L'"
+      ],
+      "BR": [
+        "y R U R'",
+        "y' L U L'"
+      ]
     }
   },
   {
@@ -187,6 +250,21 @@
       "FL": "U' F U2 F' U L' U' L",
       "BL": "U' L U2 L' U B' U' B",
       "BR": "U' B U2 B' U R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U2 R' U y' R' U' R",
+        "U' R U2 R' d R' U' R"
+      ],
+      "FL": [
+        "L U2 L2 U' L2 U' L'"
+      ],
+      "BL": [
+        "y R U2 R2 U' R2 U' R'"
+      ],
+      "BR": [
+        "R U2 R2 U' R2 U' R'"
+      ]
     }
   },
   {
@@ -225,6 +303,22 @@
       "FL": "F' U2 F2 U F2 U F",
       "BL": "L' U2 L2 U L2 U L",
       "BR": "B' U2 B2 U B2 U B"
+    },
+    "feliks": {
+      "FR": [
+        "R' U2 R2 U R2 U R",
+        "y' U R' U2 R U' y R U R'",
+        "R U' R' U R U' R' U2 R U' R'"
+      ],
+      "FL": [
+        "U L' U2 L U' y' R U R'"
+      ],
+      "BL": [
+        "L' U2 L2 U L2 U L"
+      ],
+      "BR": [
+        "U R' U2 R U' y R U R'"
+      ]
     }
   },
   {
@@ -261,6 +355,20 @@
       "FL": "U L' U L U' L' U' L",
       "BL": "U B' U B U' B' U' B",
       "BR": "U R' U R U' R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "y' U R' U R U' R' U' R"
+      ],
+      "FL": [
+        "U L' U L U' L' U' L"
+      ],
+      "BL": [
+        "y U R' U R U' R' U' R"
+      ],
+      "BR": [
+        "U R' U R U' R' U' R"
+      ]
     }
   },
   {
@@ -297,6 +405,20 @@
       "FL": "U' F U' F' U F U F'",
       "BL": "U' L U' L' U L U L'",
       "BR": "U' B U' B' U B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U' R' U R U R'"
+      ],
+      "FL": [
+        "y' U' R U' R' U R U R'"
+      ],
+      "BL": [
+        "U' L U' L' U L U L'"
+      ],
+      "BR": [
+        "y U' R U' R' U R U R'"
+      ]
     }
   },
   {
@@ -335,6 +457,22 @@
       "FL": "L' U L U2 F U F'",
       "BL": "B' U B U2 L U L'",
       "BR": "R' U R U2 B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "y' R' U R U2 y R U R'",
+        "R U R' U2 R U' R' U R U' R'"
+      ],
+      "FL": [
+        "L' U L U2 y' R U R'"
+      ],
+      "BL": [
+        "y R' U R U2 y R U R'"
+      ],
+      "BR": [
+        "R' U R U2 y R U R'",
+        "R2 F R F' R U2 R' U R"
+      ]
     }
   },
   {
@@ -373,6 +511,21 @@
       "FL": "F U' F' U2 L' U' L",
       "BL": "L U' L' U2 B' U' B",
       "BR": "B U' B' U2 R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "R U' R' U2 y' R' U' R",
+        "U F R U R' U' F' U R U' R'"
+      ],
+      "FL": [
+        "y' R U' R' U2 y' R' U' R"
+      ],
+      "BL": [
+        "L U' L' U2 y R' U' R"
+      ],
+      "BR": [
+        "y R U' R' U2 y' R' U' R"
+      ]
     }
   },
   {
@@ -409,6 +562,20 @@
       "FL": "F U2 F' U' F U F'",
       "BL": "L U2 L' U' L U L'",
       "BR": "B U2 B' U' B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U2 R' U' R U R'"
+      ],
+      "FL": [
+        "y' R U2 R' U' R U R'"
+      ],
+      "BL": [
+        "L U2 L' U' L U L'"
+      ],
+      "BR": [
+        "y R U2 R' U' R U R'"
+      ]
     }
   },
   {
@@ -441,6 +608,22 @@
       "FL": "L' U2 L U L' U' L",
       "BL": "B' U2 B U B' U' B",
       "BR": "R' U2 R U R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "y' R' U2 R U R' U' R",
+        "U' U R U' R' U' R U' R' U R U' R' y' U' R' U R U R' U R U' R' U R"
+      ],
+      "FL": [
+        "L' U2 L U L' U' L"
+      ],
+      "BL": [
+        "y R' U2 R U R' U' R",
+        "U' U L U' L' U' L U' L' U L U' L' y U' R' U R U R' U R U' R' U R"
+      ],
+      "BR": [
+        "R' U2 R U R' U' R"
+      ]
     }
   },
   {
@@ -479,6 +662,19 @@
       "FL": "U2 F2 U2 F' U' F U' F2",
       "BL": "U2 L2 U2 L' U' L U' L2",
       "BR": "U2 B2 U2 B' U' B U' B2"
+    },
+    "feliks": {
+      "FR": [
+        "R U R' U2 R U R' U' R U R'"
+      ],
+      "FL": [
+        "y' U R U' R' U' R U' R' U R U' R'",
+        "y' R U R' U2 R U R' U' R U R'"
+      ],
+      "BL": [],
+      "BR": [
+        "R' U' R U' y R U' R' U R U' R'"
+      ]
     }
   },
   {
@@ -517,6 +713,19 @@
       "FL": "L U F U' F' L' F U' F'",
       "BL": "B U L U' L' B' L U' L'",
       "BR": "R U B U' B' R' B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "F U R U' R' F' R U' R'"
+      ],
+      "FL": [
+        "U' L' U L U L' U L U' L' U L",
+        "y' F U R U' R' F' R U' R'"
+      ],
+      "BL": [],
+      "BR": [
+        "U' R' U R U R' U R U' R' U R"
+      ]
     }
   },
   {
@@ -555,6 +764,21 @@
       "FL": "U' F U F' U2 F U' F'",
       "BL": "U' L U L' U2 L U' L'",
       "BR": "U' B U B' U2 B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U R' U2 R U' R'"
+      ],
+      "FL": [
+        "y' U' R U R' U2 R U' R'"
+      ],
+      "BL": [
+        "U' L U L' U2 L U' L'"
+      ],
+      "BR": [
+        "y U' R U R' U2 R U' R'",
+        "U r' U R U' R' U' r"
+      ]
     }
   },
   {
@@ -593,6 +817,21 @@
       "FL": "F' U' F L F' L' U F",
       "BL": "L' U' L B L' B' U L",
       "BR": "B' U' B R B' R' U B"
+    },
+    "feliks": {
+      "FR": [
+        "y' U R' U' R U2 R' U R",
+        "d R' U' R U2 R' U R"
+      ],
+      "FL": [
+        "U L' U' L U2 L' U L"
+      ],
+      "BL": [
+        "y U R' U' R U2 R' U R"
+      ],
+      "BR": [
+        "U R' U' R U2 R' U R"
+      ]
     }
   },
   {
@@ -630,6 +869,20 @@
       "FL": "U' F U2 F' U2 F U' F'",
       "BL": "U' L U2 L' U2 L U' L'",
       "BR": "U' B U2 B' U2 B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U2 R' U2 R U' R'"
+      ],
+      "FL": [
+        "y' U' R U2 R' U2 R U' R'"
+      ],
+      "BL": [
+        "U' L U2 L' U2 L U' L'"
+      ],
+      "BR": [
+        "y U' R U2 R' U2 R U' R'"
+      ]
     }
   },
   {
@@ -666,6 +919,21 @@
       "FL": "F2 U2 L F2 L' U2 F2",
       "BL": "L2 U2 B L2 B' U2 L2",
       "BR": "B2 U2 R B2 R' U2 B2"
+    },
+    "feliks": {
+      "FR": [
+        "y' U R' U2 R U2 R' U R",
+        "d R' U2 R U2 R' U R"
+      ],
+      "FL": [
+        "U L' U2 L U2 L' U L"
+      ],
+      "BL": [
+        "y U R' U2 R U2 R' U R"
+      ],
+      "BR": [
+        "U R' U2 R U2 R' U R"
+      ]
     }
   },
   {
@@ -704,6 +972,21 @@
       "FL": "U' F U' F' U L' U' L",
       "BL": "U' L U' L' U B' U' B",
       "BR": "U' B U' B' U R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U' R' U y' R' U' R",
+        "y' U R' U' R U' R' U' R"
+      ],
+      "FL": [
+        "U L' U' L U' L' U' L"
+      ],
+      "BL": [
+        "y U R' U' R U' R' U' R"
+      ],
+      "BR": [
+        "U R' U' R U' R' U' R"
+      ]
     }
   },
   {
@@ -742,6 +1025,20 @@
       "FL": "U' F U F' U F U F'",
       "BL": "U' L U L' U L U L'",
       "BR": "U' B U B' U B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U R' U R U R'"
+      ],
+      "FL": [
+        "U L' U L U' y' R U R'"
+      ],
+      "BL": [
+        "U' L U L' U L U L'"
+      ],
+      "BR": [
+        "U R' U R U' y R U R'"
+      ]
     }
   },
   {
@@ -778,6 +1075,20 @@
       "FL": "U F U2 F' U F U' F'",
       "BL": "U L U2 L' U L U' L'",
       "BR": "U B U2 B' U B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U R U2 R' U R U' R'"
+      ],
+      "FL": [
+        "y' U R U2 R' U R U' R'"
+      ],
+      "BL": [
+        "U L U2 L' U L U' L'"
+      ],
+      "BR": [
+        "y U R U2 R' U R U' R'"
+      ]
     }
   },
   {
@@ -813,6 +1124,20 @@
       "FL": "U' L' U2 L2 F' L' F",
       "BL": "U' B' U2 B2 L' B' L",
       "BR": "U' R' U2 R2 B' R' B"
+    },
+    "feliks": {
+      "FR": [
+        "y' U' R' U2 R U' R' U R"
+      ],
+      "FL": [
+        "U' L' U2 L U' L' U L"
+      ],
+      "BL": [
+        "y U' R' U2 R U' R' U R"
+      ],
+      "BR": [
+        "U' R' U2 R U' R' U R"
+      ]
     }
   },
   {
@@ -851,6 +1176,21 @@
       "FL": "U2 F U F' U F U' F'",
       "BL": "U2 L U L' U L U' L'",
       "BR": "U2 B U B' U B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U2 R U R' U R U' R'",
+        "R U' R' U2 R U R'"
+      ],
+      "FL": [
+        "F R U2 R' F'"
+      ],
+      "BL": [
+        "y' F R U2 R' F'"
+      ],
+      "BR": [
+        "y U2 R U R' U R U' R'"
+      ]
     }
   },
   {
@@ -889,6 +1229,23 @@
       "FL": "U2 F U F' L' U' L",
       "BL": "U2 L U L' B' U' B",
       "BR": "U2 B U B' R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "y' U2 R' U' R U' R' U R",
+        "F' L' U2 L F"
+      ],
+      "FL": [
+        "U2 L' U' L U' L' U L"
+      ],
+      "BL": [
+        "y U2 R' U' R U' R' U R",
+        "y R' F' U2 F R"
+      ],
+      "BR": [
+        "U2 R' U' R U' R' U R",
+        "R' F' U2 F R"
+      ]
     }
   },
   {
@@ -927,6 +1284,22 @@
       "FL": "U' L' U2 L F U F'",
       "BL": "U' B' U2 B L U L'",
       "BR": "U' R' U2 R B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U' R' U y' R' U R",
+        "U' R' F R F' R U' R'"
+      ],
+      "FL": [
+        "L' U L U' y' R U' R'"
+      ],
+      "BL": [
+        "y R' U R' F R F' R"
+      ],
+      "BR": [
+        "R' U R' F R F' R",
+        "R' U R U' y R U' R'"
+      ]
     }
   },
   {
@@ -965,6 +1338,20 @@
       "FL": "F2 U F2 U F2 U2 F2",
       "BL": "L2 U L2 U L2 U2 L2",
       "BR": "B2 U B2 U B2 U2 B2"
+    },
+    "feliks": {
+      "FR": [
+        "U R U' R' U R U' R' U R U' R'"
+      ],
+      "FL": [
+        "U' L' U L U' L' U L U' L' U L"
+      ],
+      "BL": [
+        "U L U' L' U L U' L' U L U' L'"
+      ],
+      "BR": [
+        "U' R' U R U' R' U R U' R' U R"
+      ]
     }
   },
   {
@@ -1002,6 +1389,20 @@
       "FL": "U' F U' F' U2 F U' F'",
       "BL": "U' L U' L' U2 L U' L'",
       "BR": "U' B U' B' U2 B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U' R' U2 R U' R'"
+      ],
+      "FL": [
+        "U' L' U' L U2 L' U' L"
+      ],
+      "BL": [
+        "U' L U' L' U2 L U' L'"
+      ],
+      "BR": [
+        "U' R' U' R U2 R' U' R"
+      ]
     }
   },
   {
@@ -1039,6 +1440,20 @@
       "FL": "U' F U2 F' U F U F'",
       "BL": "U' L U2 L' U L U L'",
       "BR": "U' B U2 B' U B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "U R U R' U2 R U R'"
+      ],
+      "FL": [
+        "U L' U L U2 L' U L"
+      ],
+      "BL": [
+        "U L U L' U2 L U L'"
+      ],
+      "BR": [
+        "U R' U R U2 R' U R"
+      ]
     }
   },
   {
@@ -1077,6 +1492,20 @@
       "FL": "U2 F U F' L F' L' F",
       "BL": "U2 L U L' B L' B' L",
       "BR": "U2 B U B' R B' R' B"
+    },
+    "feliks": {
+      "FR": [
+        "U' R U R' d R' U' R"
+      ],
+      "FL": [
+        "y' U' R U R' d R' U' R"
+      ],
+      "BL": [
+        "U2 L U L' d' R' U R"
+      ],
+      "BR": [
+        "y U' R U R' d R' U' R"
+      ]
     }
   },
   {
@@ -1115,6 +1544,20 @@
       "FL": "U2 L' U L U F U F'",
       "BL": "U2 B' U B U L U L'",
       "BR": "U2 R' U R U B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "U F' U' F U' R U R'"
+      ],
+      "FL": [
+        "U L' U' L y' U' R U R'"
+      ],
+      "BL": [
+        "y U2 R' U R d L U L'"
+      ],
+      "BR": [
+        "U R' U' R y U' R U R'"
+      ]
     }
   },
   {
@@ -1153,6 +1596,21 @@
       "FL": "U' L' U L U F U' F'",
       "BL": "U' B' U B U L U' L'",
       "BR": "U' R' U R U B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "U' F' R U R' U' R' F R",
+        "R' F' R U R U' R' F"
+      ],
+      "FL": [
+        "U' L' U L d R U' R'"
+      ],
+      "BL": [
+        "y' U' L' U L d R U' R'"
+      ],
+      "BR": [
+        "U' R' U R y U R U' R'"
+      ]
     }
   },
   {
@@ -1191,6 +1649,22 @@
       "FL": "U F U' F' L F' L' F",
       "BL": "U L U' L' B L' B' L",
       "BR": "U B U' B' R B' R' B"
+    },
+    "feliks": {
+      "FR": [
+        "U R U' R' U' F' U F",
+        "U R U' R' F R' F' R"
+      ],
+      "FL": [
+        "y' U R U' R' U' F' U F"
+      ],
+      "BL": [
+        "U L U' L' d' R' U R"
+      ],
+      "BR": [
+        "y U R U' R' U' F' U F",
+        "y U R U' R' F R' F' R"
+      ]
     }
   },
   {
@@ -1226,6 +1700,21 @@
       "FL": "F U' F' U F U' F'",
       "BL": "L U' L' U L U' L'",
       "BR": "B U' B' U B U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U' R' U R U' R'"
+      ],
+      "FL": [
+        "y' R U' R' U R U' R'"
+      ],
+      "BL": [
+        "L U' L' U L U' L'"
+      ],
+      "BR": [
+        "y R U' R' U R U' R'",
+        "R' U2 R' F R F' R"
+      ]
     }
   },
   {
@@ -1259,6 +1748,20 @@
       "FL": "F U2 F' L' U2 L",
       "BL": "L U2 L' B' U2 B",
       "BR": "B U2 B' R' U2 R"
+    },
+    "feliks": {
+      "FR": [
+        "y' R' U R U' R' U R"
+      ],
+      "FL": [
+        "L' U L U' L' U L"
+      ],
+      "BL": [
+        "y R' U R U' R' U R"
+      ],
+      "BR": [
+        "R' U R U' R' U R"
+      ]
     }
   },
   {
@@ -1296,6 +1799,21 @@
       "FL": "U2 F U' F' L' U' L",
       "BL": "U2 L U' L' B' U' B",
       "BR": "U2 B U' B' R' U' R"
+    },
+    "feliks": {
+      "FR": [
+        "y' R' U' R U R' U' R",
+        "R' F R F' U R U' R'"
+      ],
+      "FL": [
+        "L' U' L U L' U' L"
+      ],
+      "BL": [
+        "y R' U' R U R' U' R"
+      ],
+      "BR": [
+        "R' U' R U R' U' R"
+      ]
     }
   },
   {
@@ -1332,6 +1850,21 @@
       "FL": "F U F' U' F U F'",
       "BL": "L U L' U' L U L'",
       "BR": "B U B' U' B U B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U R' U' R U R'"
+      ],
+      "FL": [
+        "y' R U R' U' R U R'",
+        "r U' r' F r U' r' F"
+      ],
+      "BL": [
+        "L U L' U' L U L'"
+      ],
+      "BR": [
+        "y R U R' U' R U R'"
+      ]
     }
   },
   {
@@ -1370,6 +1903,20 @@
       "FL": "F U' F U2 L F2 L' U2 F2",
       "BL": "L U' L U2 B L2 B' U2 L2",
       "BR": "B U' B U2 R B2 R' U2 B2"
+    },
+    "feliks": {
+      "FR": [
+        "R U' R' d R' U2 R U2 R' U R"
+      ],
+      "FL": [
+        "L' U L U' y' R U2 R' U2 R U' R'"
+      ],
+      "BL": [
+        "y R' U R d' R U2 R' U2 R U' R'"
+      ],
+      "BR": [
+        "R' U R d' R U2 R' U2 R U' R'"
+      ]
     }
   },
   {
@@ -1407,6 +1954,16 @@
       "FL": "F2 U2 F' U' F U' F' U2 F'",
       "BL": "L2 U2 L' U' L U' L' U2 L'",
       "BR": "B2 U2 B' U' B U' B' U2 B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U R' U' R U2 R' U' R U R'"
+      ],
+      "FL": [
+        "L' U L U' L' U2 L U' L' U L"
+      ],
+      "BL": [],
+      "BR": []
     }
   },
   {
@@ -1445,6 +2002,20 @@
       "FL": "F U2 F U F' U F U2 F2",
       "BL": "L U2 L U L' U L U2 L2",
       "BR": "B U2 B U B' U B U2 B2"
+    },
+    "feliks": {
+      "FR": [
+        "R U R' U2 R U' R' U R U R'"
+      ],
+      "FL": [
+        "L' U' L U L' U2 L U L' U' L",
+        "L' U L U L' U' L U2 L' U L"
+      ],
+      "BL": [],
+      "BR": [
+        "R' U' R U R' U2 R U R' U' R",
+        "R' U R U R' U' R U2 R' U R"
+      ]
     }
   },
   {
@@ -1483,6 +2054,16 @@
       "FL": "F L U F U' F' L' U' F'",
       "BL": "L B U L U' L' B' U' L'",
       "BR": "B R U B U' B' R' U' B'"
+    },
+    "feliks": {
+      "FR": [
+        "R U' R' F R U R' U' F' R U' R'"
+      ],
+      "FL": [
+        "L' U L F R U2 R' F'"
+      ],
+      "BL": [],
+      "BR": []
     }
   },
   {
@@ -1521,6 +2102,16 @@
       "FL": "F U L F U F' U' L' F'",
       "BL": "L U B L U L' U' B' L'",
       "BR": "B U R B U B' U' R' B'"
+    },
+    "feliks": {
+      "FR": [],
+      "FL": [
+        "L' U L U L' U L U' y L U L'"
+      ],
+      "BL": [],
+      "BR": [
+        "R' U R U R' U R U' y R U R'"
+      ]
     }
   }
 ]
