@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useProfile } from "../state/ProfileProvider";
 import {
   F2L_CASES,
   SLOTS,
@@ -23,25 +22,7 @@ const SLOT_LABELS: Record<Slot, string> = {
 // Fixed orientation; the slot's setup positions the pair (same as the F2L trainer).
 const HOME = { x: -28, y: -38 };
 
-function Star({ active, onClick, alg }: { active: boolean; onClick: () => void; alg: string }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={`${active ? "Remove bookmark" : "Bookmark"} ${alg}`}
-      title={active ? "Bookmarked" : "Bookmark this alg"}
-      className={`px-1 text-base leading-none ${
-        active ? "text-amber-500" : "text-slate-300 dark:text-slate-600 hover:text-amber-500"
-      }`}
-    >
-      {active ? "★" : "☆"}
-    </button>
-  );
-}
-
 function FeliksCard({ c }: { c: F2LCase }) {
-  const { profile, toggleBookmark } = useProfile();
-  const bookmarks = profile.bookmarks ?? {};
   const [slot, setSlot] = useState<Slot>("FR");
   const [activated, setActivated] = useState(false);
   const [play, setPlay] = useState({ alg: "", nonce: 0 });
@@ -84,23 +65,19 @@ function FeliksCard({ c }: { c: F2LCase }) {
               <div className="text-xs text-slate-400 dark:text-slate-500">{SLOT_LABELS[s]}</div>
               {algs.length ? (
                 <ul className="font-mono text-sm">
-                  {algs.map((a) => {
-                    const key = `${c.id}:${s}:${a}`;
-                    return (
-                      <li key={a} className="flex items-start gap-1">
-                        <button
-                          type="button"
-                          aria-label={`Play ${a}`}
-                          onClick={() => playAlg(s, a)}
-                          className="rounded border border-emerald-600 px-1 text-[10px] text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-                        >
-                          ▶
-                        </button>
-                        <Star active={!!bookmarks[key]} alg={a} onClick={() => toggleBookmark(key)} />
-                        <span>{a}</span>
-                      </li>
-                    );
-                  })}
+                  {algs.map((a) => (
+                    <li key={a} className="flex items-start gap-1">
+                      <button
+                        type="button"
+                        aria-label={`Play ${a}`}
+                        onClick={() => playAlg(s, a)}
+                        className="rounded border border-emerald-600 px-1 text-[10px] text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      >
+                        ▶
+                      </button>
+                      <span>{a}</span>
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 <div className="text-sm text-slate-400 dark:text-slate-500">— (see SpeedCubeDB)</div>
@@ -118,8 +95,7 @@ export default function F2LFeliks() {
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-1">F2L — Feliks algorithms</h1>
       <p className="text-slate-600 dark:text-slate-300 mb-6">
-        Feliks Zemdegs &amp; Andy Klise's "all four slot angles" set. Tap ▶ to animate an alg,
-        ☆ to bookmark.
+        Feliks Zemdegs &amp; Andy Klise's "all four slot angles" set. Tap ▶ to animate an alg.
       </p>
 
       {f2lGroups().map((g) => (
