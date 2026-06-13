@@ -31,8 +31,6 @@ export type UserProfile = {
   settings: Settings;
   // Bookmarked algorithms, keyed by "caseId:slot:alg".
   bookmarks: Record<string, boolean>;
-  // Algorithms marked as learned/known, keyed the same way.
-  learned: Record<string, boolean>;
 };
 
 export const SAMPLE_WINDOW = 12;

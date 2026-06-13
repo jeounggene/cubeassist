@@ -30,7 +30,7 @@ function ListPage({ title, kind, cases }: { title: string; kind: "oll" | "pll"; 
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-1">{title}</h1>
       <p className="text-slate-600 dark:text-slate-300 mb-6">
-        Tap ✓ to mark an algorithm learned, ☆ to bookmark it.
+        Tap ☆ to bookmark the algorithm you want to learn.
       </p>
       <AlgList kind={kind} cases={cases} />
     </main>

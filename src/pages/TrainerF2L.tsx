@@ -34,7 +34,7 @@ const SLOT_HOME: Record<Slot, { x: number; y: number }> = {
 };
 
 export default function TrainerF2L() {
-  const { profile, toggleBookmark, toggleLearned } = useProfile();
+  const { profile, toggleBookmark } = useProfile();
   const [selectedId, setSelectedId] = useState(F2L_CASES[0]?.id ?? "");
   const [slot, setSlot] = useState<Slot>("FR");
   const [hideAlg, setHideAlg] = useState(false);
@@ -63,7 +63,6 @@ export default function TrainerF2L() {
 
   const showAlg = !hideAlg;
   const bookmarks = profile.bookmarks ?? {};
-  const learned = profile.learned ?? {};
   const bmKey = (a: string) => `${current.id}:${slot}:${a}`;
 
   return (
@@ -165,11 +164,6 @@ export default function TrainerF2L() {
                 <span data-testid="algorithm" className="font-mono text-lg">
                   {algs[0]}
                 </span>
-                <CheckButton
-                  active={!!learned[bmKey(algs[0])]}
-                  alg={algs[0]}
-                  onClick={() => toggleLearned(bmKey(algs[0]))}
-                />
                 <StarButton
                   active={!!bookmarks[bmKey(algs[0])]}
                   alg={algs[0]}
@@ -191,11 +185,6 @@ export default function TrainerF2L() {
                           ▶
                         </button>
                         <span>{a}</span>
-                        <CheckButton
-                          active={!!learned[bmKey(a)]}
-                          alg={a}
-                          onClick={() => toggleLearned(bmKey(a))}
-                        />
                         <StarButton
                           active={!!bookmarks[bmKey(a)]}
                           alg={a}
@@ -240,22 +229,6 @@ function StarButton({ active, alg, onClick }: { active: boolean; alg: string; on
       }`}
     >
       {active ? "★" : "☆"}
-    </button>
-  );
-}
-
-function CheckButton({ active, alg, onClick }: { active: boolean; alg: string; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={`${active ? "Mark not learned" : "Mark learned"} ${alg}`}
-      title={active ? "Learned" : "Mark as learned"}
-      className={`px-1 text-base leading-none ${
-        active ? "text-emerald-500" : "text-slate-300 dark:text-slate-600 hover:text-emerald-500"
-      }`}
-    >
-      ✓
     </button>
   );
 }

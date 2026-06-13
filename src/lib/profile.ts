@@ -15,7 +15,6 @@ export function emptyProfile(): UserProfile {
     drillHistory: [],
     settings: { inspection: true, useMs: false, theme: "light" },
     bookmarks: {},
-    learned: {},
   };
 }
 
@@ -24,13 +23,6 @@ export function toggleBookmark(profile: UserProfile, key: string): UserProfile {
   if (bookmarks[key]) delete bookmarks[key];
   else bookmarks[key] = true;
   return { ...profile, bookmarks };
-}
-
-export function toggleLearned(profile: UserProfile, key: string): UserProfile {
-  const learned = { ...(profile.learned ?? {}) };
-  if (learned[key]) delete learned[key];
-  else learned[key] = true;
-  return { ...profile, learned };
 }
 
 export function loadProfile(): UserProfile {

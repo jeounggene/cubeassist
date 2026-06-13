@@ -16,7 +16,6 @@ import {
   saveProfile,
   setKnown,
   toggleBookmark,
-  toggleLearned,
 } from "../lib/profile";
 
 type ProfileContextValue = {
@@ -33,7 +32,6 @@ type ProfileContextValue = {
   ) => void;
   addDrill: (record: DrillRecord) => void;
   toggleBookmark: (key: string) => void;
-  toggleLearned: (key: string) => void;
   resetProfile: () => void;
 };
 
@@ -63,7 +61,6 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         setProfile((p) => ({ ...p, settings: { ...p.settings, [key]: value } })),
       addDrill: (record) => setProfile((p) => appendDrillRecord(p, record)),
       toggleBookmark: (key) => setProfile((p) => toggleBookmark(p, key)),
-      toggleLearned: (key) => setProfile((p) => toggleLearned(p, key)),
       resetProfile: () => setProfile(emptyProfile()),
     }),
     [profile],
