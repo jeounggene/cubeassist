@@ -1,6 +1,6 @@
 // A small, static isometric F2L cube (U + F + R faces) for the case picker.
 const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
-const MUTED = "#e2e8f0";
+const MUTED = "#cbd5e1";
 
 const U_CELLS = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const F_CELLS = [18, 19, 20, 21, 22, 23, 24, 25, 26];

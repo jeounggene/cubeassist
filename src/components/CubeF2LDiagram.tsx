@@ -3,8 +3,7 @@ import { applyAlg, faceletGeometry } from "../lib/facecube";
 
 // Color id -> CSS, in face order U R F D L B.
 const COLORS = ["#fde047", "#ef4444", "#22c55e", "#f8fafc", "#f97316", "#3b82f6"];
-const MUTED = "#e2e8f0"; // solved bottom-two-layer noise
-const TOP = "#0b1220"; // the last (top) layer is drawn black
+const MUTED = "#cbd5e1"; // non-pair stickers: a light grey, distinct from white
 
 const S = 30; // cubie size px
 const HC = S / 2; // half cubie (sticker sits this far out from the cubie center)
@@ -201,8 +200,6 @@ export default function CubeF2LDiagram({
     // Mark the destination slot (static reference; hidden during playback so the
     // turning layers stay clean).
     const isSlot = !playing && slot.has(idx);
-    // The last (top) layer is drawn black so the pair + slot stand out from it.
-    const isTop = !on && !isSlot && GEO[idx].pos[1] === 1;
     // In see-through mode, plain (non-pair, non-slot) stickers are drawn faint
     // so that whichever slot is at the back of the cube reads through it.
     const dim = seeThrough && !on && !isSlot;
@@ -221,12 +218,12 @@ export default function CubeF2LDiagram({
           marginLeft: -S / 2,
           marginTop: -S / 2,
           boxSizing: "border-box",
-          border: isSlot ? `2px solid ${SLOT_RING}` : `1.5px solid ${isTop ? "#475569" : "#0f172a"}`,
+          border: isSlot ? `2px solid ${SLOT_RING}` : "1.5px solid #0f172a",
           borderRadius: 4,
           boxShadow: isSlot ? `0 0 6px ${SLOT_RING}` : undefined,
           opacity: dim ? 0.3 : 1,
           transform: STICKER_TRANSFORM[idx],
-          backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : isTop ? TOP : MUTED,
+          backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : MUTED,
         }}
       />
     );
