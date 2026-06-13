@@ -87,6 +87,8 @@ type Props = {
 
 const SLOT_RING = "#f59e0b"; // amber outline marking the destination slot
 const SLOT_TINT = "rgba(245, 158, 11, 0.28)";
+// Facelet indices in the last (top) layer.
+const TOP_LAYER = GEO.map((_, i) => i).filter((i) => GEO[i].pos[1] === 1);
 
 export default function CubeF2LDiagram({
   facelets,
@@ -106,12 +108,14 @@ export default function CubeF2LDiagram({
   // Animation state.
   const [display, setDisplay] = useState<number[] | null>(null); // colors shown while playing
   const [displayHl, setDisplayHl] = useState<Set<number> | null>(null); // pair positions while playing
+  const [displayGrey, setDisplayGrey] = useState<Set<number> | null>(null); // last-layer noise positions while playing
   const [turn, setTurn] = useState<{ spec: Spec; angle: number } | null>(null);
 
   useEffect(() => setRot({ x: homeX, y: homeY }), [homeX, homeY]);
   useEffect(() => {
     setDisplay(null);
     setDisplayHl(null);
+    setDisplayGrey(null);
     setTurn(null);
   }, [facelets]);
 
@@ -140,10 +144,15 @@ export default function CubeF2LDiagram({
     const tokens = play.alg.split(/\s+/).filter(Boolean);
     let state = facelets;
     let hlSet = new Set(highlight);
+    // Last-layer noise (top layer + the empty target slot), minus the pair. Track
+    // it by piece so those stickers stay grey as the layers turn.
+    let greySet = new Set<number>([...TOP_LAYER, ...slotCells]);
+    for (const i of hlSet) greySet.delete(i);
     let cancelled = false;
     const timers: number[] = [];
     setDisplay(state);
     setDisplayHl(hlSet);
+    setDisplayGrey(new Set(greySet));
 
     const GAP = 80; // flat beat between consecutive turns so they never overlap
 
@@ -156,9 +165,11 @@ export default function CubeF2LDiagram({
       const a = moveAnim(tokens[i]);
       if (!a) {
         hlSet = moveHighlight(hlSet, tokens[i]);
+        greySet = moveHighlight(greySet, tokens[i]);
         state = applyAlg(state, tokens[i]);
         setDisplay(state);
         setDisplayHl(hlSet);
+        setDisplayGrey(greySet);
         step(i + 1);
         return;
       }
@@ -175,9 +186,11 @@ export default function CubeF2LDiagram({
         window.setTimeout(() => {
           if (cancelled) return;
           hlSet = moveHighlight(hlSet, a.token);
+          greySet = moveHighlight(greySet, a.token);
           state = applyAlg(state, a.token);
           setDisplay(state);
           setDisplayHl(hlSet);
+          setDisplayGrey(greySet);
           setTurn(null);
           timers.push(window.setTimeout(() => !cancelled && step(i + 1), GAP));
         }, TURN_MS + 70),
@@ -202,14 +215,16 @@ export default function CubeF2LDiagram({
     // turning layers stay clean).
     const isSlot = !playing && !on && slot.has(idx);
     // The solved F2L — face centres ("core"), the white cross, and the already
-    // solved pairs (everything in the bottom two layers except the target slot)
-    // — is drawn in real colours; the last (top) layer is grey noise. During
-    // playback every sticker shows its real colour so the colours travel with
-    // the pieces as the layers turn (grey is by home position, which would jump).
+    // solved pairs (the bottom two layers except the target slot) — shows real
+    // colours; the last (top) layer is grey noise. While playing, the grey set is
+    // tracked by piece (moveHighlight) so those stickers stay grey as the layers
+    // turn instead of flipping colour at each layer boundary.
     const p = GEO[idx].pos;
     const nonzero = (p[0] !== 0 ? 1 : 0) + (p[1] !== 0 ? 1 : 0) + (p[2] !== 0 ? 1 : 0);
     const isCenter = nonzero === 1;
-    const solved = playing || isCenter || (p[1] !== 1 && !slot.has(idx));
+    const grey =
+      playing && displayGrey ? displayGrey.has(idx) : !isCenter && p[1] === 1 && !on;
+    const solved = !grey;
     // In see-through mode, plain (non-pair, non-slot) stickers are drawn faint
     // so that whichever slot is at the back of the cube reads through it.
     const dim = seeThrough && !on && !isSlot;
