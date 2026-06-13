@@ -87,8 +87,11 @@ type Props = {
 
 const SLOT_RING = "#f59e0b"; // amber outline marking the destination slot
 const SLOT_TINT = "rgba(245, 158, 11, 0.28)";
-// Facelet indices in the last (top) layer.
-const TOP_LAYER = GEO.map((_, i) => i).filter((i) => GEO[i].pos[1] === 1);
+// Last (top) layer facelets, excluding the U centre (the yellow "core" stays
+// coloured even while animating).
+const TOP_LAYER = GEO.map((_, i) => i).filter(
+  (i) => GEO[i].pos[1] === 1 && (GEO[i].pos[0] !== 0 || GEO[i].pos[2] !== 0),
+);
 
 export default function CubeF2LDiagram({
   facelets,
