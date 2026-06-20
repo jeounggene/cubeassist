@@ -64,8 +64,20 @@ export default function TrainerF2L() {
   return (
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-1">F2L trainer</h1>
-      <p className="text-slate-600 dark:text-slate-300 mb-6">
+      <p className="text-slate-600 dark:text-slate-300 mb-2">
         Pick a case and drill the algorithm for each slot.
+      </p>
+      <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
+        Algorithms from{" "}
+        <a
+          href="https://www.speedcubedb.com/a/3x3/F2L"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-slate-700 dark:hover:text-slate-200"
+        >
+          SpeedCubeDB
+        </a>
+        .
       </p>
 
       <div className="mb-6">

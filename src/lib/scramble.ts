@@ -16,12 +16,15 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function generateScramble(n = 20): string {
+// Random scramble drawn from the given face set, keeping the standard
+// constraints: never the same face twice in a row, never three moves on the
+// same axis in a row.
+function scrambleFromFaces(faces: string[], n: number): string {
   const moves: string[] = [];
   let prev = "";
   let prev2 = "";
   while (moves.length < n) {
-    const face = pick(FACES);
+    const face = pick(faces);
     if (face === prev) continue; // no two consecutive same face
     if (
       prev !== "" &&
@@ -36,6 +39,20 @@ export function generateScramble(n = 20): string {
     prev = face;
   }
   return moves.join(" ");
+}
+
+export function generateScramble(n = 20): string {
+  return scrambleFromFaces(FACES, n);
+}
+
+// 2-gen scramble using only R and U turns (the classic speedcube "RU" event).
+export function generateRUScramble(n = 15): string {
+  return scrambleFromFaces(["R", "U"], n);
+}
+
+// 3-gen scramble using only R, U and L turns.
+export function generateRULScramble(n = 18): string {
+  return scrambleFromFaces(["R", "U", "L"], n);
 }
 
 // Retry random scrambles until the optimal cross length for `color` equals targetLen.

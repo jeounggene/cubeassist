@@ -3,6 +3,7 @@ import { ProfileProvider } from "./state/ProfileProvider";
 import Nav from "./components/Nav";
 import Algorithms from "./pages/Algorithms";
 import Trainer from "./pages/Trainer";
+import TimerPage from "./pages/TimerPage";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Navigate to="/algorithms" replace />} />
           <Route path="/algorithms/*" element={<Algorithms />} />
           <Route path="/trainer/*" element={<Trainer />} />
+          <Route path="/timer" element={<TimerPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

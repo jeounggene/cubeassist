@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useProfile } from "../state/ProfileProvider";
 
 const LINKS = [
-  { to: "/algorithms", label: "Algorithms" },
+  { to: "/timer", label: "Timer" },
   { to: "/trainer", label: "Trainer" },
+  { to: "/algorithms", label: "Algorithms" },
 ];
 
 export default function Nav() {

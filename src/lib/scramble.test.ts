@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { generateScramble, generateCrossScramble } from "./scramble";
+import {
+  generateScramble,
+  generateCrossScramble,
+  generateRUScramble,
+  generateRULScramble,
+} from "./scramble";
 import { optimalCrossLength } from "./cross";
 
 const AXIS: Record<string, string> = { U: "y", D: "y", L: "x", R: "x", F: "z", B: "z" };
@@ -27,6 +32,42 @@ describe("generateScramble", () => {
   it("uses only legal face letters and modifiers", () => {
     for (const m of generateScramble(100).split(" ")) {
       expect(m).toMatch(/^[UDLRFB]('|2)?$/);
+    }
+  });
+});
+
+describe("generateRUScramble", () => {
+  it("returns the requested number of moves (default 15)", () => {
+    expect(generateRUScramble(8).split(" ")).toHaveLength(8);
+    expect(generateRUScramble().split(" ")).toHaveLength(15);
+  });
+
+  it("uses only R and U faces, never repeating a face consecutively", () => {
+    const moves = generateRUScramble(200).split(" ");
+    for (let i = 0; i < moves.length; i++) {
+      expect(moves[i]).toMatch(/^[RU]('|2)?$/);
+      if (i > 0) expect(faceOf(moves[i])).not.toBe(faceOf(moves[i - 1]));
+    }
+  });
+});
+
+describe("generateRULScramble", () => {
+  it("returns the requested number of moves (default 18)", () => {
+    expect(generateRULScramble(10).split(" ")).toHaveLength(10);
+    expect(generateRULScramble().split(" ")).toHaveLength(18);
+  });
+
+  it("uses only R, U, L faces, no consecutive same face, no three same-axis", () => {
+    const moves = generateRULScramble(200).split(" ");
+    for (let i = 0; i < moves.length; i++) {
+      expect(moves[i]).toMatch(/^[RUL]('|2)?$/);
+      if (i > 0) expect(faceOf(moves[i])).not.toBe(faceOf(moves[i - 1]));
+      if (i >= 2) {
+        const sameAxis =
+          AXIS[faceOf(moves[i])] === AXIS[faceOf(moves[i - 1])] &&
+          AXIS[faceOf(moves[i])] === AXIS[faceOf(moves[i - 2])];
+        expect(sameAxis).toBe(false);
+      }
     }
   });
 });
