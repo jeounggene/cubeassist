@@ -113,6 +113,7 @@ export default function CubeF2LDiagram({
   const [displayHl, setDisplayHl] = useState<Set<number> | null>(null); // pair positions while playing
   const [displayGrey, setDisplayGrey] = useState<Set<number> | null>(null); // last-layer noise positions while playing
   const [turn, setTurn] = useState<{ spec: Spec; angle: number } | null>(null);
+  const [resetting, setResetting] = useState(false); // ease the end-of-play recolor
 
   useEffect(() => setRot({ x: homeX, y: homeY }), [homeX, homeY]);
   useEffect(() => {
@@ -153,6 +154,7 @@ export default function CubeF2LDiagram({
     for (const i of hlSet) greySet.delete(i);
     let cancelled = false;
     const timers: number[] = [];
+    setResetting(false); // crisp turns while playing; only the reset eases
     setDisplay(state);
     setDisplayHl(hlSet);
     setDisplayGrey(new Set(greySet));
@@ -162,7 +164,16 @@ export default function CubeF2LDiagram({
     const step = (i: number) => {
       if (cancelled) return;
       if (i >= tokens.length) {
-        timers.push(window.setTimeout(() => !cancelled && setDisplay(null), 700));
+        // Hold the solved state briefly, then crossfade back to the case instead
+        // of hard-cutting the colours.
+        timers.push(
+          window.setTimeout(() => {
+            if (cancelled) return;
+            setResetting(true);
+            setDisplay(null);
+            timers.push(window.setTimeout(() => !cancelled && setResetting(false), 450));
+          }, 700),
+        );
         return;
       }
       const a = moveAnim(tokens[i]);
@@ -255,6 +266,9 @@ export default function CubeF2LDiagram({
               : undefined,
           opacity: dim ? 0.3 : 1,
           transform: STICKER_TRANSFORM[idx],
+          transition: resetting
+            ? "background-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease"
+            : undefined,
           backgroundColor: on ? COLORS[shown[idx]] : isSlot ? SLOT_TINT : solved ? COLORS[shown[idx]] : MUTED,
         }}
       />

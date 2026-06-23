@@ -11,3 +11,40 @@
     @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100;
   }
 }
+
+/* Hover tooltip for named algorithm triggers. The label is drawn from the
+   data-tip attribute via a pseudo-element, so it never enters the element's
+   text content (the raw algorithm stays intact). */
+.alg-trigger {
+  position: relative;
+  cursor: help;
+}
+.alg-trigger::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  background: #0f172a;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+  z-index: 30;
+}
+.alg-trigger:hover::after {
+  opacity: 1;
+}
+html.dark .alg-trigger::after {
+  background: #f1f5f9;
+  color: #0f172a;
+}

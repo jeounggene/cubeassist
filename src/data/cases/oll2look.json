@@ -1,12 +1,12 @@
 [
-  { "id": "2oll-eo-dot",  "name": "2-look OLL — EO dot (no edges oriented)" },
-  { "id": "2oll-eo-line", "name": "2-look OLL — EO line (2 edges oriented)" },
-  { "id": "2oll-eo-L",    "name": "2-look OLL — EO L-shape (2 edges oriented)" },
-  { "id": "2oll-oc-sune",      "name": "2-look OLL — Sune (OCLL)" },
-  { "id": "2oll-oc-antisune",  "name": "2-look OLL — Anti-Sune (OCLL)" },
-  { "id": "2oll-oc-h",         "name": "2-look OLL — H (OCLL)" },
-  { "id": "2oll-oc-pi",        "name": "2-look OLL — Pi (OCLL)" },
-  { "id": "2oll-oc-l",         "name": "2-look OLL — L-shape (OCLL)" },
-  { "id": "2oll-oc-t",         "name": "2-look OLL — T-shape (OCLL)" },
-  { "id": "2oll-oc-u",         "name": "2-look OLL — U-shape (OCLL)" }
+  { "id": "2oll-eo-dot",  "name": "2-look OLL — EO dot (no edges oriented)", "algs": ["F R U R' U' F' U2 f R U R' U' f'"] },
+  { "id": "2oll-eo-line", "name": "2-look OLL — EO line (2 edges oriented)", "algs": ["F R U R' U' F'"] },
+  { "id": "2oll-eo-L",    "name": "2-look OLL — EO L-shape (2 edges oriented)", "algs": ["f R U R' U' f'"] },
+  { "id": "2oll-oc-sune",      "name": "2-look OLL — Sune (OCLL)", "algs": ["R U R' U R U2 R'"] },
+  { "id": "2oll-oc-antisune",  "name": "2-look OLL — Anti-Sune (OCLL)", "algs": ["R U2 R' U' R U' R'", "L' U' L U' L' U2 L"] },
+  { "id": "2oll-oc-h",         "name": "2-look OLL — H (OCLL)", "algs": ["R U R' U R U' R' U R U2 R'"] },
+  { "id": "2oll-oc-pi",        "name": "2-look OLL — Pi (OCLL)", "algs": ["R U2 R2 U' R2 U' R2 U2 R"] },
+  { "id": "2oll-oc-l",         "name": "2-look OLL — L-shape (OCLL)", "algs": ["F R' F' r U R U' r'"] },
+  { "id": "2oll-oc-t",         "name": "2-look OLL — T-shape (OCLL)", "algs": ["R U R' U' R' F R F'"] },
+  { "id": "2oll-oc-u",         "name": "2-look OLL — U-shape (OCLL)", "algs": ["R2 D R' U2 R D' R' U2 R'"] }
 ]

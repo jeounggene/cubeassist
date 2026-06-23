@@ -1,8 +1,8 @@
 import { NavLink, Routes, Route } from "react-router-dom";
-import TrainerF2L from "./TrainerF2L";
-import F2LFeliks from "./F2LFeliks";
-import AlgList from "../components/AlgList";
-import type { AlgCase } from "../components/AlgList";
+import F2L from "./F2L";
+import OLL2Look from "./OLL2Look";
+import LastLayerTrainer from "../components/LastLayerTrainer";
+import type { AlgCase } from "../components/LastLayerTrainer";
 import ollCases from "../data/cases/oll.json";
 import pllCases from "../data/cases/pll.json";
 
@@ -16,11 +16,11 @@ function Tabs() {
       <NavLink to="/algorithms" end className={cls}>
         F2L
       </NavLink>
-      <NavLink to="/algorithms/feliks" className={cls}>
-        F2L (Feliks)
-      </NavLink>
       <NavLink to="/algorithms/oll" className={cls}>
         OLL
+      </NavLink>
+      <NavLink to="/algorithms/oll2" className={cls}>
+        OLL (2-look)
       </NavLink>
       <NavLink to="/algorithms/pll" className={cls}>
         PLL
@@ -29,32 +29,24 @@ function Tabs() {
   );
 }
 
-function ListPage({ title, kind, cases }: { title: string; kind: "oll" | "pll"; cases: AlgCase[] }) {
-  return (
-    <main className="mx-auto max-w-3xl p-6">
-      <h1 className="text-3xl font-bold mb-1">{title}</h1>
-      <p className="text-slate-600 dark:text-slate-300 mb-6">
-        Each case's favored algorithm, with alternatives below it.
-      </p>
-      <AlgList kind={kind} cases={cases} />
-    </main>
-  );
-}
-
 export default function Algorithms() {
   return (
     <>
       <Tabs />
       <Routes>
-        <Route index element={<TrainerF2L />} />
-        <Route path="feliks" element={<F2LFeliks />} />
+        <Route index element={<F2L />} />
         <Route
           path="oll"
-          element={<ListPage title="OLL algorithms" kind="oll" cases={ollCases as AlgCase[]} />}
+          element={
+            <LastLayerTrainer title="OLL algorithms" kind="oll" cases={ollCases as AlgCase[]} />
+          }
         />
+        <Route path="oll2" element={<OLL2Look />} />
         <Route
           path="pll"
-          element={<ListPage title="PLL algorithms" kind="pll" cases={pllCases as AlgCase[]} />}
+          element={
+            <LastLayerTrainer title="PLL algorithms" kind="pll" cases={pllCases as AlgCase[]} />
+          }
         />
       </Routes>
     </>
