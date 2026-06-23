@@ -23,12 +23,24 @@ export type Settings = {
   theme: Theme;
 };
 
+// Daily-checklist progress for the training plan. `done` maps an ISO date to the
+// ids of tasks completed that day; `streak` counts consecutive fully-completed
+// days, `lastDone` is the most recent such day.
+export type Regimen = {
+  done: Record<string, string[]>;
+  streak: number;
+  lastDone: string | null;
+};
+
 export type UserProfile = {
   schemaVersion: 1;
   times: Record<Stage, StageTime>;
   known: Record<ChecklistKey, Record<string, boolean>>;
   drillHistory: DrillRecord[];
   settings: Settings;
+  // Optional + additive: profiles saved before the training plan won't have it,
+  // so readers must default via getRegimen().
+  regimen?: Regimen;
 };
 
 export const SAMPLE_WINDOW = 12;

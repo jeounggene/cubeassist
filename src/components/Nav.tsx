@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useProfile } from "../state/ProfileProvider";
 
 const LINKS = [
+  { to: "/plan", label: "Plan" },
   { to: "/timer", label: "Timer" },
   { to: "/trainer", label: "Trainer" },
   { to: "/algorithms", label: "Algorithms" },

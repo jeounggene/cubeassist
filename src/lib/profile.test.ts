@@ -104,6 +104,72 @@ describe("setKnown", () => {
   });
 });
 
+import { getRegimen, prevDay, setTaskDone } from "./profile";
+
+describe("prevDay", () => {
+  it("returns the previous calendar day", () => {
+    expect(prevDay("2026-06-23")).toBe("2026-06-22");
+    expect(prevDay("2026-03-01")).toBe("2026-02-28");
+    expect(prevDay("2026-01-01")).toBe("2025-12-31");
+  });
+});
+
+describe("getRegimen", () => {
+  it("defaults for a profile saved before the regimen existed", () => {
+    const p = emptyProfile();
+    delete p.regimen;
+    expect(getRegimen(p)).toEqual({ done: {}, streak: 0, lastDone: null });
+  });
+});
+
+describe("setTaskDone", () => {
+  const DAY = "2026-06-23";
+  const TASKS = ["cross", "f2l", "oll", "pll"];
+
+  it("records a completed task for the day without mutating input", () => {
+    const p = emptyProfile();
+    const out = setTaskDone(p, DAY, "oll", true, TASKS);
+    expect(getRegimen(out).done[DAY]).toEqual(["oll"]);
+    expect(getRegimen(p).done[DAY]).toBeUndefined();
+  });
+
+  it("removes a task when unchecked", () => {
+    let p = setTaskDone(emptyProfile(), DAY, "oll", true, TASKS);
+    p = setTaskDone(p, DAY, "oll", false, TASKS);
+    expect(getRegimen(p).done[DAY] ?? []).toEqual([]);
+  });
+
+  it("starts a streak at 1 when the day is first fully completed", () => {
+    let p = emptyProfile();
+    for (const t of TASKS) p = setTaskDone(p, DAY, t, true, TASKS);
+    expect(getRegimen(p).streak).toBe(1);
+    expect(getRegimen(p).lastDone).toBe(DAY);
+  });
+
+  it("extends the streak when yesterday was completed", () => {
+    let p = emptyProfile();
+    p.regimen = { done: {}, streak: 3, lastDone: prevDay(DAY) };
+    for (const t of TASKS) p = setTaskDone(p, DAY, t, true, TASKS);
+    expect(getRegimen(p).streak).toBe(4);
+  });
+
+  it("resets the streak to 1 after a gap", () => {
+    let p = emptyProfile();
+    p.regimen = { done: {}, streak: 5, lastDone: "2026-06-20" }; // 3 days earlier
+    for (const t of TASKS) p = setTaskDone(p, DAY, t, true, TASKS);
+    expect(getRegimen(p).streak).toBe(1);
+  });
+
+  it("does not double-count the streak if the same day completes again", () => {
+    let p = emptyProfile();
+    for (const t of TASKS) p = setTaskDone(p, DAY, t, true, TASKS);
+    // toggle one off and on again
+    p = setTaskDone(p, DAY, "pll", false, TASKS);
+    p = setTaskDone(p, DAY, "pll", true, TASKS);
+    expect(getRegimen(p).streak).toBe(1);
+  });
+});
+
 import { appendDrillRecord } from "./profile";
 import type { DrillRecord } from "../types/profile";
 

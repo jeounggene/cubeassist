@@ -15,6 +15,7 @@ import {
   loadProfile,
   saveProfile,
   setKnown,
+  setTaskDone,
 } from "../lib/profile";
 
 type ProfileContextValue = {
@@ -30,6 +31,7 @@ type ProfileContextValue = {
     value: UserProfile["settings"][K],
   ) => void;
   addDrill: (record: DrillRecord) => void;
+  setTask: (date: string, taskId: string, done: boolean, allTaskIds: string[]) => void;
   resetProfile: () => void;
 };
 
@@ -58,6 +60,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       setSetting: (key, value) =>
         setProfile((p) => ({ ...p, settings: { ...p.settings, [key]: value } })),
       addDrill: (record) => setProfile((p) => appendDrillRecord(p, record)),
+      setTask: (date, taskId, done, allTaskIds) =>
+        setProfile((p) => setTaskDone(p, date, taskId, done, allTaskIds)),
       resetProfile: () => setProfile(emptyProfile()),
     }),
     [profile],

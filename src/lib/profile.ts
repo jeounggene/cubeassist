@@ -1,6 +1,12 @@
 // src/lib/profile.ts
 import { STORAGE_KEY, SAMPLE_WINDOW } from "../types/profile";
-import type { UserProfile, Stage, ChecklistKey, DrillRecord } from "../types/profile";
+import type {
+  UserProfile,
+  Stage,
+  ChecklistKey,
+  DrillRecord,
+  Regimen,
+} from "../types/profile";
 
 const STAGES: Stage[] = ["cross", "f2l", "oll", "pll"];
 const CHECKLISTS: ChecklistKey[] = ["f2l", "oll2look", "pll2look", "oll", "pll"];
@@ -14,6 +20,48 @@ export function emptyProfile(): UserProfile {
     known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as UserProfile["known"],
     drillHistory: [],
     settings: { inspection: true, useMs: false, theme: "light" },
+    regimen: { done: {}, streak: 0, lastDone: null },
+  };
+}
+
+export function getRegimen(profile: UserProfile): Regimen {
+  return profile.regimen ?? { done: {}, streak: 0, lastDone: null };
+}
+
+// Previous calendar day for an ISO date, computed in UTC to avoid DST drift.
+export function prevDay(date: string): string {
+  const d = new Date(`${date}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() - 1);
+  return d.toISOString().slice(0, 10);
+}
+
+// Check/uncheck a daily task. When every task for the day is checked for the
+// first time, advance the streak (from yesterday) or restart it after a gap.
+export function setTaskDone(
+  profile: UserProfile,
+  date: string,
+  taskId: string,
+  done: boolean,
+  allTaskIds: string[],
+): UserProfile {
+  const reg = getRegimen(profile);
+  const prev = reg.done[date] ?? [];
+  const list = done
+    ? prev.includes(taskId)
+      ? prev
+      : [...prev, taskId]
+    : prev.filter((t) => t !== taskId);
+
+  let { streak, lastDone } = reg;
+  const allDone = allTaskIds.length > 0 && allTaskIds.every((t) => list.includes(t));
+  if (allDone && lastDone !== date) {
+    streak = lastDone === prevDay(date) ? streak + 1 : 1;
+    lastDone = date;
+  }
+
+  return {
+    ...profile,
+    regimen: { done: { ...reg.done, [date]: list }, streak, lastDone },
   };
 }
 
