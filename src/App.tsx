@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <ProfileProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Nav />
         <Routes>
           <Route path="/" element={<Navigate to="/algorithms" replace />} />
