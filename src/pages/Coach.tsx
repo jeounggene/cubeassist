@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useProfile } from "../state/ProfileProvider";
 import { getSmartSolves } from "../lib/profile";
@@ -6,7 +6,7 @@ import { heuristicCoach } from "../lib/coach";
 import type { CoachInsight, CoachReport } from "../lib/coach";
 import { makeClaudeCoach } from "../lib/coach-claude";
 import { SimulatorCube } from "../lib/smartcube/simulator";
-import { GanCube, clearGanMac } from "../lib/smartcube/gan";
+import { GanCube, clearGanMac, isDecryptionError } from "../lib/smartcube/gan";
 import type { SmartCube } from "../lib/smartcube/smartcube";
 import SmartCubeSession from "../components/SmartCubeSession";
 
@@ -28,6 +28,25 @@ export default function Coach() {
   });
   const [connecting, setConnecting] = useState(false);
   const [connectError, setConnectError] = useState<string | null>(null);
+
+  // A wrong MAC makes the cube's data decrypt to garbage and gan-web-bluetooth's
+  // parser throws (as an unhandled promise rejection) a few seconds after connecting.
+  // Recover: clear the bad MAC, disconnect, and tell the user — instead of looping.
+  useEffect(() => {
+    if (!cube || cube.brand !== "gan") return;
+    const onReject = (e: PromiseRejectionEvent) => {
+      if (!isDecryptionError(e.reason)) return;
+      clearGanMac();
+      void cube.disconnect();
+      setCube(null);
+      setConnectError(
+        "Couldn't decrypt data from the cube — the MAC address was wrong, so I cleared it. " +
+          "Reconnect and enter the exact MAC from the cube's battery-compartment sticker or the GAN app.",
+      );
+    };
+    window.addEventListener("unhandledrejection", onReject);
+    return () => window.removeEventListener("unhandledrejection", onReject);
+  }, [cube]);
 
   const solves = getSmartSolves(profile);
   const solveKey = `${solves.length}:${solves[solves.length - 1]?.total ?? 0}`;

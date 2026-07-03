@@ -17,6 +17,14 @@ export function clearGanMac(): void {
   localStorage.removeItem(MAC_STORAGE_KEY);
 }
 
+// A wrong MAC makes the cube's data decrypt to garbage, and gan-web-bluetooth's
+// state parser then throws "Cannot read properties of undefined (reading '0')".
+// Detect that so we can recover (clear the bad MAC) instead of looping.
+export function isDecryptionError(reason: unknown): boolean {
+  const msg = reason instanceof Error ? reason.message : String(reason);
+  return msg.includes("Cannot read properties of undefined");
+}
+
 // GAN cubes encrypt their BLE stream with a key salted by the cube's MAC address,
 // which Web Bluetooth doesn't expose. `connectGanCube` first tries to read it from
 // advertisement data (needs the browser's experimental watchAdvertisements support);

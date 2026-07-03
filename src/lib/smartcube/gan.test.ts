@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { GanCubeEvent } from "gan-web-bluetooth";
-import { ganEventToCubeMove, ganEventToOrientation, normalizeMac } from "./gan";
+import { ganEventToCubeMove, ganEventToOrientation, normalizeMac, isDecryptionError } from "./gan";
 
 describe("normalizeMac", () => {
   it("accepts a colon-separated MAC and upper-cases it", () => {
@@ -60,5 +60,15 @@ describe("ganEventToOrientation", () => {
 
   it("ignores non-gyro events", () => {
     expect(ganEventToOrientation(ev({ type: "MOVE", move: "R" }))).toBeNull();
+  });
+});
+
+describe("isDecryptionError", () => {
+  it("matches the garbage-decryption parser crash", () => {
+    expect(isDecryptionError(new TypeError("Cannot read properties of undefined (reading '0')"))).toBe(true);
+  });
+  it("ignores unrelated errors", () => {
+    expect(isDecryptionError(new Error("Bluetooth disconnected"))).toBe(false);
+    expect(isDecryptionError("some string")).toBe(false);
   });
 });
