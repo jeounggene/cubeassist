@@ -6,7 +6,7 @@ import { heuristicCoach } from "../lib/coach";
 import type { CoachInsight, CoachReport } from "../lib/coach";
 import { makeClaudeCoach } from "../lib/coach-claude";
 import { SimulatorCube } from "../lib/smartcube/simulator";
-import { GanCube } from "../lib/smartcube/gan";
+import { GanCube, clearGanMac } from "../lib/smartcube/gan";
 import type { SmartCube } from "../lib/smartcube/smartcube";
 import SmartCubeSession from "../components/SmartCubeSession";
 
@@ -119,12 +119,22 @@ export default function Coach() {
             {connecting ? "Connecting…" : "Connect GAN cube"}
           </button>
           <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            Pairs a GAN smart cube over Bluetooth. No cube? Append <code>?sim=1</code> to try the
-            simulator.
+            Chrome/Edge only. Wake the cube (turn a face) and make sure it isn't still connected in
+            the GAN app on your phone. No cube? Append <code>?sim=1</code> to try the simulator.
           </p>
           {connectError ? (
             <p className="mt-2 text-sm text-red-600 dark:text-red-400">{connectError}</p>
           ) : null}
+          <button
+            type="button"
+            onClick={() => {
+              clearGanMac();
+              setConnectError(null);
+            }}
+            className="mt-2 text-xs text-slate-400 dark:text-slate-500 underline"
+          >
+            Reset saved cube MAC
+          </button>
         </div>
       )}
 

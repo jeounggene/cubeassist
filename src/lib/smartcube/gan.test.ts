@@ -1,6 +1,23 @@
 import { describe, it, expect } from "vitest";
 import type { GanCubeEvent } from "gan-web-bluetooth";
-import { ganEventToCubeMove } from "./gan";
+import { ganEventToCubeMove, normalizeMac } from "./gan";
+
+describe("normalizeMac", () => {
+  it("accepts a colon-separated MAC and upper-cases it", () => {
+    expect(normalizeMac("ab:12:cd:34:ef:56")).toBe("AB:12:CD:34:EF:56");
+  });
+
+  it("accepts a dash-separated MAC and normalises the separators", () => {
+    expect(normalizeMac(" AB-12-CD-34-EF-56 ")).toBe("AB:12:CD:34:EF:56");
+  });
+
+  it("rejects malformed input", () => {
+    expect(normalizeMac("")).toBeNull();
+    expect(normalizeMac("not a mac")).toBeNull();
+    expect(normalizeMac("AB:12:CD:34:EF")).toBeNull(); // too short
+    expect(normalizeMac("AB:12:CD:34:EF:5G")).toBeNull(); // non-hex
+  });
+});
 
 // Build a GanCubeEvent-shaped object for testing (real events carry more fields).
 const ev = (over: Record<string, unknown>): GanCubeEvent =>
