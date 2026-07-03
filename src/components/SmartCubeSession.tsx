@@ -3,6 +3,7 @@ import type { SmartCube, CubeMove } from "../lib/smartcube/smartcube";
 import { moveToken } from "../lib/smartcube/smartcube";
 import { detectSplits } from "../lib/smartcube/splits";
 import type { SplitResult } from "../lib/smartcube/splits";
+import { initQueue, applyMove, simplifyForDisplay } from "../lib/smartcube/scramble-queue";
 import { solved, applyAlg } from "../lib/facecube";
 import type { Facelets } from "../lib/facecube";
 import { generateScramble } from "../lib/scramble";
@@ -18,11 +19,13 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
   const [scramble, setScramble] = useState(() => generateScramble(20));
   const [ready, setReady] = useState(false);
   const [last, setLast] = useState<SplitResult | null>(null);
+  const [remaining, setRemaining] = useState<string[]>(() => initQueue(scramble));
+  const [deviated, setDeviated] = useState(false);
 
   // Mutable per-solve state kept in refs so the move handler always sees fresh
   // values. Initialised for the first scramble; reset inline on each new scramble.
   const runningRef = useRef<Facelets>(solved());
-  const targetRef = useRef<Facelets>(applyAlg(solved(), scramble));
+  const queueRef = useRef<string[]>(initQueue(scramble));
   const readyRef = useRef(false);
   const startStateRef = useRef<Facelets | null>(null);
   const t0Ref = useRef(0);
@@ -32,7 +35,9 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
     const startNextScramble = () => {
       const next = generateScramble(20);
       runningRef.current = solved();
-      targetRef.current = applyAlg(solved(), next);
+      queueRef.current = initQueue(next);
+      setRemaining(queueRef.current);
+      setDeviated(false);
       readyRef.current = false;
       startStateRef.current = null;
       bufRef.current = [];
@@ -45,8 +50,12 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
       runningRef.current = applyAlg(runningRef.current, token);
 
       if (!readyRef.current) {
-        // Waiting for the scramble to be applied to the cube.
-        if (runningRef.current.every((v, i) => v === targetRef.current[i])) {
+        // Applying the scramble: self-correcting queue keeps the target invariant.
+        const res = applyMove(queueRef.current, token);
+        queueRef.current = res.queue;
+        setRemaining(res.queue);
+        setDeviated(res.deviated);
+        if (res.queue.length === 0) {
           readyRef.current = true;
           startStateRef.current = runningRef.current;
           setReady(true);
@@ -75,9 +84,24 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
       <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">
         {ready ? "Solving… go!" : "Apply this scramble to your cube"}
       </div>
-      <div data-testid="scramble" className="font-mono text-lg mb-4">
+      <div data-testid="scramble" className="font-mono text-lg mb-1">
         {scramble}
       </div>
+      {!ready ? (
+        <div data-testid="scramble-status" className="mb-4 text-sm">
+          {deviated ? (
+            <span className="text-red-600 dark:text-red-400">
+              Off-scramble — remaining moves adjusted:{" "}
+              <span className="font-mono">{simplifyForDisplay(remaining).join(" ") || "done"}</span>
+            </span>
+          ) : (
+            <span className="text-slate-500 dark:text-slate-400">
+              Remaining:{" "}
+              <span className="font-mono">{simplifyForDisplay(remaining).join(" ") || "done"}</span>
+            </span>
+          )}
+        </div>
+      ) : null}
       <div className="grid grid-cols-5 gap-3 text-center">
         <Split label="Cross" testId="live-cross" value={last ? last.splits.cross : null} />
         <Split label="F2L" testId="live-f2l" value={last ? last.splits.f2l : null} />
