@@ -1,4 +1,5 @@
 import type { SmartCube, CubeMove, Face } from "./smartcube";
+import type { Quaternion } from "../quaternion";
 import type { GanCubeConnection, GanCubeEvent } from "gan-web-bluetooth";
 
 const FACES = new Set<Face>(["U", "D", "L", "R", "F", "B"]);
@@ -49,6 +50,13 @@ export function ganEventToCubeMove(event: GanCubeEvent): CubeMove | null {
   return { face, dir, t };
 }
 
+// Map a GAN GYRO event's orientation quaternion, or null for other events.
+export function ganEventToOrientation(event: GanCubeEvent): Quaternion | null {
+  if (event.type !== "GYRO") return null;
+  const q = event.quaternion;
+  return { x: q.x, y: q.y, z: q.z, w: q.w };
+}
+
 // A real smart cube backed by a GAN (i3 / 356 i / 12) over Web Bluetooth.
 // The library is dynamic-imported so it (and its deps) stay out of the main bundle.
 export class GanCube implements SmartCube {
@@ -57,6 +65,7 @@ export class GanCube implements SmartCube {
   private sub: { unsubscribe(): void } | null = null;
   private moveCbs = new Set<(m: CubeMove) => void>();
   private discCbs = new Set<() => void>();
+  private oriCbs = new Set<(q: Quaternion) => void>();
   private _connected = false;
 
   get connected(): boolean {
@@ -76,7 +85,12 @@ export class GanCube implements SmartCube {
         return;
       }
       const move = ganEventToCubeMove(event);
-      if (move) this.moveCbs.forEach((cb) => cb(move));
+      if (move) {
+        this.moveCbs.forEach((cb) => cb(move));
+        return;
+      }
+      const ori = ganEventToOrientation(event);
+      if (ori) this.oriCbs.forEach((cb) => cb(ori));
     });
   }
 
@@ -103,5 +117,10 @@ export class GanCube implements SmartCube {
   onDisconnect(cb: () => void): () => void {
     this.discCbs.add(cb);
     return () => this.discCbs.delete(cb);
+  }
+
+  onOrientation(cb: (q: Quaternion) => void): () => void {
+    this.oriCbs.add(cb);
+    return () => this.oriCbs.delete(cb);
   }
 }

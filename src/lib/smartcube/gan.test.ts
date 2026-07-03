@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { GanCubeEvent } from "gan-web-bluetooth";
-import { ganEventToCubeMove, normalizeMac } from "./gan";
+import { ganEventToCubeMove, ganEventToOrientation, normalizeMac } from "./gan";
 
 describe("normalizeMac", () => {
   it("accepts a colon-separated MAC and upper-cases it", () => {
@@ -48,5 +48,17 @@ describe("ganEventToCubeMove", () => {
     expect(
       ganEventToCubeMove(ev({ type: "MOVE", move: "x", cubeTimestamp: 1, localTimestamp: 1 })),
     ).toBeNull();
+  });
+});
+
+describe("ganEventToOrientation", () => {
+  it("maps a GYRO event's quaternion", () => {
+    expect(
+      ganEventToOrientation(ev({ type: "GYRO", quaternion: { x: 0, y: 0, z: 0, w: 1 } })),
+    ).toEqual({ x: 0, y: 0, z: 0, w: 1 });
+  });
+
+  it("ignores non-gyro events", () => {
+    expect(ganEventToOrientation(ev({ type: "MOVE", move: "R" }))).toBeNull();
   });
 });

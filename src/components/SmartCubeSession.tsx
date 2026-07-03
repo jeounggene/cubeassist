@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { SmartCube, CubeMove } from "../lib/smartcube/smartcube";
+import type { SmartCube, CubeMove, Face } from "../lib/smartcube/smartcube";
 import { moveToken } from "../lib/smartcube/smartcube";
 import { detectSplits } from "../lib/smartcube/splits";
 import type { SplitResult } from "../lib/smartcube/splits";
@@ -7,6 +7,9 @@ import { initQueue, applyMove, simplifyForDisplay } from "../lib/smartcube/scram
 import { solved, applyAlg } from "../lib/facecube";
 import type { Facelets } from "../lib/facecube";
 import { generateScramble } from "../lib/scramble";
+import { conjugate, mul } from "../lib/quaternion";
+import type { Quaternion } from "../lib/quaternion";
+import CubeView3D from "./CubeView3D";
 import { useProfile } from "../state/ProfileProvider";
 import type { Stage } from "../types/profile";
 
@@ -21,6 +24,9 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
   const [last, setLast] = useState<SplitResult | null>(null);
   const [remaining, setRemaining] = useState<string[]>(() => initQueue(scramble));
   const [deviated, setDeviated] = useState(false);
+  const [turn, setTurn] = useState<{ face: Face; dir: 1 | -1; nonce: number } | null>(null);
+  const [orientation, setOrientation] = useState<Quaternion | null>(null);
+  const [displayFacelets, setDisplayFacelets] = useState<Facelets>(() => solved());
 
   // Mutable per-solve state kept in refs so the move handler always sees fresh
   // values. Initialised for the first scramble; reset inline on each new scramble.
@@ -30,11 +36,27 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
   const startStateRef = useRef<Facelets | null>(null);
   const t0Ref = useRef(0);
   const bufRef = useRef<{ token: string; t: number }[]>([]);
+  const nonceRef = useRef(0);
+  const neutralRef = useRef<Quaternion | null>(null);
+  const rawOriRef = useRef<Quaternion | null>(null);
+
+  // Cube spatial orientation (gyro), if the driver provides it. Recenter subtracts
+  // a captured neutral so "facing you" aligns regardless of the gyro's raw zero.
+  useEffect(() => {
+    if (!cube.onOrientation) return;
+    return cube.onOrientation((q) => {
+      rawOriRef.current = q;
+      const n = neutralRef.current;
+      setOrientation(n ? mul(conjugate(n), q) : q);
+    });
+  }, [cube]);
 
   useEffect(() => {
     const startNextScramble = () => {
       const next = generateScramble(20);
       runningRef.current = solved();
+      setDisplayFacelets(runningRef.current);
+      setTurn(null);
       queueRef.current = initQueue(next);
       setRemaining(queueRef.current);
       setDeviated(false);
@@ -48,6 +70,9 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
     const onMove = (m: CubeMove) => {
       const token = moveToken(m);
       runningRef.current = applyAlg(runningRef.current, token);
+      setDisplayFacelets(runningRef.current);
+      nonceRef.current += 1;
+      setTurn({ face: m.face, dir: m.dir, nonce: nonceRef.current });
 
       if (!readyRef.current) {
         // Applying the scramble: self-correcting queue keeps the target invariant.
@@ -81,6 +106,23 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
 
   return (
     <div className="rounded border border-slate-200 dark:border-slate-700 p-4">
+      <div className="mb-4">
+        <CubeView3D facelets={displayFacelets} turn={turn} orientation={orientation} />
+        {cube.onOrientation ? (
+          <div className="text-center mt-1">
+            <button
+              type="button"
+              onClick={() => {
+                neutralRef.current = rawOriRef.current;
+                if (rawOriRef.current) setOrientation({ x: 0, y: 0, z: 0, w: 1 });
+              }}
+              className="text-xs text-slate-500 dark:text-slate-400 underline"
+            >
+              Recenter cube
+            </button>
+          </div>
+        ) : null}
+      </div>
       <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">
         {ready ? "Solving… go!" : "Apply this scramble to your cube"}
       </div>

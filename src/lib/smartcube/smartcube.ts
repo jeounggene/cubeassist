@@ -1,6 +1,9 @@
 // A minimal driver-agnostic smart-cube interface. A "move" is one quarter turn
 // with a timestamp in ms (cube hardware clock if available, else performance.now()).
 
+import type { Quaternion } from "../quaternion";
+export type { Quaternion };
+
 export type Face = "U" | "D" | "L" | "R" | "F" | "B";
 export type CubeMove = { face: Face; dir: 1 | -1; t: number };
 
@@ -11,6 +14,8 @@ export interface SmartCube {
   disconnect(): Promise<void>;
   onMove(cb: (m: CubeMove) => void): () => void; // returns unsubscribe
   onDisconnect(cb: () => void): () => void; // returns unsubscribe
+  // Optional: cube spatial orientation (gyroscope). Absent on the simulator.
+  onOrientation?(cb: (q: Quaternion) => void): () => void;
 }
 
 // A CubeMove as a token facecube.applyAlg understands: "R", "U'", etc.
