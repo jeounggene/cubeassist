@@ -1272,10 +1272,13 @@ git commit -m "feat(coach): gated /coach page with live session + coach report"
 
 ---
 
-### Task 7 (BLOCKED — needs user OK): Real GAN Web Bluetooth driver
+### Task 7 (DONE — user approved GAN + dependency): Real GAN Web Bluetooth driver
 
-**Do not start** until the user confirms Fork B (target GAN) and approves adding the
-`gan-web-bluetooth` (MIT) runtime dependency. This is the repo's first runtime dep.
+Implemented in `src/lib/smartcube/gan.ts`: `GanCube implements SmartCube` plus a pure,
+unit-tested `ganEventToCubeMove(event)` mapper (GAN's `move` notation → `CubeMove`,
+preferring the cube's hardware timestamp). `gan-web-bluetooth` is dynamic-imported inside
+`connect()`, so it (and its `rxjs`/`aes-js` deps) code-split into a lazy chunk. Wired into
+`Coach.tsx` via a "Connect GAN cube" button. Original blocked note follows for history:
 
 **Files (planned):**
 - Create: `src/lib/smartcube/gan.ts` — `class GanCube implements SmartCube`, mapping the
@@ -1291,9 +1294,14 @@ already covered via the simulator.
 
 ---
 
-### Task 8 (BLOCKED — needs user OK): Claude-backed coach provider
+### Task 8 (DONE — user approved LLM coach): Claude-backed coach provider
 
-**Do not start** until the user confirms Fork A (wants an LLM coach) and the API-key UX.
+Implemented in `src/lib/coach-claude.ts`: `makeClaudeCoach(apiKey)` returns a `CoachProvider`
+whose `analyze` dynamic-imports `@anthropic-ai/sdk`, calls `claude-opus-4-8` with
+`output_config.format` (json_schema) for a validated `CoachReport`, from the browser
+(`dangerouslyAllowBrowser: true`). Key stored in `settings.anthropicKey` (optional/additive).
+`Coach.tsx` exposes a user-initiated "Get Claude's coaching" button with a data-egress warning;
+any error falls back to `heuristicCoach`. Original blocked note follows for history:
 
 **Files (planned):**
 - Create: `src/lib/coach-claude.ts` — `claudeCoach: CoachProvider` calling the Anthropic

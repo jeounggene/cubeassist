@@ -21,6 +21,9 @@ export type Settings = {
   inspection: boolean;
   useMs: boolean;
   theme: Theme;
+  // Optional + additive: an Anthropic API key enabling the Claude-backed coach.
+  // Stored in localStorage; sent directly from the browser to the Anthropic API.
+  anthropicKey?: string;
 };
 
 // Daily-checklist progress for the training plan. `done` maps an ISO date to the
