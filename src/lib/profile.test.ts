@@ -1,7 +1,9 @@
 // src/lib/profile.test.ts
 import { describe, it, expect, beforeEach } from "vitest";
 import { loadProfile, saveProfile, emptyProfile } from "./profile";
-import { STORAGE_KEY } from "../types/profile";
+import { getSmartSolves, recordSmartSolve } from "./profile";
+import { STORAGE_KEY, SMART_SOLVE_CAP } from "../types/profile";
+import type { SmartSolve } from "../types/profile";
 
 beforeEach(() => {
   localStorage.clear();
@@ -170,6 +172,107 @@ describe("setTaskDone", () => {
   });
 });
 
+import { caseStatus, setCaseStatus } from "./profile";
+
+describe("case status (unknown / learning / known)", () => {
+  it("defaults to unknown", () => {
+    expect(caseStatus(emptyProfile(), "oll", "OLL-01")).toBe("unknown");
+  });
+
+  it("sets a case to learning and back to unknown", () => {
+    let p = setCaseStatus(emptyProfile(), "oll", "OLL-01", "learning");
+    expect(caseStatus(p, "oll", "OLL-01")).toBe("learning");
+    p = setCaseStatus(p, "oll", "OLL-01", "unknown");
+    expect(caseStatus(p, "oll", "OLL-01")).toBe("unknown");
+  });
+
+  it("known and learning are mutually exclusive", () => {
+    let p = setCaseStatus(emptyProfile(), "pll", "PLL-T", "learning");
+    p = setCaseStatus(p, "pll", "PLL-T", "known");
+    expect(caseStatus(p, "pll", "PLL-T")).toBe("known");
+    expect(p.known.pll["PLL-T"]).toBe(true);
+    expect(p.learning?.pll["PLL-T"]).toBe(false);
+  });
+
+  it("reads learning for a profile saved before the field existed", () => {
+    const p = emptyProfile();
+    delete p.learning;
+    expect(caseStatus(p, "f2l", "f2l-01")).toBe("unknown");
+    const out = setCaseStatus(p, "f2l", "f2l-01", "learning");
+    expect(caseStatus(out, "f2l", "f2l-01")).toBe("learning");
+  });
+
+  it("does not mutate the input profile", () => {
+    const p = emptyProfile();
+    const out = setCaseStatus(p, "oll", "OLL-01", "learning");
+    expect(caseStatus(p, "oll", "OLL-01")).toBe("unknown");
+    expect(out).not.toBe(p);
+  });
+});
+
+import { getSolveLog, recordSolve, solveTimes, solveDays } from "./profile";
+
+describe("solve log (batched by day)", () => {
+  it("defaults to an empty log", () => {
+    expect(getSolveLog(emptyProfile(), "timer-3x3")).toEqual({
+      days: {},
+      best: null,
+      count: 0,
+    });
+  });
+
+  it("groups solves under their day and tracks all-time best/count", () => {
+    let p = recordSolve(emptyProfile(), "timer-3x3", 12.5, "2026-06-22");
+    p = recordSolve(p, "timer-3x3", 9.8, "2026-06-23");
+    p = recordSolve(p, "timer-3x3", 11.0, "2026-06-23");
+    const log = getSolveLog(p, "timer-3x3");
+    expect(log.days).toEqual({ "2026-06-22": [12.5], "2026-06-23": [9.8, 11.0] });
+    expect(log.best).toBe(9.8);
+    expect(log.count).toBe(3);
+  });
+
+  it("flattens solves chronologically and lists days newest-first", () => {
+    let p = recordSolve(emptyProfile(), "e", 5, "2026-06-22");
+    p = recordSolve(p, "e", 6, "2026-06-23");
+    p = recordSolve(p, "e", 4, "2026-06-22");
+    const log = getSolveLog(p, "e");
+    expect(solveTimes(log)).toEqual([5, 4, 6]); // day order, then within-day order
+    expect(solveDays(log)).toEqual(["2026-06-23", "2026-06-22"]);
+  });
+
+  it("normalises a legacy flat-times log so the day views never crash", () => {
+    const p = emptyProfile();
+    // A profile saved before day-batching: a flat `times` array, no `days`.
+    (p.solves as Record<string, unknown>)["timer-3x3"] = {
+      times: [10, 8, 9],
+      best: 8,
+      count: 3,
+    };
+    const log = getSolveLog(p, "timer-3x3");
+    expect(() => solveDays(log)).not.toThrow();
+    expect(() => solveTimes(log)).not.toThrow();
+    expect(log.count).toBe(3);
+    expect(log.best).toBe(8);
+    expect(solveTimes(log)).toEqual([10, 8, 9]); // preserved, not lost
+  });
+
+  it("keeps events separate", () => {
+    let p = recordSolve(emptyProfile(), "timer-3x3", 10, "2026-06-23");
+    p = recordSolve(p, "timer-ru", 4, "2026-06-23");
+    expect(getSolveLog(p, "timer-3x3").count).toBe(1);
+    expect(getSolveLog(p, "timer-ru").best).toBe(4);
+  });
+
+  it("rejects invalid solve times and does not mutate input", () => {
+    const p = emptyProfile();
+    expect(() => recordSolve(p, "e", 0, "2026-06-23")).toThrow();
+    expect(() => recordSolve(p, "e", -1, "2026-06-23")).toThrow();
+    const out = recordSolve(p, "e", 5, "2026-06-23");
+    expect(getSolveLog(p, "e").count).toBe(0);
+    expect(out).not.toBe(p);
+  });
+});
+
 import { appendDrillRecord } from "./profile";
 import type { DrillRecord } from "../types/profile";
 
@@ -192,5 +295,44 @@ describe("appendDrillRecord", () => {
     const out = appendDrillRecord(p, rec);
     expect(p.drillHistory).toHaveLength(0);
     expect(out).not.toBe(p);
+  });
+});
+
+describe("smart solves", () => {
+  const solve = (total: number): SmartSolve => ({
+    date: "2026-07-02",
+    total,
+    splits: { cross: 1, f2l: total - 4, oll: 1.5, pll: 1.5 },
+    moves: 50,
+    tps: 50 / total,
+  });
+
+  it("defaults to empty for a profile without smartSolves", () => {
+    expect(getSmartSolves(emptyProfile())).toEqual([]);
+  });
+
+  it("appends newest last", () => {
+    let p = emptyProfile();
+    p = recordSmartSolve(p, solve(20));
+    p = recordSmartSolve(p, solve(18));
+    expect(getSmartSolves(p).map((s) => s.total)).toEqual([20, 18]);
+  });
+
+  it("caps at SMART_SOLVE_CAP, dropping oldest", () => {
+    let p = emptyProfile();
+    for (let i = 0; i < SMART_SOLVE_CAP + 5; i++) p = recordSmartSolve(p, solve(10 + i));
+    const solves = getSmartSolves(p);
+    expect(solves.length).toBe(SMART_SOLVE_CAP);
+    expect(solves[0].total).toBe(15); // first 5 dropped
+  });
+
+  it("rejects a non-finite total", () => {
+    expect(() => recordSmartSolve(emptyProfile(), solve(NaN))).toThrow();
+  });
+
+  it("loads a legacy profile object with no smartSolves key", () => {
+    const legacy = { ...emptyProfile() };
+    delete (legacy as { smartSolves?: unknown }).smartSolves;
+    expect(getSmartSolves(legacy)).toEqual([]);
   });
 });

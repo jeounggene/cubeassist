@@ -1,15 +1,26 @@
 // src/lib/profile.ts
-import { STORAGE_KEY, SAMPLE_WINDOW } from "../types/profile";
+import { STORAGE_KEY, SAMPLE_WINDOW, SMART_SOLVE_CAP } from "../types/profile";
 import type {
   UserProfile,
   Stage,
   ChecklistKey,
   DrillRecord,
   Regimen,
+  SolveLog,
+  SmartSolve,
 } from "../types/profile";
 
 const STAGES: Stage[] = ["cross", "f2l", "oll", "pll"];
 const CHECKLISTS: ChecklistKey[] = ["f2l", "oll2look", "pll2look", "oll", "pll"];
+
+export type CaseStatus = "unknown" | "learning" | "known";
+
+function emptyChecklists(): Record<ChecklistKey, Record<string, boolean>> {
+  return Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as Record<
+    ChecklistKey,
+    Record<string, boolean>
+  >;
+}
 
 export function emptyProfile(): UserProfile {
   return {
@@ -17,10 +28,116 @@ export function emptyProfile(): UserProfile {
     times: Object.fromEntries(
       STAGES.map((s) => [s, { avg: null, samples: [] }]),
     ) as unknown as UserProfile["times"],
-    known: Object.fromEntries(CHECKLISTS.map((k) => [k, {}])) as unknown as UserProfile["known"],
+    known: emptyChecklists(),
+    learning: emptyChecklists(),
     drillHistory: [],
     settings: { inspection: true, useMs: false, theme: "light" },
     regimen: { done: {}, streak: 0, lastDone: null },
+    solves: {},
+    smartSolves: [],
+  };
+}
+
+export function getSmartSolves(profile: UserProfile): SmartSolve[] {
+  return profile.smartSolves ?? [];
+}
+
+// Append a smart solve, keeping only the most recent SMART_SOLVE_CAP.
+export function recordSmartSolve(
+  profile: UserProfile,
+  solve: SmartSolve,
+): UserProfile {
+  if (!(solve.total > 0) || !Number.isFinite(solve.total)) {
+    throw new Error(`Invalid smart solve total: ${solve.total}`);
+  }
+  const next = [...getSmartSolves(profile), solve].slice(-SMART_SOLVE_CAP);
+  return { ...profile, smartSolves: next };
+}
+
+export function getSolveLog(profile: UserProfile, eventId: string): SolveLog {
+  const raw = profile.solves?.[eventId] as
+    | (SolveLog & { times?: number[] })
+    | undefined;
+  if (!raw) return { days: {}, best: null, count: 0 };
+  // Normalise logs saved before day-batching (a flat `times` array, no `days`),
+  // so the day-grouped views can't crash. Old solves are kept under "earlier".
+  if (!raw.days) {
+    const legacy = raw.times ?? [];
+    return {
+      days: legacy.length ? { earlier: legacy } : {},
+      best: raw.best ?? (legacy.length ? Math.min(...legacy) : null),
+      count: raw.count ?? legacy.length,
+    };
+  }
+  return raw;
+}
+
+// Append a solve to its day's batch, updating all-time best/count.
+export function recordSolve(
+  profile: UserProfile,
+  eventId: string,
+  seconds: number,
+  date: string,
+): UserProfile {
+  if (!(seconds > 0) || !Number.isFinite(seconds)) {
+    throw new Error(`Invalid solve time: ${seconds}`);
+  }
+  const prev = getSolveLog(profile, eventId);
+  const best = prev.best == null ? seconds : Math.min(prev.best, seconds);
+  return {
+    ...profile,
+    solves: {
+      ...(profile.solves ?? {}),
+      [eventId]: {
+        days: { ...prev.days, [date]: [...(prev.days[date] ?? []), seconds] },
+        best,
+        count: prev.count + 1,
+      },
+    },
+  };
+}
+
+// All solves flattened oldest-first (day order, then within-day order).
+export function solveTimes(log: SolveLog): number[] {
+  return Object.keys(log.days)
+    .sort()
+    .flatMap((d) => log.days[d]);
+}
+
+// Day keys, most recent first.
+export function solveDays(log: SolveLog): string[] {
+  return Object.keys(log.days).sort().reverse();
+}
+
+// Three-state status of a case: known (comfortable), learning (knows it but not
+// solid), or unknown. `known` and `learning` are kept mutually exclusive.
+export function caseStatus(
+  profile: UserProfile,
+  list: ChecklistKey,
+  caseId: string,
+): CaseStatus {
+  if (profile.known[list]?.[caseId]) return "known";
+  if (profile.learning?.[list]?.[caseId]) return "learning";
+  return "unknown";
+}
+
+export function setCaseStatus(
+  profile: UserProfile,
+  list: ChecklistKey,
+  caseId: string,
+  status: CaseStatus,
+): UserProfile {
+  const learning = profile.learning ?? emptyChecklists();
+  return {
+    ...profile,
+    known: {
+      ...profile.known,
+      [list]: { ...profile.known[list], [caseId]: status === "known" },
+    },
+    learning: {
+      ...learning,
+      [list]: { ...learning[list], [caseId]: status === "learning" },
+    },
   };
 }
 

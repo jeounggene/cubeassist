@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import type { ReactNode } from "react";
-import type { UserProfile, DrillRecord } from "../types/profile";
+import type { UserProfile, DrillRecord, SmartSolve } from "../types/profile";
 import {
   appendDrillRecord,
   appendTimeSample,
@@ -15,8 +15,12 @@ import {
   loadProfile,
   saveProfile,
   setKnown,
+  setCaseStatus,
   setTaskDone,
+  recordSolve,
+  recordSmartSolve as recordSmartSolveLib,
 } from "../lib/profile";
+import type { CaseStatus } from "../lib/profile";
 
 type ProfileContextValue = {
   profile: UserProfile;
@@ -31,7 +35,14 @@ type ProfileContextValue = {
     value: UserProfile["settings"][K],
   ) => void;
   addDrill: (record: DrillRecord) => void;
+  recordSolve: (eventId: string, seconds: number, date: string) => void;
+  recordSmartSolve: (solve: SmartSolve) => void;
   setTask: (date: string, taskId: string, done: boolean, allTaskIds: string[]) => void;
+  setCaseStatus: (
+    list: keyof UserProfile["known"],
+    caseId: string,
+    status: CaseStatus,
+  ) => void;
   resetProfile: () => void;
 };
 
@@ -60,8 +71,14 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       setSetting: (key, value) =>
         setProfile((p) => ({ ...p, settings: { ...p.settings, [key]: value } })),
       addDrill: (record) => setProfile((p) => appendDrillRecord(p, record)),
+      recordSolve: (eventId, seconds, date) =>
+        setProfile((p) => recordSolve(p, eventId, seconds, date)),
+      recordSmartSolve: (solve) =>
+        setProfile((p) => recordSmartSolveLib(p, solve)),
       setTask: (date, taskId, done, allTaskIds) =>
         setProfile((p) => setTaskDone(p, date, taskId, done, allTaskIds)),
+      setCaseStatus: (list, caseId, status) =>
+        setProfile((p) => setCaseStatus(p, list, caseId, status)),
       resetProfile: () => setProfile(emptyProfile()),
     }),
     [profile],
