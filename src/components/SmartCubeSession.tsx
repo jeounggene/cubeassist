@@ -19,7 +19,8 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
   const [ready, setReady] = useState(false);
   const [last, setLast] = useState<SplitResult | null>(null);
 
-  // Mutable per-solve state kept in refs so the move handler always sees fresh values.
+  // Mutable per-solve state kept in refs so the move handler always sees fresh
+  // values. Initialised for the first scramble; reset inline on each new scramble.
   const runningRef = useRef<Facelets>(solved());
   const targetRef = useRef<Facelets>(applyAlg(solved(), scramble));
   const readyRef = useRef(false);
@@ -27,17 +28,18 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
   const t0Ref = useRef(0);
   const bufRef = useRef<{ token: string; t: number }[]>([]);
 
-  // Reset everything when a new scramble is set (mount + after each solve).
   useEffect(() => {
-    targetRef.current = applyAlg(solved(), scramble);
-    runningRef.current = solved();
-    readyRef.current = false;
-    startStateRef.current = null;
-    bufRef.current = [];
-    setReady(false);
-  }, [scramble]);
+    const startNextScramble = () => {
+      const next = generateScramble(20);
+      runningRef.current = solved();
+      targetRef.current = applyAlg(solved(), next);
+      readyRef.current = false;
+      startStateRef.current = null;
+      bufRef.current = [];
+      setReady(false);
+      setScramble(next);
+    };
 
-  useEffect(() => {
     const onMove = (m: CubeMove) => {
       const token = moveToken(m);
       runningRef.current = applyAlg(runningRef.current, token);
@@ -62,7 +64,7 @@ export default function SmartCubeSession({ cube }: { cube: SmartCube }) {
           if (res.splits[st] > 0) addTime(st, res.splits[st]);
         });
         setLast(res);
-        setScramble(generateScramble(20)); // triggers the reset effect for the next solve
+        startNextScramble(); // arm the next solve
       }
     };
     return cube.onMove(onMove);

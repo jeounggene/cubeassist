@@ -4,6 +4,7 @@ import { useProfile } from "../state/ProfileProvider";
 const LINKS = [
   { to: "/plan", label: "Plan" },
   { to: "/timer", label: "Timer" },
+  { to: "/coach", label: "Coach" },
   { to: "/trainer", label: "Trainer" },
   { to: "/algorithms", label: "Algorithms" },
 ];
